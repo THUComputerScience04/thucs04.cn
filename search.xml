@@ -16,7 +16,8 @@
   <entry>
     <title>三角函数的正整数幂的不定积分</title>
     <url>/2020/11/22/simple-triangular-indefinite-integral/</url>
-    <content><![CDATA[<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+    <content><![CDATA[<p>啊说真的排版好麻烦明天再来调吧</p>
+<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
 <li>换元法（凑积分法）</li>
 </ul>
 <p>$$<br>\int f’(\phi(x))\phi’(x)dx = \int f’(\phi(x))d\phi(x) = f(\phi(x))+C<br>$$</p>
