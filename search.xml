@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>三角函数的正整数幂的不定积分</title>
+    <url>/2020/11/22/simple-triangular-indefinite-integral/</url>
+    <content><![CDATA[<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+<li>换元法（凑积分法）</li>
+</ul>
+<p>$$<br>\int f’(\phi(x))\phi’(x)dx = \int f’(\phi(x))d\phi(x) = f(\phi(x))+C<br>$$</p>
+<p>$$<br>\int f’(u)du = \int f’(\phi(x)) \phi’(x)dx = g(x)+C = g(\phi^{-1} (x))+C<br>$$</p>
+<ul>
+<li>分部积分法</li>
+</ul>
+<h2 id="关于三角函数的幂的积分"><a href="#关于三角函数的幂的积分" class="headerlink" title="关于三角函数的幂的积分"></a>关于三角函数的幂的积分</h2><h3 id="sin-或-cos-的幂"><a href="#sin-或-cos-的幂" class="headerlink" title="sin 或 cos 的幂"></a>sin 或 cos 的幂</h3><p>若指数中存在奇数：<br>$$<br>\int \cos^7x \sin^{10}xdx<br>$$</p>
+<ol>
+<li>选定 cos 与 sin 中次幂较低，且为奇数的一个，使用凑积分法</li>
+<li>使用公式 $sin^2x+cos^2x=1$ 替换掉剩下的项</li>
+</ol>
+<p><em>Solve:</em><br>$$<br>\begin{aligned}<br>&amp;\int \cos ^{7} x \sin ^{10} x d x \<br>&amp;=\int \cos ^{6} x \sin ^{10} x d \sin x \<br>&amp;=\int\left(1-\sin ^{2} x\right)^{3} \sin ^{10} x d \sin x \<br>(t &amp;=\sin x) \<br>&amp;= \int\left(1-3 t^{2}+3 t^{4}-t^{6}\right) t^{10} d t \<br>&amp;=\int\left(t^{10}-3 t^{12}+3 t^{14}-t^{16}\right) d t \<br>&amp;=\frac {t^{11}} {11}-\frac{3}{13} t^{13}+\frac{3}{15} t^{15}-\frac{1}{17} t^{17}+C \<br>&amp;=\frac{1}{11} \sin ^{11} x-\frac{3}{13} \sin ^{2} x+\frac{1}{5} \sin ^{10} x-\frac{1}{17} \sin ^{17} x+C<br>\end{aligned}<br>$$</p>
+<p>若指数中不存在奇数：<br>$$<br>\quad \int \cos ^{2} x \sin ^{4} x d x<br>$$</p>
+<ol>
+<li>使用二倍角公式</li>
+<li>展开后分别积分</li>
+</ol>
+<p><em>Solve:</em></p>
+<p>$\quad \int \cos ^{2} x \sin ^{4} x d x=\int \frac{1+\cos 2 x}{2} \frac{\left(1-\cos ^{2} x\right)^{2}}{4} d x$<br>$=\frac{1}{8} \int\left(\cos ^{2} 2 x-2 \cos 2 x+1\right)(1+\cos 2 x) d x$<br>$=\frac{1}{8} \int\left(\cos ^{3} 2 x-\cos ^{2} 2 x-\cos 2 x+1\right) d x$<br>$=\frac{1}{8} \int \cos ^{3} 2 x d x-\frac{1}{8} \int \cos ^{2} 2 x d x-\frac{1}{8} \int \cos 2 x d x+\frac{1}{8} \int d x$<br>$=\frac{1}{8} \cdot \frac{1}{2} \int \cos ^{2} 2x d \sin 2 x-\frac{1}{8} \int \frac{1+\cos 4 x}{2} d x-\frac{1}{8} \cdot \frac{1}{2} \sin 2 x+\frac{1}{8} x+C<br>$</p>
+<p>$=\frac{1}{16} \int d \sin 2 x-\frac{1}{16} \int \sin ^{2} 2 x d \sin 2 x-\frac{1}{16} x-\frac{1}{16} \cdot \frac{1}{4} \sin 4 x-\frac{1}{16} \sin 2 x+\frac{1}{8} x+C$</p>
+<p>$=\frac{x}{16}-\frac{\sin^32x}{48}-\frac{\sin4x}{64}+C$</p>
+<h3 id="tan-与-cot-的幂"><a href="#tan-与-cot-的幂" class="headerlink" title="tan 与 cot 的幂"></a>tan 与 cot 的幂</h3><p>$$<br>\int \tan ^{4} x d x<br>$$</p>
+<p>使用公式 $ \tan ^{2} x=\sec ^{2} x-1 $<br>$$<br>\begin{array}{l}<br>\int \tan ^{0} x d x=\int d x=x+C \<br>\int \tan ^{1} x d x=\int \frac{\sin x}{\cos x} d x=-\int \frac{1}{\cos x} d \cos x=-\ln |\cos x|+C \<br>\qquad=\ln |\sec x|+C \<br>\end{array}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>I_{n} &amp;=\int \tan ^{n} x d x \<br>&amp;=\int \tan ^{n-2} x \tan ^{2} x d x \<br>&amp;=\int \tan ^{n-2} x\left(\sec ^{2} x-1\right) d x \<br>&amp;=\int \tan ^{n-2} x \sec ^{2} x d x-\int \tan ^{n-2} x d x \<br>&amp;=\int \tan ^{n-2} x d \tan x-\int \tan ^{n-2} x d x \<br>&amp;=\frac{1}{n-1} \cdot \tan ^{n-1} x-I_{n-2}<br>\end{aligned}<br>$$</p>
+<p><em>Solve:</em><br>$$<br>\begin{aligned}<br>\int \tan ^{4} x d x &amp;=\int \tan ^{2} x\left(\sec ^{2} x-1\right) d x \<br>&amp;=\int \tan ^{2} x \sec ^{2} x d x-\int \tan ^{2} x d x \<br>&amp;=\frac{1}{3} \tan ^{3} x-\int \sec ^{2} x d x+\int d x \<br>&amp;=\frac{1}{3} \tan ^{3} x-\tan x+x+C<br>\end{aligned}<br>$$<br>cot 的幂读者自证不难.</p>
+<h3 id="sec-与-csc-的幂"><a href="#sec-与-csc-的幂" class="headerlink" title="sec 与 csc 的幂"></a>sec 与 csc 的幂</h3><p>$$<br>\begin{aligned}<br>\int \sec x d x &amp;=\int \frac{(\sec x)(\sec x+\tan x)}{\sec x+\tan x} d x \<br>&amp;=\int \frac{\sec x \tan x+\sec ^{2} x}{\sec x+\tan x} d x \<br>&amp;=\ln |\sec x+\tan x|+C \<br>\int \sec ^{2} x d x &amp;=\tan x+C<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\int \sec ^{n} x d x &amp;=\int \sec ^{n-2} x \sec ^{2} x d x \<br>&amp;=\int \sec ^{n-2} x d \tan x \<br>&amp;=\sec ^{n-2} x \tan x-\int \tan x(n-2) \sec ^{n-3} x \sec x \tan x d x \<br>&amp;=\sec ^{n-2} \tan x-(n-2) \int \sec ^{n-2} x \tan ^{2} x d x \<br>&amp;=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n-2} x\left(\sec ^{2} x-1\right) d x \<br>&amp;=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n} x d x+(n-2) \int \sec ^{n-2} x d x \<br>\end{aligned}<br>$$</p>
+<p>因此我们有：<br>$$<br>\int \sec ^{n} x d x=\frac{1}{n-1} \sec ^{n-2} x \tan x+\frac{n-2}{n-1} \int \sec ^{n-2} x d x<br>$$<br>csc 的幂同理显然.</p>
+]]></content>
+      <tags>
+        <tag>Calculus</tag>
+      </tags>
+  </entry>
+</search>
