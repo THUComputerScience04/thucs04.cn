@@ -1,43 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>数据结构-堆</title>
-    <url>/2020/11/24/ds-heap/</url>
-    <content><![CDATA[<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>完全二叉树：</li>
-</ul>
-<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
-<p><a href="https://imgchr.com/i/Da1oSH"><img src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png"></a></p>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
-<li><p>下标：</p>
-<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
-</li>
-<li><p>大小：</p>
-<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
-</li>
-</ul>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
-<li><a href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
-<li><p><a href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
-<li><a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Data Structure</tag>
-        <tag>Heap</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hash Table（散列表）</title>
     <url>/2020/11/25/hash-table/</url>
-    <content><![CDATA[<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
+    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
+<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
 <p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
 <p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
@@ -68,16 +35,38 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello, World.</title>
-    <url>/2020/11/20/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
+    <title>数据结构-堆</title>
+    <url>/2020/11/24/ds-heap/</url>
+    <content><![CDATA[<p>　　　数据结构中的堆结构　　　</p>
+<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+<li>完全二叉树：</li>
+</ul>
+<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
+<p><a href="https://imgchr.com/i/Da1oSH"><img src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png"></a></p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li><p>下标：</p>
+<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
+</li>
+<li><p>大小：</p>
+<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
+</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
+<li><a href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
+<li><p><a href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
+<li><a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
+</ul>
 ]]></content>
       <tags>
-        <tag>日志</tag>
+        <tag>Data Structure</tag>
+        <tag>Heap</tag>
       </tags>
   </entry>
   <entry>
@@ -162,6 +151,19 @@ I_{n} &=\int \tan ^{n} x d x \\
 ]]></content>
       <tags>
         <tag>Calculus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
       </tags>
   </entry>
 </search>

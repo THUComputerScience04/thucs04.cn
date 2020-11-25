@@ -10,8 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="c7w,"> 
-    <meta name="description" content="​        散列表（Hash table，也叫哈希表），是根据键（Key）而直接访问在内存储存位置的数据结构。
-​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到,"> 
+    <meta name="description" content="　　散列表的相关概念和内容　　
+​        散列表（Hash table，也叫哈希表），是根据键（Key）而直接访问在内存储存位置的数据结构。
+​        也就是说，它通过计算一个关于键,"> 
     <meta name="author" content="c7w"> 
     <link rel="alternative" href="atom.xml" title="c7w 的破站 v2.0" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -63,7 +64,8 @@
 
         </div>
         <div class="content markdown">
-            <p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
+            <p>　　散列表的相关概念和内容　　</p>
+<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
 <p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
 <p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
@@ -122,6 +124,21 @@
 
     </div>
 </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 
 
