@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据结构-堆</title>
+    <url>/2020/11/24/ds-heap/</url>
+    <content><![CDATA[<p>　　　数据结构中的堆结构　　　</p>
+<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+<li>完全二叉树：</li>
+</ul>
+<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
+<p><a href="https://imgchr.com/i/Da1oSH"><img src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png"></a></p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li><p>下标：</p>
+<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
+</li>
+<li><p>大小：</p>
+<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
+</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
+<li><a href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
+<li><p><a href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
+<li><a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+        <tag>Heap</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello, World.</title>
     <url>/2020/11/20/hello-world/</url>
     <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
@@ -48,38 +83,30 @@
       </tags>
   </entry>
   <entry>
-    <title>数据结构-堆</title>
-    <url>/2020/11/24/ds-heap/</url>
-    <content><![CDATA[<p>　　　数据结构中的堆结构　　　</p>
-<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>完全二叉树：</li>
-</ul>
-<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
-<p><a href="https://imgchr.com/i/Da1oSH"><img src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png"></a></p>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
-<li><p>下标：</p>
-<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
-</li>
-<li><p>大小：</p>
-<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
-</li>
-</ul>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
-<li><a href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
-<li><p><a href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
-</li>
-</ul>
+    <title>同余 逆元 费马小定理</title>
+    <url>/2020/12/02/inverse-element/</url>
+    <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
+<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
+<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
+<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
+1\%p=a^{p-1}\%p \\
+=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
+<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
+&#123;
+    return qpow(x, M - 2, M);
+&#125;
+</code></pre>
+<p>【黑人问号脸.jpeg】</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
-<li><a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
+<li><a href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
+<li><a href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
 </ul>
 ]]></content>
       <tags>
-        <tag>Data Structure</tag>
-        <tag>Heap</tag>
+        <tag>数学</tag>
+        <tag>逆元</tag>
       </tags>
   </entry>
   <entry>
@@ -164,33 +191,6 @@ I_{n} &=\int \tan ^{n} x d x \\
 ]]></content>
       <tags>
         <tag>Calculus</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>同余 逆元 费马小定理</title>
-    <url>/2020/12/02/inverse-element/</url>
-    <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
-<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
-<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
-<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
-<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
-1\%p=a^{p-1}\%p \\
-=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
-<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
-&#123;
-    return qpow(x, M - 2, M);
-&#125;
-</code></pre>
-<p>【黑人问号脸.jpeg】</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
-<li><a href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>数学</tag>
-        <tag>逆元</tag>
       </tags>
   </entry>
 </search>
