@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1607510126989">
+  <link rel="stylesheet" href="/css/style.css?v=1607524042539">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -363,8 +363,8 @@ int main()&#123;
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
             <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月24日</a>
-            <a><i class="nexmoefont icon-areachart"></i>248 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+            <a><i class="nexmoefont icon-areachart"></i>664 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
         </div>
 
         <article>
@@ -386,10 +386,152 @@ int main()&#123;
 </ul>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
 <li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
-<li><p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
-</li>
+<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></li>
+</ul>
+<h2 id="src"><a href="#src" class="headerlink" title="src"></a>src</h2><pre><code class="lang-c++">//最小堆
+class smallHeap &#123;
+public:
+    int size, maxSize, * head = NULL;
+
+    void init(int depth) &#123;
+        int p = qpow(2, depth, 19260817);
+        head = new int[p-1];
+        maxSize = p - 1;
+    &#125;
+
+    smallHeap(int depth) &#123;
+        init(depth);
+    &#125;
+
+    int getSize() &#123;
+        return size;
+    &#125;
+
+    bool put(int val) &#123;
+        if (size == maxSize) return false;
+        size++;
+        int currentNode = size; head[currentNode] = val;
+        while (currentNode != 1) &#123;
+            int parentNode = currentNode / 2;
+            if (head[parentNode] &gt; head[currentNode]) &#123;
+                int temp = head[parentNode];
+                head[parentNode] = head[currentNode];
+                head[currentNode] = temp;
+                currentNode = parentNode;
+            &#125;
+            else &#123;
+                break;
+            &#125;
+        &#125;
+        return true;
+    &#125;
+
+    int get() &#123;
+        int currentNode = 1;
+        int tempValue = head[currentNode];
+        head[currentNode] = head[size];
+        size--;
+        int parentNode = 1;
+        while (1) &#123;
+            if (parentNode * 2 &gt; size) break;
+            currentNode = (head[parentNode * 2] &lt; head[parentNode * 2 + 1]) ? (parentNode * 2) : (parentNode * 2 + 1);
+            if (head[parentNode] &gt; head[currentNode]) &#123;
+                int temp = head[parentNode];
+                head[parentNode] = head[currentNode];
+                head[currentNode] = temp;
+                parentNode = currentNode;
+            &#125;
+            else &#123;
+                break;
+            &#125;
+        &#125;
+
+        return tempValue;
+    &#125;
+
+    int top() &#123; return head[1]; &#125;
+
+    void show() &#123;
+        for (int i = 1; i &lt;= size; i++) &#123;
+            cout &lt;&lt; head[i] &lt;&lt; &quot; &quot;;
+        &#125;
+    &#125;
+&#125;;
+
+//最大堆
+class bigHeap &#123;
+public:
+    int size, maxSize, * head = NULL;
+
+    void init(int depth) &#123;
+        int p = qpow(2, depth, 19260817);
+        head = new int[p-1];
+        maxSize = p - 1;
+    &#125;
+
+    bigHeap(int depth) &#123;
+        init(depth);
+    &#125;
+
+    int getSize() &#123;
+        return size;
+    &#125;
+
+    bool put(int val) &#123;
+        if (size == maxSize) return false;
+        size++;
+        int currentNode = size; head[currentNode] = val;
+        while (currentNode != 1) &#123;
+            int parentNode = currentNode / 2;
+            if (head[parentNode] &lt; head[currentNode]) &#123;
+                int temp = head[parentNode];
+                head[parentNode] = head[currentNode];
+                head[currentNode] = temp;
+                currentNode = parentNode;
+            &#125;
+            else &#123;
+                break;
+            &#125;
+        &#125;
+        return true;
+    &#125;
+
+    int get() &#123;
+        int currentNode = 1;
+        int tempValue = head[currentNode];
+        head[currentNode] = head[size];
+        size--;
+        int parentNode = 1;
+        while (1) &#123;
+            if (parentNode * 2 &gt; size) break;
+            currentNode = (head[parentNode * 2] &gt; head[parentNode * 2 + 1]) ? (parentNode * 2) : (parentNode * 2 + 1);
+            if (head[parentNode] &lt; head[currentNode]) &#123;
+                int temp = head[parentNode];
+                head[parentNode] = head[currentNode];
+                head[currentNode] = temp;
+                parentNode = currentNode;
+            &#125;
+            else &#123;
+                break;
+            &#125;
+        &#125;
+
+        return tempValue;
+    &#125;
+
+    int top() &#123; return head[1]; &#125;
+
+    void show() &#123;
+        for (int i = 1; i &lt;= size; i++) &#123;
+            cout &lt;&lt; head[i] &lt;&lt; &quot; &quot;;
+        &#125;
+    &#125;
+&#125;;
+</code></pre>
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1090">https://www.luogu.com.cn/problem/P1090</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1168">https://www.luogu.com.cn/problem/P1168</a></li>
 </ul>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
@@ -541,7 +683,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1607510126991"></script>
+ <script src="/js/app.js?v=1607524042541"></script>
 
   
 
