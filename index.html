@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1607509992813">
+  <link rel="stylesheet" href="/css/style.css?v=1607510126989">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -186,7 +186,8 @@ f[i][v]=max(f[i-1][v-k*w[i]]+ k*c[i])</script><p>循环时注意$v-k*w[i]$ 非�
 <script type="math/tex; mode=display">
 f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述方法，可以只使用二维的数组：当每件物品只可以取一次时变量$v$和$u$采用逆序的循环，当物品有如完全背包问题时采用顺序的循环。当物品有如多重背包问题时拆分物品。</p>
 <h3 id="物品总个数的限制"><a href="#物品总个数的限制" class="headerlink" title="物品总个数的限制"></a>物品总个数的限制</h3><p>有时，“二维费用”的条件是以这样一种隐含的方式给出的：最多只能取$M$件物品。这事实上相当于每件物品多了一种“件数”的费用，每个物品的件数费用均为$1$，可以付出的最大件数费用为$M$。</p>
-<h3 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h3><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
+<h2 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h2><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
+<p>诶mathjax怎么又炸了</p>
 <h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
 </ul>
@@ -540,7 +541,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1607509992813"></script>
+ <script src="/js/app.js?v=1607510126991"></script>
 
   
 
@@ -548,6 +549,21 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

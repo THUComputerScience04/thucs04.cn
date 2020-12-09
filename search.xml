@@ -1,88 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>数据结构-堆</title>
-    <url>/2020/11/24/ds-heap/</url>
-    <content><![CDATA[<p>　　　数据结构中的堆结构　　　</p>
-<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>完全二叉树：</li>
-</ul>
-<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
-<p><a href="https://imgchr.com/i/Da1oSH"><img src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png"></a></p>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
-<li><p>下标：</p>
-<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
-</li>
-<li><p>大小：</p>
-<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
-</li>
-</ul>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
-<li><a href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
-<li><p><a href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
-<li><a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Data Structure</tag>
-        <tag>Heap</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hash Table（散列表）</title>
-    <url>/2020/11/25/hash-table/</url>
-    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
-<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
-<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
-<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
-<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
-<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
-</ul>
-<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
-<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
-<li>开放定址法</li>
-<li>避免聚集：<ul>
-<li>单独链表法</li>
-<li>再散列</li>
-</ul>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
-</li>
-<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Data Structure</tag>
-        <tag>Hash Table</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello, World.</title>
-    <url>/2020/11/20/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>动态规划的背包问题</title>
     <url>/2020/12/09/dp-backpack/</url>
     <content><![CDATA[<p>所以为什么要找一个背包图片当头图啊喂</p>
@@ -124,7 +42,8 @@ f[i][v]=max(f[i-1][v-k*w[i]]+ k*c[i])</script><p>循环时注意$v-k*w[i]$ 非�
 <script type="math/tex; mode=display">
 f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述方法，可以只使用二维的数组：当每件物品只可以取一次时变量$v$和$u$采用逆序的循环，当物品有如完全背包问题时采用顺序的循环。当物品有如多重背包问题时拆分物品。</p>
 <h3 id="物品总个数的限制"><a href="#物品总个数的限制" class="headerlink" title="物品总个数的限制"></a>物品总个数的限制</h3><p>有时，“二维费用”的条件是以这样一种隐含的方式给出的：最多只能取$M$件物品。这事实上相当于每件物品多了一种“件数”的费用，每个物品的件数费用均为$1$，可以付出的最大件数费用为$M$。</p>
-<h3 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h3><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
+<h2 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h2><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
+<p>诶mathjax怎么又炸了</p>
 <h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
 <li><a href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
 </ul>
@@ -198,6 +117,115 @@ int main()&#123;
       <tags>
         <tag>dp</tag>
         <tag>背包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-堆</title>
+    <url>/2020/11/24/ds-heap/</url>
+    <content><![CDATA[<p>　　　数据结构中的堆结构　　　</p>
+<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+<li>完全二叉树：</li>
+</ul>
+<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
+<p><a href="https://imgchr.com/i/Da1oSH"><img src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png"></a></p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li><p>下标：</p>
+<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
+</li>
+<li><p>大小：</p>
+<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
+</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
+<li><a href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
+<li><p><a href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></p>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
+<li><a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+        <tag>Heap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hash Table（散列表）</title>
+    <url>/2020/11/25/hash-table/</url>
+    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
+<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
+<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
+<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
+<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
+<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
+</ul>
+<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
+<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
+<li>开放定址法</li>
+<li>避免聚集：<ul>
+<li>单独链表法</li>
+<li>再散列</li>
+</ul>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
+</li>
+<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+        <tag>Hash Table</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>同余 逆元 费马小定理</title>
+    <url>/2020/12/02/inverse-element/</url>
+    <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
+<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
+<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
+<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
+1\%p=a^{p-1}\%p \\
+=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
+<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
+&#123;
+    return qpow(x, M - 2, M);
+&#125;
+</code></pre>
+<p>【黑人问号脸.jpeg】</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
+<li><a href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>数学</tag>
+        <tag>逆元</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
@@ -282,33 +310,6 @@ I_{n} &=\int \tan ^{n} x d x \\
 ]]></content>
       <tags>
         <tag>Calculus</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>同余 逆元 费马小定理</title>
-    <url>/2020/12/02/inverse-element/</url>
-    <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
-<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
-<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
-<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
-<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
-1\%p=a^{p-1}\%p \\
-=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
-<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
-&#123;
-    return qpow(x, M - 2, M);
-&#125;
-</code></pre>
-<p>【黑人问号脸.jpeg】</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
-<li><a href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>数学</tag>
-        <tag>逆元</tag>
       </tags>
   </entry>
 </search>
