@@ -20,12 +20,14 @@
 <meta property="og:description" content="所以为什么要找一个背包图片当头图啊喂 0&#x2F;1 背包问题有$N$件物品和一个容量为$V$的背包。每种物品仅有一件，可以选择放或不放。第$i$件物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。  设$f[i][v]$表示前$i$件物品(部分或全部)恰放入一个容量为$v$的背包可以获得的最大价值。则其状态转移方程便是：  f[i]">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-12-09T09:20:29.000Z">
-<meta property="article:modified_time" content="2020-12-09T10:07:05.416Z">
+<meta property="article:modified_time" content="2020-12-09T10:08:09.614Z">
 <meta property="article:author" content="c7w">
+<meta property="article:tag" content="dp">
+<meta property="article:tag" content="背包">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1607508476169">
+  <link rel="stylesheet" href="/css/style.css?v=1607508636813">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -50,7 +52,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>6</div>
-        <div><span>标签</span>7</div>
+        <div><span>标签</span>9</div>
         <div><span>分类</span>0</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -96,7 +98,7 @@
   
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Calculus/" style="font-size: 10px;">Calculus</a> <a href="/tags/Data-Structure/" style="font-size: 20px;">Data Structure</a> <a href="/tags/Hash-Table/" style="font-size: 10px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 10px;">Heap</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 10px;">日志</a> <a href="/tags/%E9%80%86%E5%85%83/" style="font-size: 10px;">逆元</a>
+      <a href="/tags/Calculus/" style="font-size: 10px;">Calculus</a> <a href="/tags/Data-Structure/" style="font-size: 20px;">Data Structure</a> <a href="/tags/Hash-Table/" style="font-size: 10px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 10px;">Heap</a> <a href="/tags/dp/" style="font-size: 10px;">dp</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 10px;">日志</a> <a href="/tags/%E8%83%8C%E5%8C%85/" style="font-size: 10px;">背包</a> <a href="/tags/%E9%80%86%E5%85%83/" style="font-size: 10px;">逆元</a>
     </div>
     
   </div>
@@ -206,19 +208,13 @@ f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述�
 
   
     
-  <div class="nexmoe-post-copyright">
-    <strong>本文作者：</strong>c7w<br>
-    <strong>本文链接：</strong><a href="https://cc7w.cf/2020/12/09/dp-backpack/" title="https:&#x2F;&#x2F;cc7w.cf&#x2F;2020&#x2F;12&#x2F;09&#x2F;dp-backpack&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;cc7w.cf&#x2F;2020&#x2F;12&#x2F;09&#x2F;dp-backpack&#x2F;</a><br>
-    
-      © c7w 2020. All Rights Reserved.
-    
-  </div>
-
 
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/dp/" rel="tag">dp</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E8%83%8C%E5%8C%85/" rel="tag">背包</a>
     
 </div>
 
@@ -253,7 +249,7 @@ f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述�
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1607508476171"></script>
+ <script src="/js/app.js?v=1607508636816"></script>
 
   
 
