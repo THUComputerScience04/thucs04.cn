@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1607508636879">
+  <link rel="stylesheet" href="/css/style.css?v=1607508813573">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -170,7 +170,7 @@ for \ k\ in \ range[0, floor(\frac v {w[i]})]:\\
         f[v] = max(f[v], f[v-w[i]]+c[i]);
 </code></pre>
 <h3 id="另一种解法：转化为0-1背包问题"><a href="#另一种解法：转化为0-1背包问题" class="headerlink" title="另一种解法：转化为0/1背包问题"></a>另一种解法：转化为0/1背包问题</h3><p>考虑到第$i$种物品最多选$floor(\frac V {w[i]})$件，于是可以把第$i$种物品转化为$floor(\frac V {w[i]})$件费用及价值均不变的物品，然后求解这个0/1背包问题。</p>
-<p>更高效的转化方法是：把第$i$种物品拆成费用为$w[i]<em>2^k$、价值为$c[i]</em>2^k$的若干件物品，其中$k$满足$w[i]*2^k&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
+<p>更高效的转化方法是：把第$i$种物品拆成费用为$2^kw[i]$、价值为$2^kc[i]$的若干件物品，其中$k$满足$2^kw[i]&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
 <h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><p>有$N$种物品和一个容量为$V$的背包。<strong>第$i$种物品最多有$n[i]$件可用</strong>，每件费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
 <p>基本的方程只需将完全背包问题的方程略微一改即可，因为对于第$i$种物品有$n[i]+1$种策略：取$0$件，取$1$件……取$n[i]$件。令$f[i][v]$表示前$i$种物品恰放入一个容量为$v$的背包的最大价值，则：</p>
 <script type="math/tex; mode=display">
@@ -198,7 +198,7 @@ f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述�
     <div class="nexmoe-post">
         <a href="/2020/12/02/inverse-element/">
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 60%;"> 
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 60.67415730337079%;"> 
                     <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="同余 逆元 费马小定理" class="lazyload">
                     <h1>同余 逆元 费马小定理</h1>
                 </div>
@@ -474,7 +474,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1607508636881"></script>
+ <script src="/js/app.js?v=1607508813575"></script>
 
   
 

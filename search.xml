@@ -26,7 +26,7 @@ for \ k\ in \ range[0, floor(\frac v {w[i]})]:\\
         f[v] = max(f[v], f[v-w[i]]+c[i]);
 </code></pre>
 <h3 id="另一种解法：转化为0-1背包问题"><a href="#另一种解法：转化为0-1背包问题" class="headerlink" title="另一种解法：转化为0/1背包问题"></a>另一种解法：转化为0/1背包问题</h3><p>考虑到第$i$种物品最多选$floor(\frac V {w[i]})$件，于是可以把第$i$种物品转化为$floor(\frac V {w[i]})$件费用及价值均不变的物品，然后求解这个0/1背包问题。</p>
-<p>更高效的转化方法是：把第$i$种物品拆成费用为$w[i]<em>2^k$、价值为$c[i]</em>2^k$的若干件物品，其中$k$满足$w[i]*2^k&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
+<p>更高效的转化方法是：把第$i$种物品拆成费用为$2^kw[i]$、价值为$2^kc[i]$的若干件物品，其中$k$满足$2^kw[i]&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
 <h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><p>有$N$种物品和一个容量为$V$的背包。<strong>第$i$种物品最多有$n[i]$件可用</strong>，每件费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
 <p>基本的方程只需将完全背包问题的方程略微一改即可，因为对于第$i$种物品有$n[i]+1$种策略：取$0$件，取$1$件……取$n[i]$件。令$f[i][v]$表示前$i$种物品恰放入一个容量为$v$的背包的最大价值，则：</p>
 <script type="math/tex; mode=display">
@@ -88,6 +88,19 @@ f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述�
       </tags>
   </entry>
   <entry>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hash Table（散列表）</title>
     <url>/2020/11/25/hash-table/</url>
     <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
@@ -119,19 +132,6 @@ f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述�
       <tags>
         <tag>Data Structure</tag>
         <tag>Hash Table</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello, World.</title>
-    <url>/2020/11/20/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
