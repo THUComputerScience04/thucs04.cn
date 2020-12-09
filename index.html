@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1607508813573">
+  <link rel="stylesheet" href="/css/style.css?v=1607509992813">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -141,8 +141,8 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
             <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月09日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 6 分钟</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.7k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
         </div>
 
         <article>
@@ -190,6 +190,72 @@ f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述�
 <h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
 </ul>
+<p>附AC代码：</p>
+<pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+int v, n=0;
+    //  i j   k
+int f[1001] = &#123;0&#125;;
+
+int max(int a, int b)&#123;
+    return a &gt; b ? a : b;
+&#125;
+
+void processTime()&#123;
+    int a, b, c, d;
+    scanf(&quot;%d:%d %d:%d&quot;, &amp;a, &amp;b, &amp;c, &amp;d);
+    v = d - b + (c - a) * 60;
+&#125;
+
+void tryItem(int cost, int value, bool inf)&#123;
+    if(inf)&#123;
+        for (int j = cost; j &lt;= v; j++)&#123;
+            f[j] = max(f[j], f[j - cost]+value);
+        &#125;
+    &#125;else&#123;
+        for (int j = v; j &gt;= cost; j--)&#123;
+            f[j] = max(f[j], f[j - cost]+value);
+        &#125;
+    &#125;
+&#125;
+
+void decompose(int cost, int value, int num)&#123;
+    int base = 1;
+    while(num&gt;=base)&#123;
+        tryItem(cost * base, value * base, false);
+        num -= base;
+        base &lt;&lt;= 1;
+    &#125;
+    if(num&gt;0)&#123;
+        tryItem(cost * num, value * num, false);
+    &#125;
+&#125;
+
+int main()&#123;
+    processTime();
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        int a, b, c;
+        scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c);
+        if(c==0)&#123;
+            tryItem(a, b, true);
+        &#125;else if(c==1)&#123;
+            tryItem(a, b, false);
+        &#125;else&#123;
+            decompose(a, b, c);
+        &#125;
+    &#125;
+    int result = 0;
+    for (int i = 1; i &lt;= v; i++)&#123;
+        result = max(result, f[i]);
+    &#125;
+    cout &lt;&lt; result;
+    return 0;
+&#125;
+</code></pre>
 
             
         </article>
@@ -474,7 +540,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1607508813575"></script>
+ <script src="/js/app.js?v=1607509992813"></script>
 
   
 
@@ -482,21 +548,6 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
