@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608303953994">
+  <link rel="stylesheet" href="/css/style.css?v=1608611159020">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -130,25 +130,133 @@
         <section class="nexmoe-posts">
     
     <div class="nexmoe-post">
-        <a href="/2020/12/09/ds-segment-tree/">
+        <a href="/2020/12/22/ds-fenwick-tree-basic/">
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 60.67415730337079%;"> 
-                    <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="线段树" class="lazyload">
-                    <h1>线段树</h1>
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
+                    <img data-src="https://s3.ax1x.com/2020/12/22/rD8BFK.png" data-sizes="auto" alt="树状数组-入门" class="lazyload">
+                    <h1>树状数组-入门</h1>
                 </div>
             
         </a>
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月09日</a>
-            <a><i class="nexmoefont icon-areachart"></i>22 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月22日</a>
+            <a><i class="nexmoefont icon-areachart"></i>794 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
         </div>
 
         <article>
             
-                <p>我猜最后头图得是线段树</p>
-<h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><h1 id="干饭去了，有空再说8"><a href="#干饭去了，有空再说8" class="headerlink" title="干饭去了，有空再说8"></a>干饭去了，有空再说8</h1>
+                <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>树状数组可以用于高效计算数列的前缀和，区间和等等。</p>
+<p>它可以支持在$O(logn)$的时间内得到任意前缀和，以及在$O(logn)$时间内支持对区间单点值的修改。空间复杂度为$O(n)$。</p>
+<h3 id="数组存储方式"><a href="#数组存储方式" class="headerlink" title="数组存储方式"></a>数组存储方式</h3><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/22/rD8IfS.png" alt="rD8IfS.png" class="lazyload"></p>
+<p>如图所示。</p>
+<p>$A[i]$代表原数组的元素，$C[i]$代表树状数组中的元素。</p>
+<pre><code class="lang-c++">C[1]=A[1];
+C[2]=A[1]+A[2];
+C[3]=A[3];
+C[4]=A[1]+A[2]+A[3]+A[4];
+C[5]=A[5];
+C[6]=A[5]+A[6];
+C[7]=A[7];
+C[8]=A[1]+A[2]+A[3]+A[4]+A[5]+A[6]+A[7]+A[8];
+</code></pre>
+<p>而其索引的二进制表示如下：</p>
+<pre><code class="lang-c++">C[1] = C[0001] = A[1];
+C[2] = C[0010] = A[1]+A[2];
+C[3] = C[0011] = A[3];
+C[4] = C[0100] = A[1]+A[2]+A[3]+A[4];
+C[5] = C[0101] = A[5];
+C[6] = C[0110] = A[5]+A[6];
+C[7] = C[0111] = A[7];
+C[8] = C[1000] = A[1]+A[2]+A[3]+A[4]+A[5]+A[6]+A[7]+A[8];
+</code></pre>
+<p>我们可以找出规律，</p>
+<script type="math/tex; mode=display">
+C[i] =\sum_{k=把i二进制表示的最低位1置为0后，将新的值+1}^i A[k]</script><p>也就是说，问题在于如何找出$i$的最低位$1$所代表的数值。</p>
+<h3 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h3><p>这里我们可以引入<code>lowbit</code>函数。</p>
+<pre><code class="lang-c++">int lowbit (int x)
+&#123;
+    return x &amp; (-x);
+&#125;
+</code></pre>
+<p>我们已经知道，对于整数表示，有</p>
+<ul>
+<li><p>正数的补码是其本身；</p>
+</li>
+<li><p>负数的补码是在反码的基础上$+1$；</p>
+</li>
+</ul>
+<p>因此<code>x &amp; (-x)</code>就可以满足我们对于查找最低位$1$的需求。</p>
+<p>举个例子：</p>
+<ul>
+<li>二进制数 $11010$ (1) </li>
+<li><p>其反码为 $00101$ (2)</p>
+</li>
+<li><p>加 $1$ 后为 $00110$ (3)</p>
+</li>
+<li>将(1)(3)两者相与便得到最低位的 $1$ 所表示的数值</li>
+</ul>
+<h2 id="树状数组的建立"><a href="#树状数组的建立" class="headerlink" title="树状数组的建立"></a>树状数组的建立</h2><p>上面准备工作都做好了，码就行了:(</p>
+<pre><code class="lang-c++">#include &lt;iostream&gt;
+#define MAXN 12
+using namespace std;
+
+int ft[MAXN+1] = &#123;0&#125;;
+int a[MAXN + 1] = &#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12&#125;;
+
+int lowbit(int x)&#123;
+    return x &amp; (-x);
+&#125;
+
+void generateTree()&#123;
+    for (int i = 1; i &lt;= MAXN; i++)&#123;
+        for (int k = i - lowbit(i) + 1; k &lt;= i; k++)
+            ft[i] += a[k];
+    &#125;
+&#125;
+
+int main()&#123;
+    generateTree();
+    return 0;
+&#125;
+</code></pre>
+<h2 id="单点更新"><a href="#单点更新" class="headerlink" title="单点更新"></a>单点更新</h2><p>再把这张图拿过来：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/22/rD8IfS.png" alt="rD8IfS.png" class="lazyload"></p>
+<p>如果我们要更改$A[3]$的值，那么我们知道，$C[3], C[4], C[8]$ 的值都会受到影响。</p>
+<ul>
+<li>$3(011)$ =&gt; <code>C[3] += temp;</code></li>
+<li>$lowbit(3) = 001$, $3 + lowbit(3)= 100 = 4(100)$ =&gt; <code>C[4] += temp;</code></li>
+<li>$lowbit(4) = 100$, $4+lowbit(4)=1000=8(1000)$ =&gt; <code>C[8] += temp;</code></li>
+<li>……</li>
+</ul>
+<p>因此，我们只需要对所要更新的数据不断使其自增lowbit后，</p>
+<p>使树状数组的对应索引增加 temp 值即可。</p>
+<pre><code class="lang-c++">void update(int index, int val)&#123;
+    for (int i = index; i &lt;= MAXN; i = i + lowbit(i))&#123;
+        ft[i] += val;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h2><p>假设现在我们要查询1~7的前缀和。</p>
+<pre><code class="lang-c++">C[7] = C[0111] = A[7];
+C[6] = C[0110] = A[5] + A[6];
+C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
+</code></pre>
+<p>归纳可知，我们只需每次将索引减少i的lowbit，然后将对应的树状数组的值求和即可。</p>
+<pre><code class="lang-c++">int getSum(int index)&#123;
+    int result = 0;
+    for (int k = index; k &gt; 0; k-=lowbit(k))&#123;
+        result += ft[k];
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84</a>‘</li>
+<li><a target="_blank" rel="noopener" href="https://bestsort.cn/2019/04/26/195/">https://bestsort.cn/2019/04/26/195/</a></li>
+</ul>
+
             
         </article>
     </div>
@@ -707,7 +815,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608303953996"></script>
+ <script src="/js/app.js?v=1608611159021"></script>
 
   
 
