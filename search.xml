@@ -121,7 +121,7 @@ int main()&#123;
   </entry>
   <entry>
     <title>一些参数方程/极坐标图像</title>
-    <url>/2020/12/26/figure-of-some-function/</url>
+    <url>/2020/12/26/figure-of-some-curves/</url>
     <content><![CDATA[<p>菜鸡没学过4-4，在微积分应用里面积面积和体积的时候有的草图画不出来…</p>
 <h2 id="星形线"><a href="#星形线" class="headerlink" title="星形线"></a>星形线</h2><script type="math/tex; mode=display">
 x^{\frac 2 3}+y^{\frac 2 3}=a^{\frac 2 3} \\
@@ -147,6 +147,19 @@ y=a(1-\cos t)
 <li>部分图像采用 GeoGebra 绘制</li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据结构-堆</title>
@@ -326,40 +339,6 @@ public:
       </tags>
   </entry>
   <entry>
-    <title>Hash Table（散列表）</title>
-    <url>/2020/11/25/hash-table/</url>
-    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
-<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
-<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
-<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
-<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
-<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
-</ul>
-<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
-<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
-<li>开放定址法</li>
-<li>避免聚集：<ul>
-<li>单独链表法</li>
-<li>再散列</li>
-</ul>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
-</li>
-<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Data Structure</tag>
-        <tag>Hash Table</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>树状数组-入门</title>
     <url>/2020/12/22/ds-fenwick-tree-basic/</url>
     <content><![CDATA[<h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>树状数组可以用于高效计算数列的前缀和，区间和等等。</p>
@@ -477,19 +456,6 @@ C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
       </tags>
   </entry>
   <entry>
-    <title>Hello, World.</title>
-    <url>/2020/11/20/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>同余 逆元 费马小定理</title>
     <url>/2020/12/02/inverse-element/</url>
     <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
@@ -515,47 +481,6 @@ C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
         <tag>数学</tag>
         <tag>逆元</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>合同矩阵与相似矩阵</title>
-    <url>/2020/12/26/matrix-congruence-and-similarity/</url>
-    <content><![CDATA[<h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
-<script type="math/tex; mode=display">
-A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
-<li>合同关系是等价关系.</li>
-</ol>
-<ul>
-<li>自反性: $A$与$A$本身合同</li>
-<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
-<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
-</ul>
-<ol>
-<li>合同矩阵的<strong>秩</strong>相同。</li>
-</ol>
-<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
-<script type="math/tex; mode=display">
-A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
-<li>相似关系是等价关系.</li>
-</ol>
-<ul>
-<li>自反性: $A$与$A$本身相似</li>
-<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
-<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
-</ul>
-<ol>
-<li>相似矩阵具有一系列相同的特点.</li>
-</ol>
-<ul>
-<li>两者的秩相等；</li>
-<li>两者的行列式值相等；</li>
-<li>两者的迹相等；</li>
-<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
-<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
-</ul>
-<ol>
-<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
-</ol>
-]]></content>
   </entry>
   <entry>
     <title>三角函数的正整数幂的不定积分</title>
@@ -640,5 +565,80 @@ I_{n} &=\int \tan ^{n} x d x \\
       <tags>
         <tag>Calculus</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hash Table（散列表）</title>
+    <url>/2020/11/25/hash-table/</url>
+    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
+<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
+<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
+<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
+<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
+<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
+</ul>
+<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
+<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
+<li>开放定址法</li>
+<li>避免聚集：<ul>
+<li>单独链表法</li>
+<li>再散列</li>
+</ul>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
+</li>
+<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+        <tag>Hash Table</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>合同矩阵与相似矩阵</title>
+    <url>/2020/12/26/matrix-congruence-and-similarity/</url>
+    <content><![CDATA[<h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>合同关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身合同</li>
+<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
+<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
+</ul>
+<ol>
+<li>合同矩阵的<strong>秩</strong>相同。</li>
+</ol>
+<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>相似关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身相似</li>
+<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
+<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
+</ul>
+<ol>
+<li>相似矩阵具有一系列相同的特点.</li>
+</ol>
+<ul>
+<li>两者的秩相等；</li>
+<li>两者的行列式值相等；</li>
+<li>两者的迹相等；</li>
+<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
+<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
+</ul>
+<ol>
+<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
+</ol>
+]]></content>
   </entry>
 </search>
