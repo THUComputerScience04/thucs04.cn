@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>tags - c7w 的破站 v2.0</title>
+  <title>洛谷 P1908 求逆序对 - c7w 的破站 v2.0</title>
   <meta charset="UTF-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,18 +12,22 @@
   
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://cc7w.cf/tags/index.html">
+  <meta name="description" content="归并排序求逆序对数目#include &lt;iostream&gt; #include &lt;cstdio&gt; using namespace std;  unsigned long long result &#x3D; 0; int a[500001] &#x3D; &amp;#123;0&amp;#125;; int cache[500001] &#x3D; &amp;#123;0&amp;#125;;  void sort(int l, int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="洛谷 P1908 求逆序对">
+<meta property="og:url" content="https://cc7w.cf/2020/12/31/luogu-P1908/index.html">
 <meta property="og:site_name" content="c7w 的破站 v2.0">
+<meta property="og:description" content="归并排序求逆序对数目#include &lt;iostream&gt; #include &lt;cstdio&gt; using namespace std;  unsigned long long result &#x3D; 0; int a[500001] &#x3D; &amp;#123;0&amp;#125;; int cache[500001] &#x3D; &amp;#123;0&amp;#125;;  void sort(int l, int">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-11-22T01:38:20.000Z">
-<meta property="article:modified_time" content="2020-11-22T01:38:22.322Z">
+<meta property="article:published_time" content="2020-12-31T06:48:21.000Z">
+<meta property="article:modified_time" content="2020-12-31T06:49:23.172Z">
 <meta property="article:author" content="c7w">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="luogu">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1609397517803">
+  <link rel="stylesheet" href="/css/style.css?v=1609397517825">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -132,15 +136,15 @@
         <div class="nexmoe-post">
   
       <div class="nexmoe-post-cover" style="padding-bottom: 60.67415730337079%;"> 
-          <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="tags" class="lazyload">
-          <h1>tags</h1>
+          <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="洛谷 P1908 求逆序对" class="lazyload">
+          <h1>洛谷 P1908 求逆序对</h1>
       </div>
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月22日</a>
-    <a><i class="nexmoefont icon-areachart"></i>0 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月31日</a>
+    <a><i class="nexmoefont icon-areachart"></i>698 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
 
   <div class="nexmoe-post-right">
@@ -148,7 +152,7 @@
       <div class="nexmoe-fixed">
         <div class="nexmoe-valign">
             <div class="nexmoe-toc">
-                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9%E6%95%B0%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">归并排序求逆序对数目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E7%A6%BB%E6%95%A3%E5%8C%96%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9%E6%95%B0%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">树状数组+离散化求逆序对数目</span></a></li></ol>
             </div>
         </div>
       </div>
@@ -156,7 +160,184 @@
   </div>
 
   <article>
-    
+    <h2 id="归并排序求逆序对数目"><a href="#归并排序求逆序对数目" class="headerlink" title="归并排序求逆序对数目"></a>归并排序求逆序对数目</h2><pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+unsigned long long result = 0;
+int a[500001] = &#123;0&#125;;
+int cache[500001] = &#123;0&#125;;
+
+void sort(int l, int r)&#123;
+    if (r &lt;= l) return;
+    if(r-l==1)&#123;
+        if(a[l]&gt;a[r])&#123;
+            int temp = a[l];
+            a[l] = a[r];
+            a[r] = temp;
+            result++;
+        &#125;
+        return;
+    &#125;
+    int mid = (l + r) / 2;
+    //[l, mid] &amp;&amp; [mid+1, r]
+    sort(l, mid);
+    sort(mid + 1, r);
+    int len = r - l + 1;
+    int x = l, y = mid + 1;
+    int pos = 0;
+    while(x&lt;=mid &amp;&amp; y&lt;=r)&#123;
+        while (x &lt;= mid &amp;&amp; y &lt;= r &amp;&amp; a[x] &lt;= a[y]) &#123;
+            pos++;
+            cache[pos] = a[x];
+            x++;
+        &#125;
+        if (x &lt;= mid &amp;&amp; y &lt;= r &amp;&amp; a[x] &gt; a[y])&#123;
+            pos++;
+            cache[pos] = a[y];
+            y++;
+            result += mid-x+1;
+        &#125; 
+        if(x&gt;mid)&#123;
+            while(y&lt;=r)&#123;
+                pos++;
+                cache[pos] = a[y];
+                y++;
+            &#125;
+            break;
+        &#125;
+        if(y&gt;r)&#123;
+            while (x&lt;=mid) &#123;
+                pos++;
+                cache[pos] = a[x];
+                x++;
+            &#125;
+            break;
+        &#125;
+    &#125;
+    for (int i = l; i &lt;= r; i++)&#123;
+        a[i] = cache[i - l + 1];
+    &#125;
+&#125;
+
+int main()&#123;
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    &#125;
+    sort(1, n);
+    cout &lt;&lt; result;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="树状数组-离散化求逆序对数目"><a href="#树状数组-离散化求逆序对数目" class="headerlink" title="树状数组+离散化求逆序对数目"></a>树状数组+离散化求逆序对数目</h2><pre><code class="lang-c++">#include &lt;iostream&gt;
+#define MAXN 500001
+using namespace std;
+
+int n;
+unsigned long long result = 0;
+int a[MAXN] = &#123;0&#125;;
+int ft[MAXN + 1] = &#123;0&#125;;
+
+int lowbit(int x) &#123;
+    return x &amp; (-x);
+&#125;
+
+void update(int index, int val) &#123;
+    for (int i = index; i &lt;= n; i = i + lowbit(i)) &#123;
+        ft[i] += val;
+    &#125;
+&#125;
+
+int getSum(int index) &#123;
+    int result = 0;
+    for (int k = index; k &gt; 0; k -= lowbit(k)) &#123;
+        result += ft[k];
+    &#125;
+    return result;
+&#125;
+
+class entry &#123;
+    public:
+     int id, val, rank;
+&#125; m[500001];
+
+// Last Update: 2020-12-30
+/* Quick Sort With CMP Start */
+// Sort the element between [a+left, a+right)
+// You need to implement the &quot;compare&quot; function.
+// You&#39;d better implement a strict inequality in the set.
+// An example is given in pseudocode.
+/*
+bool compare(T A, T B)&#123;
+    if(A precedes B)&#123;
+        return true;
+    &#125;else&#123;
+        return false;
+    &#125;
+&#125;
+*/
+template &lt;class T&gt;
+void quickSort(T* a, int left, int right, bool (*cmp)(T, T)) &#123;
+    T pivot = *(a + right - 1);
+    int l = left, r = right - 1;
+    while (l &lt; r) &#123;
+        while (l &lt; r &amp;&amp; !cmp(pivot, a[l])) &#123;  // a[l] &gt;= pivot then continue
+            l++;
+        &#125;
+        while (l &lt; r &amp;&amp; !cmp(a[r], pivot)) &#123;  // a[r] &lt;= pivot then continue
+            r--;
+        &#125;
+        if (l != r) &#123;
+            T temp = a[l];
+            a[l] = a[r];
+            a[r] = temp;
+        &#125; else &#123;
+            a[right - 1] = a[l];
+            a[l] = pivot;
+            quickSort(a, left, l, cmp);
+            quickSort(a, l + 1, right, cmp);
+        &#125;
+    &#125;
+&#125;
+/* Quick Sort With CMP End */
+
+bool compare1(entry a, entry b)&#123;
+    if (a.val &lt; b.val) return true;
+    if (a.val &gt; b.val) return false;
+    if (a.id &lt; b.id) return true;
+    return false;
+&#125;
+
+bool compare2(entry a, entry b)&#123;
+    if (a.id &lt; b.id) return true;
+    return false;
+&#125;
+
+
+
+int main()&#123;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        cin &gt;&gt; a[i];
+        m[i].id = i;
+        m[i].val = a[i]; 
+    &#125;
+    quickSort(m, 1, n + 1, compare1);
+    for (int i = 1; i &lt;= n; i++)&#123;
+        m[i].rank = i;
+    &#125;
+    quickSort(m, 1, n + 1, compare2);
+    for (int i = n; i &gt;= 1; i--) &#123;
+        update(m[i].rank, 1);
+        result = result + getSum(m[i].rank - 1);
+    &#125;
+    cout &lt;&lt; result;
+    return 0;
+&#125;
+</code></pre>
+
   </article>
 
   
@@ -166,6 +347,8 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/code/" rel="tag">code</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/luogu/" rel="tag">luogu</a>
     
 </div>
 
@@ -200,7 +383,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1609397517809"></script>
+ <script src="/js/app.js?v=1609397517827"></script>
 
   
 
