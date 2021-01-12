@@ -136,20 +136,142 @@ C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
       </tags>
   </entry>
   <entry>
-    <title>密码保护文章测试</title>
-    <url>/2021/01/11/encrypt-test/</url>
+    <title>2020-01 日记</title>
+    <url>/2021/01/12/diary-2021-01/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="【■■■ - 密码错误 - ■■■】" data-whm="Oh, these decrypted content cannot be verified, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="8712cc481fc34ae6d16ea47f63532ef2acc2c124b33fb3f40c54973de3857f5f">018a63061e17dd91a60e05280129f742932d41a23e2bd96bdb1d48a7faba3ed7b029007f6e466b7ae950fd3977006312fab6bc5ff0c39b2e1bf6c5f37584a15703aba8c89474cb7ce75d3218d2a7d448</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="e5d63de55df67cc5a49d9eb579bb2aefc24e883bac0bbbbabc364911c902d803">e971eef91994a0ec820bbaf4f44e9b4c932ad9f630de73109907d4f0e116ceec7ada3d06dbaec7425ed4145358bc90cee94a3cbd8e4f0caf558b3a7805f8793846ab856ec5452e632200c4908673937a9fe09ca306924cc780f59f86170f1e5f68e5e073f9df0678e4ac77140178ab1be87293194fd146e18af6135c2edbfed9184a24ce3973eb83750212b7b0d18e51f88125abbf62e31ba84ae564970a3f33256b6b8581355459a6d1e5217a55029a1f1760f91d70ebecee0df74961881dfba240af55c68dcecd18176e95dcf8d4213f665f82dff36b6e213bed5b6edf73442efbf6ea1daf99ab2f03dc4703c6b5f7869f0be1ecfadd6693a12546a8e24180a46ab1e7f477ccb58ab6478719f5288b710ca46844b4497ef7d5b9e7573a362c87e366fa910f71baa123df2cee503149925401984818b42d6893675f048d70b1c5612e9a0b5dcaa0bb4f0493b260ec893c52c5b3f78a3d739f7c236309da89ad644d932bf2113b1ca134a84ef826ae68d38098639b044de8d3ee529f8eed37e9f611a6ecff30747c0d89bc63c9e665b9a88a859f734e2135ed31aced8b6c730e2471f4ea7abce0ade5539a6c22e17952194e84371ce4c14d46c78c99cf3e971c8b5b997fdadcdf64f8418306e50079f6d3dd7d671ea3827bd649ec9452efd56a01de1c23ddd448eb0ac3f5d05d0fb9a38f6ed8f9bccb95300412426158c4d7884e79666c8db2bf687bcb341228d9edb6b2dafca91acb194d9b1d1fa20a2ceb3e23b99769e494090d9bce122644e5a57ef48ad98fa502e43ee88727adad82525e886cf36ba114055ec6a9da1faccbbc94a853d9e7177f35781dd40c57c093200be91da4f6a2dd3a3f75f9a7a1499b55d0baae76505d1eb3c8dce72a3a03b7db03e233ec3d0d44da2f50f51bdbbed167f40b7a8c44db76e4806ce2ca548df73b242439cf9c015a71a5d18c46a6f92abcd2</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
       <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Please complete the sentence: c7w,_______.<br/> You should type in four characters in lowercase.</span>
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">密码是yyds的一个全排列</span>
       </label>
     </div>
   </div>
 </div>
 <script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <tags>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态规划的背包问题</title>
+    <url>/2020/12/09/dp-backpack/</url>
+    <content><![CDATA[<p>所以为什么要找一个背包图片当头图啊喂</p>
+<h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0/1 背包问题"></a>0/1 背包问题</h2><p>有$N$件物品和一个容量为$V$的背包。<strong>每种物品仅有一件，可以选择放或不放。</strong>第$i$件物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
+<p>设$f[i][v]$表示前$i$件物品(部分或全部)<em>恰</em>放入一个容量为$v$的背包可以获得的最大价值。则其状态转移方程便是：</p>
+<script type="math/tex; mode=display">
+f[i][v]=\max(f[i-1][v],f[i-1][v-w[i]]+c[i])</script><h3 id="0-1背包的空间优化"><a href="#0-1背包的空间优化" class="headerlink" title="0/1背包的空间优化"></a>0/1背包的空间优化</h3><p>我们可以将二维数组存储优化为一维数组存储。</p>
+<p>在每次主循环中，如果我们以$v=V…0$的逆序推$f[v]$，这样就能保证推$f[v]$时$f[v-w[i]]$保存的是状态$f[i-1][v-w[i]]$的值。</p>
+<p>伪代码如下：</p>
+<pre><code class="lang-c++">for i = 1...N 
+    for v = V...0 
+        f[v] = max(f[v], f[v-w[i]]+c[i]);
+</code></pre>
+<p>　　其中$f[v]=max(f[v],f[v-w[i]]+c[i])$便与原转移方程等价。</p>
+<h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><p>有$N$种物品和一个容量为$V$的背包，<strong>每种物品都有无限件可用</strong>。第$i$种物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
+<p>令$f[i][v]$表示前$i$种物品<em>恰</em>放入一个容量为$v$的背包的最大价值，于是可以按照每种物品不同的策略写出状态转移方程：</p>
+<script type="math/tex; mode=display">
+for \ k\ in \ range[0, floor(\frac v {w[i]})]:\\
+ f[i][v]=max(f[i-1][v-k*w[i]]+k*c[i])</script><h3 id="完全背包问题的空间优化"><a href="#完全背包问题的空间优化" class="headerlink" title="完全背包问题的空间优化"></a>完全背包问题的空间优化</h3><p>完全背包的特点恰是每种物品可选无限件，所以我们可以考虑“加选一件第$i$种物品”策略。因此我们可以使用<strong>可能已选入第i种物品</strong>的子结果$f[i][v-w[i]]$，于是我们必须采用$v=0…V$的顺序循环。</p>
+<p>伪代码如下：</p>
+<pre><code class="lang-c++">for i = 1...N 
+    for v = 0...V
+        f[v] = max(f[v], f[v-w[i]]+c[i]);
+</code></pre>
+<h3 id="另一种解法：转化为0-1背包问题"><a href="#另一种解法：转化为0-1背包问题" class="headerlink" title="另一种解法：转化为0/1背包问题"></a>另一种解法：转化为0/1背包问题</h3><p>考虑到第$i$种物品最多选$floor(\frac V {w[i]})$件，于是可以把第$i$种物品转化为$floor(\frac V {w[i]})$件费用及价值均不变的物品，然后求解这个0/1背包问题。</p>
+<p>更高效的转化方法是：把第$i$种物品拆成费用为$2^kw[i]$、价值为$2^kc[i]$的若干件物品，其中$k$满足$2^kw[i]&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
+<h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><p>有$N$种物品和一个容量为$V$的背包。<strong>第$i$种物品最多有$n[i]$件可用</strong>，每件费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
+<p>基本的方程只需将完全背包问题的方程略微一改即可，因为对于第$i$种物品有$n[i]+1$种策略：取$0$件，取$1$件……取$n[i]$件。令$f[i][v]$表示前$i$种物品恰放入一个容量为$v$的背包的最大价值，则：</p>
+<script type="math/tex; mode=display">
+for \ k\ in \ range[0, n[i]]:\\
+f[i][v]=max(f[i-1][v-k*w[i]]+ k*c[i])</script><p>循环时注意$v-k*w[i]$ 非负即可。</p>
+<h3 id="转化为0-1背包问题"><a href="#转化为0-1背包问题" class="headerlink" title="转化为0/1背包问题"></a>转化为0/1背包问题</h3><p>将第$i$种物品分成若干件物品，其中每件物品有一个系数，这件物品的费用和价值均是原来的费用和价值乘以这个系数。使这些系数分别为</p>
+<script type="math/tex; mode=display">
+1,2,4,...,2^{k-1},n[i]-2^k+1</script><p>且k是满足$n[i]-2^k+1&gt;0$的最大整数。</p>
+<p>例如，如果$n[i]$为$13$，就将这种物品分成系数分别为$1,2,4,6$的四件物品。 </p>
+<h2 id="二维背包问题"><a href="#二维背包问题" class="headerlink" title="二维背包问题"></a>二维背包问题</h2><p>二维费用的背包问题是指：对于每件物品，具有两种不同的费用；选择这件物品必须同时付出这两种代价；对于每种代价都有一个可付出的最大值（背包容量）。问怎样选择物品可以得到最大的价值。</p>
+<p>设这两种代价分别为代价1和代价2，第$i$件物品所需的两种代价分别为$a[i]$和$b[i]$。两种代价可付出的最大值（两种背包容量）分别为$V$和$U$。物品的价值为$c[i]$。</p>
+<p>费用加了一维，只需状态也加一维即可。设$f[i][v][u]$表示前$i$件物品付出两种代价分别恰为$v$和$u$时可获得的最大价值。状态转移方程就是：</p>
+<script type="math/tex; mode=display">
+f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述方法，可以只使用二维的数组：当每件物品只可以取一次时变量$v$和$u$采用逆序的循环，当物品有如完全背包问题时采用顺序的循环。当物品有如多重背包问题时拆分物品。</p>
+<h3 id="物品总个数的限制"><a href="#物品总个数的限制" class="headerlink" title="物品总个数的限制"></a>物品总个数的限制</h3><p>有时，“二维费用”的条件是以这样一种隐含的方式给出的：最多只能取$M$件物品。这事实上相当于每件物品多了一种“件数”的费用，每个物品的件数费用均为$1$，可以付出的最大件数费用为$M$。</p>
+<h2 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h2><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
+<p>诶mathjax怎么又炸了</p>
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
+<li><a href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
+</ul>
+<p>附AC代码：</p>
+<pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+int v, n=0;
+    //  i j   k
+int f[1001] = &#123;0&#125;;
+
+int max(int a, int b)&#123;
+    return a &gt; b ? a : b;
+&#125;
+
+void processTime()&#123;
+    int a, b, c, d;
+    scanf(&quot;%d:%d %d:%d&quot;, &amp;a, &amp;b, &amp;c, &amp;d);
+    v = d - b + (c - a) * 60;
+&#125;
+
+void tryItem(int cost, int value, bool inf)&#123;
+    if(inf)&#123;
+        for (int j = cost; j &lt;= v; j++)&#123;
+            f[j] = max(f[j], f[j - cost]+value);
+        &#125;
+    &#125;else&#123;
+        for (int j = v; j &gt;= cost; j--)&#123;
+            f[j] = max(f[j], f[j - cost]+value);
+        &#125;
+    &#125;
+&#125;
+
+void decompose(int cost, int value, int num)&#123;
+    int base = 1;
+    while(num&gt;=base)&#123;
+        tryItem(cost * base, value * base, false);
+        num -= base;
+        base &lt;&lt;= 1;
+    &#125;
+    if(num&gt;0)&#123;
+        tryItem(cost * num, value * num, false);
+    &#125;
+&#125;
+
+int main()&#123;
+    processTime();
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        int a, b, c;
+        scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c);
+        if(c==0)&#123;
+            tryItem(a, b, true);
+        &#125;else if(c==1)&#123;
+            tryItem(a, b, false);
+        &#125;else&#123;
+            decompose(a, b, c);
+        &#125;
+    &#125;
+    int result = 0;
+    for (int i = 1; i &lt;= v; i++)&#123;
+        result = max(result, f[i]);
+    &#125;
+    cout &lt;&lt; result;
+    return 0;
+&#125;
+</code></pre>
+]]></content>
+      <tags>
+        <tag>dp</tag>
+        <tag>背包</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据结构-堆</title>
@@ -329,151 +451,32 @@ public:
       </tags>
   </entry>
   <entry>
-    <title>一些参数方程/极坐标图像</title>
-    <url>/2020/12/26/figure-of-some-curves/</url>
-    <content><![CDATA[<p>菜鸡没学过4-4，在微积分应用里面积面积和体积的时候有的草图画不出来…</p>
-<h2 id="星形线"><a href="#星形线" class="headerlink" title="星形线"></a>星形线</h2><script type="math/tex; mode=display">
-x^{\frac 2 3}+y^{\frac 2 3}=a^{\frac 2 3} \\
-\begin{cases}
-x=a\cos^3t\\
-y=a\sin^3t
-\end{cases}</script><p><img src="https://s3.ax1x.com/2020/12/26/r4AL8K.png" alt=""></p>
-<h2 id="摆线"><a href="#摆线" class="headerlink" title="摆线"></a>摆线</h2><script type="math/tex; mode=display">
-\begin {cases}
-x= a(t-\sin t)\\
-y=a(1-\cos t)
-\end {cases}</script><p><img src="https://s3.ax1x.com/2020/12/26/r4E12T.png" alt=""></p>
-<p>图为$-4\pi \le t \le 4\pi, a=1$的图像.</p>
-<p>周期为$2\pi$.</p>
-<h2 id="双纽线"><a href="#双纽线" class="headerlink" title="双纽线"></a>双纽线</h2><p><a href="https://imgchr.com/i/r4VeSK"><img src="https://s3.ax1x.com/2020/12/26/r4VeSK.png" alt="r4VeSK.png"></a></p>
-<h2 id="笛卡尔心形线"><a href="#笛卡尔心形线" class="headerlink" title="笛卡尔心形线"></a>笛卡尔心形线</h2><p><a href="https://imgchr.com/i/r4ZSht"><img src="https://s3.ax1x.com/2020/12/26/r4ZSht.png" alt="r4ZSht.png"></a></p>
-<h2 id="其它曲线"><a href="#其它曲线" class="headerlink" title="其它曲线"></a>其它曲线</h2><p><a href="https://imgchr.com/i/r4ZeNn"><img src="https://s3.ax1x.com/2020/12/26/r4ZeNn.png" alt="r4ZeNn.png"></a></p>
-<p><a href="https://imgchr.com/i/r4Zu90"><img src="https://s3.ax1x.com/2020/12/26/r4Zu90.png" alt="r4Zu90.png"></a></p>
-<p><a href="https://imgchr.com/i/r4ZK3V"><img src="https://s3.ax1x.com/2020/12/26/r4ZK3V.png" alt="r4ZK3V.png"></a></p>
-<p><a href="https://imgchr.com/i/r4ZMcT"><img src="https://s3.ax1x.com/2020/12/26/r4ZMcT.png" alt="r4ZMcT.png"></a></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://mm.edrawsoft.cn/template/65439">https://mm.edrawsoft.cn/template/65439</a></li>
-<li>部分图像采用 GeoGebra 绘制</li>
-</ul>
-]]></content>
+    <title>密码保护文章测试</title>
+    <url>/2021/01/11/encrypt-test/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="【■■■ - 密码错误 - ■■■】" data-whm="Oh, these decrypted content cannot be verified, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="8712cc481fc34ae6d16ea47f63532ef2acc2c124b33fb3f40c54973de3857f5f">018a63061e17dd91a60e05280129f742932d41a23e2bd96bdb1d48a7faba3ed7b029007f6e466b7ae950fd3977006312fab6bc5ff0c39b2e1bf6c5f37584a15703aba8c89474cb7ce75d3218d2a7d448</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Please complete the sentence: c7w,_______.<br/> You should type in four characters in lowercase.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
   <entry>
-    <title>动态规划的背包问题</title>
-    <url>/2020/12/09/dp-backpack/</url>
-    <content><![CDATA[<p>所以为什么要找一个背包图片当头图啊喂</p>
-<h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0/1 背包问题"></a>0/1 背包问题</h2><p>有$N$件物品和一个容量为$V$的背包。<strong>每种物品仅有一件，可以选择放或不放。</strong>第$i$件物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
-<p>设$f[i][v]$表示前$i$件物品(部分或全部)<em>恰</em>放入一个容量为$v$的背包可以获得的最大价值。则其状态转移方程便是：</p>
-<script type="math/tex; mode=display">
-f[i][v]=\max(f[i-1][v],f[i-1][v-w[i]]+c[i])</script><h3 id="0-1背包的空间优化"><a href="#0-1背包的空间优化" class="headerlink" title="0/1背包的空间优化"></a>0/1背包的空间优化</h3><p>我们可以将二维数组存储优化为一维数组存储。</p>
-<p>在每次主循环中，如果我们以$v=V…0$的逆序推$f[v]$，这样就能保证推$f[v]$时$f[v-w[i]]$保存的是状态$f[i-1][v-w[i]]$的值。</p>
-<p>伪代码如下：</p>
-<pre><code class="lang-c++">for i = 1...N 
-    for v = V...0 
-        f[v] = max(f[v], f[v-w[i]]+c[i]);
-</code></pre>
-<p>　　其中$f[v]=max(f[v],f[v-w[i]]+c[i])$便与原转移方程等价。</p>
-<h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><p>有$N$种物品和一个容量为$V$的背包，<strong>每种物品都有无限件可用</strong>。第$i$种物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
-<p>令$f[i][v]$表示前$i$种物品<em>恰</em>放入一个容量为$v$的背包的最大价值，于是可以按照每种物品不同的策略写出状态转移方程：</p>
-<script type="math/tex; mode=display">
-for \ k\ in \ range[0, floor(\frac v {w[i]})]:\\
- f[i][v]=max(f[i-1][v-k*w[i]]+k*c[i])</script><h3 id="完全背包问题的空间优化"><a href="#完全背包问题的空间优化" class="headerlink" title="完全背包问题的空间优化"></a>完全背包问题的空间优化</h3><p>完全背包的特点恰是每种物品可选无限件，所以我们可以考虑“加选一件第$i$种物品”策略。因此我们可以使用<strong>可能已选入第i种物品</strong>的子结果$f[i][v-w[i]]$，于是我们必须采用$v=0…V$的顺序循环。</p>
-<p>伪代码如下：</p>
-<pre><code class="lang-c++">for i = 1...N 
-    for v = 0...V
-        f[v] = max(f[v], f[v-w[i]]+c[i]);
-</code></pre>
-<h3 id="另一种解法：转化为0-1背包问题"><a href="#另一种解法：转化为0-1背包问题" class="headerlink" title="另一种解法：转化为0/1背包问题"></a>另一种解法：转化为0/1背包问题</h3><p>考虑到第$i$种物品最多选$floor(\frac V {w[i]})$件，于是可以把第$i$种物品转化为$floor(\frac V {w[i]})$件费用及价值均不变的物品，然后求解这个0/1背包问题。</p>
-<p>更高效的转化方法是：把第$i$种物品拆成费用为$2^kw[i]$、价值为$2^kc[i]$的若干件物品，其中$k$满足$2^kw[i]&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
-<h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><p>有$N$种物品和一个容量为$V$的背包。<strong>第$i$种物品最多有$n[i]$件可用</strong>，每件费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
-<p>基本的方程只需将完全背包问题的方程略微一改即可，因为对于第$i$种物品有$n[i]+1$种策略：取$0$件，取$1$件……取$n[i]$件。令$f[i][v]$表示前$i$种物品恰放入一个容量为$v$的背包的最大价值，则：</p>
-<script type="math/tex; mode=display">
-for \ k\ in \ range[0, n[i]]:\\
-f[i][v]=max(f[i-1][v-k*w[i]]+ k*c[i])</script><p>循环时注意$v-k*w[i]$ 非负即可。</p>
-<h3 id="转化为0-1背包问题"><a href="#转化为0-1背包问题" class="headerlink" title="转化为0/1背包问题"></a>转化为0/1背包问题</h3><p>将第$i$种物品分成若干件物品，其中每件物品有一个系数，这件物品的费用和价值均是原来的费用和价值乘以这个系数。使这些系数分别为</p>
-<script type="math/tex; mode=display">
-1,2,4,...,2^{k-1},n[i]-2^k+1</script><p>且k是满足$n[i]-2^k+1&gt;0$的最大整数。</p>
-<p>例如，如果$n[i]$为$13$，就将这种物品分成系数分别为$1,2,4,6$的四件物品。 </p>
-<h2 id="二维背包问题"><a href="#二维背包问题" class="headerlink" title="二维背包问题"></a>二维背包问题</h2><p>二维费用的背包问题是指：对于每件物品，具有两种不同的费用；选择这件物品必须同时付出这两种代价；对于每种代价都有一个可付出的最大值（背包容量）。问怎样选择物品可以得到最大的价值。</p>
-<p>设这两种代价分别为代价1和代价2，第$i$件物品所需的两种代价分别为$a[i]$和$b[i]$。两种代价可付出的最大值（两种背包容量）分别为$V$和$U$。物品的价值为$c[i]$。</p>
-<p>费用加了一维，只需状态也加一维即可。设$f[i][v][u]$表示前$i$件物品付出两种代价分别恰为$v$和$u$时可获得的最大价值。状态转移方程就是：</p>
-<script type="math/tex; mode=display">
-f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述方法，可以只使用二维的数组：当每件物品只可以取一次时变量$v$和$u$采用逆序的循环，当物品有如完全背包问题时采用顺序的循环。当物品有如多重背包问题时拆分物品。</p>
-<h3 id="物品总个数的限制"><a href="#物品总个数的限制" class="headerlink" title="物品总个数的限制"></a>物品总个数的限制</h3><p>有时，“二维费用”的条件是以这样一种隐含的方式给出的：最多只能取$M$件物品。这事实上相当于每件物品多了一种“件数”的费用，每个物品的件数费用均为$1$，可以付出的最大件数费用为$M$。</p>
-<h2 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h2><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
-<p>诶mathjax怎么又炸了</p>
-<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
-<li><a href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
-</ul>
-<p>附AC代码：</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-using namespace std;
-
-int v, n=0;
-    //  i j   k
-int f[1001] = &#123;0&#125;;
-
-int max(int a, int b)&#123;
-    return a &gt; b ? a : b;
-&#125;
-
-void processTime()&#123;
-    int a, b, c, d;
-    scanf(&quot;%d:%d %d:%d&quot;, &amp;a, &amp;b, &amp;c, &amp;d);
-    v = d - b + (c - a) * 60;
-&#125;
-
-void tryItem(int cost, int value, bool inf)&#123;
-    if(inf)&#123;
-        for (int j = cost; j &lt;= v; j++)&#123;
-            f[j] = max(f[j], f[j - cost]+value);
-        &#125;
-    &#125;else&#123;
-        for (int j = v; j &gt;= cost; j--)&#123;
-            f[j] = max(f[j], f[j - cost]+value);
-        &#125;
-    &#125;
-&#125;
-
-void decompose(int cost, int value, int num)&#123;
-    int base = 1;
-    while(num&gt;=base)&#123;
-        tryItem(cost * base, value * base, false);
-        num -= base;
-        base &lt;&lt;= 1;
-    &#125;
-    if(num&gt;0)&#123;
-        tryItem(cost * num, value * num, false);
-    &#125;
-&#125;
-
-int main()&#123;
-    processTime();
-    int n;
-    cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; i++)&#123;
-        int a, b, c;
-        scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c);
-        if(c==0)&#123;
-            tryItem(a, b, true);
-        &#125;else if(c==1)&#123;
-            tryItem(a, b, false);
-        &#125;else&#123;
-            decompose(a, b, c);
-        &#125;
-    &#125;
-    int result = 0;
-    for (int i = 1; i &lt;= v; i++)&#123;
-        result = max(result, f[i]);
-    &#125;
-    cout &lt;&lt; result;
-    return 0;
-&#125;
-</code></pre>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
 ]]></content>
       <tags>
-        <tag>dp</tag>
-        <tag>背包</tag>
+        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
@@ -511,44 +514,32 @@ int main()&#123;
       </tags>
   </entry>
   <entry>
-    <title>合同矩阵与相似矩阵</title>
-    <url>/2020/12/26/matrix-congruence-and-similarity/</url>
-    <content><![CDATA[<h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
-<script type="math/tex; mode=display">
-A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
-<li>合同关系是等价关系.</li>
-</ol>
-<ul>
-<li>自反性: $A$与$A$本身合同</li>
-<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
-<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
+    <title>一些参数方程/极坐标图像</title>
+    <url>/2020/12/26/figure-of-some-curves/</url>
+    <content><![CDATA[<p>菜鸡没学过4-4，在微积分应用里面积面积和体积的时候有的草图画不出来…</p>
+<h2 id="星形线"><a href="#星形线" class="headerlink" title="星形线"></a>星形线</h2><script type="math/tex; mode=display">
+x^{\frac 2 3}+y^{\frac 2 3}=a^{\frac 2 3} \\
+\begin{cases}
+x=a\cos^3t\\
+y=a\sin^3t
+\end{cases}</script><p><img src="https://s3.ax1x.com/2020/12/26/r4AL8K.png" alt=""></p>
+<h2 id="摆线"><a href="#摆线" class="headerlink" title="摆线"></a>摆线</h2><script type="math/tex; mode=display">
+\begin {cases}
+x= a(t-\sin t)\\
+y=a(1-\cos t)
+\end {cases}</script><p><img src="https://s3.ax1x.com/2020/12/26/r4E12T.png" alt=""></p>
+<p>图为$-4\pi \le t \le 4\pi, a=1$的图像.</p>
+<p>周期为$2\pi$.</p>
+<h2 id="双纽线"><a href="#双纽线" class="headerlink" title="双纽线"></a>双纽线</h2><p><a href="https://imgchr.com/i/r4VeSK"><img src="https://s3.ax1x.com/2020/12/26/r4VeSK.png" alt="r4VeSK.png"></a></p>
+<h2 id="笛卡尔心形线"><a href="#笛卡尔心形线" class="headerlink" title="笛卡尔心形线"></a>笛卡尔心形线</h2><p><a href="https://imgchr.com/i/r4ZSht"><img src="https://s3.ax1x.com/2020/12/26/r4ZSht.png" alt="r4ZSht.png"></a></p>
+<h2 id="其它曲线"><a href="#其它曲线" class="headerlink" title="其它曲线"></a>其它曲线</h2><p><a href="https://imgchr.com/i/r4ZeNn"><img src="https://s3.ax1x.com/2020/12/26/r4ZeNn.png" alt="r4ZeNn.png"></a></p>
+<p><a href="https://imgchr.com/i/r4Zu90"><img src="https://s3.ax1x.com/2020/12/26/r4Zu90.png" alt="r4Zu90.png"></a></p>
+<p><a href="https://imgchr.com/i/r4ZK3V"><img src="https://s3.ax1x.com/2020/12/26/r4ZK3V.png" alt="r4ZK3V.png"></a></p>
+<p><a href="https://imgchr.com/i/r4ZMcT"><img src="https://s3.ax1x.com/2020/12/26/r4ZMcT.png" alt="r4ZMcT.png"></a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://mm.edrawsoft.cn/template/65439">https://mm.edrawsoft.cn/template/65439</a></li>
+<li>部分图像采用 GeoGebra 绘制</li>
 </ul>
-<ol>
-<li>合同矩阵的<strong>秩</strong>相同。</li>
-</ol>
-<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
-<script type="math/tex; mode=display">
-A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
-<li>相似关系是等价关系.</li>
-</ol>
-<ul>
-<li>自反性: $A$与$A$本身相似</li>
-<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
-<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
-</ul>
-<ol>
-<li>相似矩阵具有一系列相同的特点.</li>
-</ol>
-<ul>
-<li>两者的秩相等；</li>
-<li>两者的行列式值相等；</li>
-<li>两者的迹相等；</li>
-<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
-<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
-</ul>
-<ol>
-<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
-</ol>
 ]]></content>
   </entry>
   <entry>
@@ -576,103 +567,6 @@ A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" titl
       <tags>
         <tag>数学</tag>
         <tag>逆元</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello, World.</title>
-    <url>/2020/11/20/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>三角函数的正整数幂的不定积分</title>
-    <url>/2020/11/22/simple-triangular-indefinite-integral/</url>
-    <content><![CDATA[<p>啊说真的排版好麻烦明天再来调吧</p>
-<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>换元法（凑微分法）</li>
-</ul>
-<script type="math/tex; mode=display">
-\int f'(\phi(x))\phi'(x)dx = \int f'(\phi(x))d\phi(x) = f(\phi(x))+C</script><script type="math/tex; mode=display">
-\int f'(u)du = \int f'(\phi(x)) \phi'(x)dx = g(x)+C = g(\phi^{-1} (x))+C</script><ul>
-<li>分部积分法</li>
-</ul>
-<h2 id="关于三角函数的幂的积分"><a href="#关于三角函数的幂的积分" class="headerlink" title="关于三角函数的幂的积分"></a>关于三角函数的幂的积分</h2><h3 id="sin-或-cos-的幂"><a href="#sin-或-cos-的幂" class="headerlink" title="sin 或 cos 的幂"></a>sin 或 cos 的幂</h3><p>若指数中存在奇数：</p>
-<script type="math/tex; mode=display">
-\int \cos^7x \sin^{10}xdx</script><ol>
-<li>选定 cos 与 sin 中次幂较低，且为奇数的一个，使用凑微分法</li>
-<li>使用公式 $sin^2x+cos^2x=1$ 替换掉剩下的项</li>
-</ol>
-<p><em>Solve:</em></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\int \cos ^{7} x \sin ^{10} x d x \\
-&=\int \cos ^{6} x \sin ^{10} x d \sin x \\
-&=\int\left(1-\sin ^{2} x\right)^{3} \sin ^{10} x d \sin x \\
-(t &=\sin x) \\
-&= \int\left(1-3 t^{2}+3 t^{4}-t^{6}\right) t^{10} d t \\
-&=\int\left(t^{10}-3 t^{12}+3 t^{14}-t^{16}\right) d t \\
-&=\frac {t^{11}} {11}-\frac{3}{13} t^{13}+\frac{3}{15} t^{15}-\frac{1}{17} t^{17}+C \\
-&=\frac{1}{11} \sin ^{11} x-\frac{3}{13} \sin ^{2} x+\frac{1}{5} \sin ^{10} x-\frac{1}{17} \sin ^{17} x+C
-\end{aligned}</script><p>若指数中不存在奇数：</p>
-<script type="math/tex; mode=display">
-\quad \int \cos ^{2} x \sin ^{4} x d x</script><ol>
-<li>使用二倍角公式</li>
-<li>展开后分别积分</li>
-</ol>
-<p><em>Solve:</em></p>
-<p>$\quad \int \cos ^{2} x \sin ^{4} x d x=\int \frac{1+\cos 2 x}{2} \frac{\left(1-\cos ^{2} x\right)^{2}}{4} d x$<br>$=\frac{1}{8} \int\left(\cos ^{2} 2 x-2 \cos 2 x+1\right)(1+\cos 2 x) d x$<br>$=\frac{1}{8} \int\left(\cos ^{3} 2 x-\cos ^{2} 2 x-\cos 2 x+1\right) d x$<br>$=\frac{1}{8} \int \cos ^{3} 2 x d x-\frac{1}{8} \int \cos ^{2} 2 x d x-\frac{1}{8} \int \cos 2 x d x+\frac{1}{8} \int d x$<br>$=\frac{1}{8} \cdot \frac{1}{2} \int \cos ^{2} 2x d \sin 2 x-\frac{1}{8} \int \frac{1+\cos 4 x}{2} d x-\frac{1}{8} \cdot \frac{1}{2} \sin 2 x+\frac{1}{8} x+C<br>$</p>
-<p>$=\frac{1}{16} \int d \sin 2 x-\frac{1}{16} \int \sin ^{2} 2 x d \sin 2 x-\frac{1}{16} x-\frac{1}{16} \cdot \frac{1}{4} \sin 4 x-\frac{1}{16} \sin 2 x+\frac{1}{8} x+C$</p>
-<p>$=\frac{x}{16}-\frac{\sin^32x}{48}-\frac{\sin4x}{64}+C$</p>
-<h3 id="tan-与-cot-的幂"><a href="#tan-与-cot-的幂" class="headerlink" title="tan 与 cot 的幂"></a>tan 与 cot 的幂</h3><script type="math/tex; mode=display">
-\int \tan ^{4} x d x</script><p>使用公式 $ \tan ^{2} x=\sec ^{2} x-1 $</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}
-\int \tan ^{0} x d x=\int d x=x+C \\
-\int \tan ^{1} x d x=\int \frac{\sin x}{\cos x} d x=-\int \frac{1}{\cos x} d \cos x=-\ln |\cos x|+C \\
-\qquad=\ln |\sec x|+C \\
-\end{array}</script><script type="math/tex; mode=display">
-\begin{aligned}
-I_{n} &=\int \tan ^{n} x d x \\
-&=\int \tan ^{n-2} x \tan ^{2} x d x \\
-&=\int \tan ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
-&=\int \tan ^{n-2} x \sec ^{2} x d x-\int \tan ^{n-2} x d x \\
-&=\int \tan ^{n-2} x d \tan x-\int \tan ^{n-2} x d x \\
-&=\frac{1}{n-1} \cdot \tan ^{n-1} x-I_{n-2}
-\end{aligned}</script><p><em>Solve:</em></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\int \tan ^{4} x d x &=\int \tan ^{2} x\left(\sec ^{2} x-1\right) d x \\
-&=\int \tan ^{2} x \sec ^{2} x d x-\int \tan ^{2} x d x \\
-&=\frac{1}{3} \tan ^{3} x-\int \sec ^{2} x d x+\int d x \\
-&=\frac{1}{3} \tan ^{3} x-\tan x+x+C
-\end{aligned}</script><p>cot 的幂读者自证不难.</p>
-<h3 id="sec-与-csc-的幂"><a href="#sec-与-csc-的幂" class="headerlink" title="sec 与 csc 的幂"></a>sec 与 csc 的幂</h3><script type="math/tex; mode=display">
-\begin{aligned}
-\int \sec x d x &=\int \frac{(\sec x)(\sec x+\tan x)}{\sec x+\tan x} d x \\
-&=\int \frac{\sec x \tan x+\sec ^{2} x}{\sec x+\tan x} d x \\
-&=\ln |\sec x+\tan x|+C \\
-\int \sec ^{2} x d x &=\tan x+C
-\end{aligned}</script><script type="math/tex; mode=display">
-\begin{aligned}
-\int \sec ^{n} x d x &=\int \sec ^{n-2} x \sec ^{2} x d x \\
-&=\int \sec ^{n-2} x d \tan x \\
-&=\sec ^{n-2} x \tan x-\int \tan x(n-2) \sec ^{n-3} x \sec x \tan x d x \\
-&=\sec ^{n-2} \tan x-(n-2) \int \sec ^{n-2} x \tan ^{2} x d x \\
-&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
-&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n} x d x+(n-2) \int \sec ^{n-2} x d x \\
-\end{aligned}</script><p>因此我们有：</p>
-<script type="math/tex; mode=display">
-\int \sec ^{n} x d x=\frac{1}{n-1} \sec ^{n-2} x \tan x+\frac{n-2}{n-1} \int \sec ^{n-2} x d x</script><p>csc 的幂同理显然.</p>
-]]></content>
-      <tags>
-        <tag>Calculus</tag>
       </tags>
   </entry>
   <entry>
@@ -860,5 +754,130 @@ int main()&#123;
         <tag>code</tag>
         <tag>luogu</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>三角函数的正整数幂的不定积分</title>
+    <url>/2020/11/22/simple-triangular-indefinite-integral/</url>
+    <content><![CDATA[<p>啊说真的排版好麻烦明天再来调吧</p>
+<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+<li>换元法（凑微分法）</li>
+</ul>
+<script type="math/tex; mode=display">
+\int f'(\phi(x))\phi'(x)dx = \int f'(\phi(x))d\phi(x) = f(\phi(x))+C</script><script type="math/tex; mode=display">
+\int f'(u)du = \int f'(\phi(x)) \phi'(x)dx = g(x)+C = g(\phi^{-1} (x))+C</script><ul>
+<li>分部积分法</li>
+</ul>
+<h2 id="关于三角函数的幂的积分"><a href="#关于三角函数的幂的积分" class="headerlink" title="关于三角函数的幂的积分"></a>关于三角函数的幂的积分</h2><h3 id="sin-或-cos-的幂"><a href="#sin-或-cos-的幂" class="headerlink" title="sin 或 cos 的幂"></a>sin 或 cos 的幂</h3><p>若指数中存在奇数：</p>
+<script type="math/tex; mode=display">
+\int \cos^7x \sin^{10}xdx</script><ol>
+<li>选定 cos 与 sin 中次幂较低，且为奇数的一个，使用凑微分法</li>
+<li>使用公式 $sin^2x+cos^2x=1$ 替换掉剩下的项</li>
+</ol>
+<p><em>Solve:</em></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\int \cos ^{7} x \sin ^{10} x d x \\
+&=\int \cos ^{6} x \sin ^{10} x d \sin x \\
+&=\int\left(1-\sin ^{2} x\right)^{3} \sin ^{10} x d \sin x \\
+(t &=\sin x) \\
+&= \int\left(1-3 t^{2}+3 t^{4}-t^{6}\right) t^{10} d t \\
+&=\int\left(t^{10}-3 t^{12}+3 t^{14}-t^{16}\right) d t \\
+&=\frac {t^{11}} {11}-\frac{3}{13} t^{13}+\frac{3}{15} t^{15}-\frac{1}{17} t^{17}+C \\
+&=\frac{1}{11} \sin ^{11} x-\frac{3}{13} \sin ^{2} x+\frac{1}{5} \sin ^{10} x-\frac{1}{17} \sin ^{17} x+C
+\end{aligned}</script><p>若指数中不存在奇数：</p>
+<script type="math/tex; mode=display">
+\quad \int \cos ^{2} x \sin ^{4} x d x</script><ol>
+<li>使用二倍角公式</li>
+<li>展开后分别积分</li>
+</ol>
+<p><em>Solve:</em></p>
+<p>$\quad \int \cos ^{2} x \sin ^{4} x d x=\int \frac{1+\cos 2 x}{2} \frac{\left(1-\cos ^{2} x\right)^{2}}{4} d x$<br>$=\frac{1}{8} \int\left(\cos ^{2} 2 x-2 \cos 2 x+1\right)(1+\cos 2 x) d x$<br>$=\frac{1}{8} \int\left(\cos ^{3} 2 x-\cos ^{2} 2 x-\cos 2 x+1\right) d x$<br>$=\frac{1}{8} \int \cos ^{3} 2 x d x-\frac{1}{8} \int \cos ^{2} 2 x d x-\frac{1}{8} \int \cos 2 x d x+\frac{1}{8} \int d x$<br>$=\frac{1}{8} \cdot \frac{1}{2} \int \cos ^{2} 2x d \sin 2 x-\frac{1}{8} \int \frac{1+\cos 4 x}{2} d x-\frac{1}{8} \cdot \frac{1}{2} \sin 2 x+\frac{1}{8} x+C<br>$</p>
+<p>$=\frac{1}{16} \int d \sin 2 x-\frac{1}{16} \int \sin ^{2} 2 x d \sin 2 x-\frac{1}{16} x-\frac{1}{16} \cdot \frac{1}{4} \sin 4 x-\frac{1}{16} \sin 2 x+\frac{1}{8} x+C$</p>
+<p>$=\frac{x}{16}-\frac{\sin^32x}{48}-\frac{\sin4x}{64}+C$</p>
+<h3 id="tan-与-cot-的幂"><a href="#tan-与-cot-的幂" class="headerlink" title="tan 与 cot 的幂"></a>tan 与 cot 的幂</h3><script type="math/tex; mode=display">
+\int \tan ^{4} x d x</script><p>使用公式 $ \tan ^{2} x=\sec ^{2} x-1 $</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\int \tan ^{0} x d x=\int d x=x+C \\
+\int \tan ^{1} x d x=\int \frac{\sin x}{\cos x} d x=-\int \frac{1}{\cos x} d \cos x=-\ln |\cos x|+C \\
+\qquad=\ln |\sec x|+C \\
+\end{array}</script><script type="math/tex; mode=display">
+\begin{aligned}
+I_{n} &=\int \tan ^{n} x d x \\
+&=\int \tan ^{n-2} x \tan ^{2} x d x \\
+&=\int \tan ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
+&=\int \tan ^{n-2} x \sec ^{2} x d x-\int \tan ^{n-2} x d x \\
+&=\int \tan ^{n-2} x d \tan x-\int \tan ^{n-2} x d x \\
+&=\frac{1}{n-1} \cdot \tan ^{n-1} x-I_{n-2}
+\end{aligned}</script><p><em>Solve:</em></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int \tan ^{4} x d x &=\int \tan ^{2} x\left(\sec ^{2} x-1\right) d x \\
+&=\int \tan ^{2} x \sec ^{2} x d x-\int \tan ^{2} x d x \\
+&=\frac{1}{3} \tan ^{3} x-\int \sec ^{2} x d x+\int d x \\
+&=\frac{1}{3} \tan ^{3} x-\tan x+x+C
+\end{aligned}</script><p>cot 的幂读者自证不难.</p>
+<h3 id="sec-与-csc-的幂"><a href="#sec-与-csc-的幂" class="headerlink" title="sec 与 csc 的幂"></a>sec 与 csc 的幂</h3><script type="math/tex; mode=display">
+\begin{aligned}
+\int \sec x d x &=\int \frac{(\sec x)(\sec x+\tan x)}{\sec x+\tan x} d x \\
+&=\int \frac{\sec x \tan x+\sec ^{2} x}{\sec x+\tan x} d x \\
+&=\ln |\sec x+\tan x|+C \\
+\int \sec ^{2} x d x &=\tan x+C
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+\int \sec ^{n} x d x &=\int \sec ^{n-2} x \sec ^{2} x d x \\
+&=\int \sec ^{n-2} x d \tan x \\
+&=\sec ^{n-2} x \tan x-\int \tan x(n-2) \sec ^{n-3} x \sec x \tan x d x \\
+&=\sec ^{n-2} \tan x-(n-2) \int \sec ^{n-2} x \tan ^{2} x d x \\
+&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
+&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n} x d x+(n-2) \int \sec ^{n-2} x d x \\
+\end{aligned}</script><p>因此我们有：</p>
+<script type="math/tex; mode=display">
+\int \sec ^{n} x d x=\frac{1}{n-1} \sec ^{n-2} x \tan x+\frac{n-2}{n-1} \int \sec ^{n-2} x d x</script><p>csc 的幂同理显然.</p>
+]]></content>
+      <tags>
+        <tag>Calculus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>合同矩阵与相似矩阵</title>
+    <url>/2020/12/26/matrix-congruence-and-similarity/</url>
+    <content><![CDATA[<h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>合同关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身合同</li>
+<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
+<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
+</ul>
+<ol>
+<li>合同矩阵的<strong>秩</strong>相同。</li>
+</ol>
+<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>相似关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身相似</li>
+<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
+<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
+</ul>
+<ol>
+<li>相似矩阵具有一系列相同的特点.</li>
+</ol>
+<ul>
+<li>两者的秩相等；</li>
+<li>两者的行列式值相等；</li>
+<li>两者的迹相等；</li>
+<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
+<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
+</ul>
+<ol>
+<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
+</ol>
+]]></content>
   </entry>
 </search>
