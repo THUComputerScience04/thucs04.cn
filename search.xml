@@ -1,6 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>树状数组-入门</title>
+    <url>/2020/12/22/ds-fenwick-tree-basic/</url>
+    <content><![CDATA[<h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>树状数组可以用于高效计算数列的前缀和，区间和等等。</p>
+<p>它可以支持在$O(logn)$的时间内得到任意前缀和，以及在$O(logn)$时间内支持对区间单点值的修改。空间复杂度为$O(n)$。</p>
+<h3 id="数组存储方式"><a href="#数组存储方式" class="headerlink" title="数组存储方式"></a>数组存储方式</h3><p><img src="https://s3.ax1x.com/2020/12/22/rD8IfS.png" alt="rD8IfS.png"></p>
+<p>如图所示。</p>
+<p>$A[i]$代表原数组的元素，$C[i]$代表树状数组中的元素。</p>
+<pre><code class="lang-c++">C[1]=A[1];
+C[2]=A[1]+A[2];
+C[3]=A[3];
+C[4]=A[1]+A[2]+A[3]+A[4];
+C[5]=A[5];
+C[6]=A[5]+A[6];
+C[7]=A[7];
+C[8]=A[1]+A[2]+A[3]+A[4]+A[5]+A[6]+A[7]+A[8];
+</code></pre>
+<p>而其索引的二进制表示如下：</p>
+<pre><code class="lang-c++">C[1] = C[0001] = A[1];
+C[2] = C[0010] = A[1]+A[2];
+C[3] = C[0011] = A[3];
+C[4] = C[0100] = A[1]+A[2]+A[3]+A[4];
+C[5] = C[0101] = A[5];
+C[6] = C[0110] = A[5]+A[6];
+C[7] = C[0111] = A[7];
+C[8] = C[1000] = A[1]+A[2]+A[3]+A[4]+A[5]+A[6]+A[7]+A[8];
+</code></pre>
+<p>我们可以找出规律，</p>
+<script type="math/tex; mode=display">
+C[i] =\sum_{k=把i二进制表示的最低位1置为0后，将新的值+1}^i A[k]</script><p>也就是说，问题在于如何找出$i$的最低位$1$所代表的数值。</p>
+<h3 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h3><p>这里我们可以引入<code>lowbit</code>函数。</p>
+<pre><code class="lang-c++">int lowbit (int x)
+&#123;
+    return x &amp; (-x);
+&#125;
+</code></pre>
+<p>我们已经知道，对于整数表示，有</p>
+<ul>
+<li><p>正数的补码是其本身；</p>
+</li>
+<li><p>负数的补码是在反码的基础上$+1$；</p>
+</li>
+</ul>
+<p>因此<code>x &amp; (-x)</code>就可以满足我们对于查找最低位$1$的需求。</p>
+<p>举个例子：</p>
+<ul>
+<li>二进制数 $11010$ (1) </li>
+<li><p>其反码为 $00101$ (2)</p>
+</li>
+<li><p>加 $1$ 后为 $00110$ (3)</p>
+</li>
+<li>将(1)(3)两者相与便得到最低位的 $1$ 所表示的数值</li>
+</ul>
+<h2 id="树状数组的建立"><a href="#树状数组的建立" class="headerlink" title="树状数组的建立"></a>树状数组的建立</h2><p>上面准备工作都做好了，码就行了:(</p>
+<pre><code class="lang-c++">#include &lt;iostream&gt;
+#define MAXN 12
+using namespace std;
+
+int ft[MAXN+1] = &#123;0&#125;;
+int a[MAXN + 1] = &#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12&#125;;
+
+int lowbit(int x)&#123;
+    return x &amp; (-x);
+&#125;
+
+void generateTree()&#123;
+    for (int i = 1; i &lt;= MAXN; i++)&#123;
+        for (int k = i - lowbit(i) + 1; k &lt;= i; k++)
+            ft[i] += a[k];
+    &#125;
+&#125;
+
+int main()&#123;
+    generateTree();
+    return 0;
+&#125;
+</code></pre>
+<h2 id="单点更新"><a href="#单点更新" class="headerlink" title="单点更新"></a>单点更新</h2><p>再把这张图拿过来：</p>
+<p><img src="https://s3.ax1x.com/2020/12/22/rD8IfS.png" alt="rD8IfS.png"></p>
+<p>如果我们要更改$A[3]$的值，那么我们知道，$C[3], C[4], C[8]$ 的值都会受到影响。</p>
+<ul>
+<li>$3(011)$ =&gt; <code>C[3] += temp;</code></li>
+<li>$lowbit(3) = 001$, $3 + lowbit(3)= 100 = 4(100)$ =&gt; <code>C[4] += temp;</code></li>
+<li>$lowbit(4) = 100$, $4+lowbit(4)=1000=8(1000)$ =&gt; <code>C[8] += temp;</code></li>
+<li>……</li>
+</ul>
+<p>因此，我们只需要对所要更新的数据不断使其自增lowbit后，</p>
+<p>使树状数组的对应索引增加 temp 值即可。</p>
+<pre><code class="lang-c++">void update(int index, int val)&#123;
+    for (int i = index; i &lt;= MAXN; i = i + lowbit(i))&#123;
+        ft[i] += val;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h2><p>假设现在我们要查询1~7的前缀和。</p>
+<pre><code class="lang-c++">C[7] = C[0111] = A[7];
+C[6] = C[0110] = A[5] + A[6];
+C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
+</code></pre>
+<p>归纳可知，我们只需每次将索引减少i的lowbit，然后将对应的树状数组的值求和即可。</p>
+<pre><code class="lang-c++">int getSum(int index)&#123;
+    int result = 0;
+    for (int k = index; k &gt; 0; k-=lowbit(k))&#123;
+        result += ft[k];
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84</a>‘</li>
+<li><a href="https://bestsort.cn/2019/04/26/195/">https://bestsort.cn/2019/04/26/195/</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据的离散化</title>
     <url>/2020/12/31/data-discreatization/</url>
     <content><![CDATA[<h2 id="数据的离散化处理"><a href="#数据的离散化处理" class="headerlink" title="数据的离散化处理"></a>数据的离散化处理</h2><p>什么是<strong>离散化</strong>？</p>
@@ -135,6 +252,96 @@ int main()&#123;
       <tags>
         <tag>dp</tag>
         <tag>背包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>密码保护文章测试</title>
+    <url>/2021/01/11/encrypt-test/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="【■■■ - 密码错误 - ■■■】" data-whm="Oh, these decrypted content cannot be verified, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="8712cc481fc34ae6d16ea47f63532ef2acc2c124b33fb3f40c54973de3857f5f">018a63061e17dd91a60e05280129f742932d41a23e2bd96bdb1d48a7faba3ed7b029007f6e466b7ae950fd3977006312fab6bc5ff0c39b2e1bf6c5f37584a15703aba8c89474cb7ce75d3218d2a7d448</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Please complete the sentence: c7w,_______.<br/> You should type in four characters in lowercase.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
+    <title>Hello, World.</title>
+    <url>/2020/11/20/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hash Table（散列表）</title>
+    <url>/2020/11/25/hash-table/</url>
+    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
+<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
+<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
+<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
+<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
+<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
+</ul>
+<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
+<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
+<li>开放定址法</li>
+<li>避免聚集：<ul>
+<li>单独链表法</li>
+<li>再散列</li>
+</ul>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
+</li>
+<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+        <tag>Hash Table</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>同余 逆元 费马小定理</title>
+    <url>/2020/12/02/inverse-element/</url>
+    <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
+<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
+<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
+<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
+1\%p=a^{p-1}\%p \\
+=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
+<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
+&#123;
+    return qpow(x, M - 2, M);
+&#125;
+</code></pre>
+<p>【黑人问号脸.jpeg】</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
+<li><a href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>数学</tag>
+        <tag>逆元</tag>
       </tags>
   </entry>
   <entry>
@@ -315,123 +522,6 @@ public:
       </tags>
   </entry>
   <entry>
-    <title>树状数组-入门</title>
-    <url>/2020/12/22/ds-fenwick-tree-basic/</url>
-    <content><![CDATA[<h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>树状数组可以用于高效计算数列的前缀和，区间和等等。</p>
-<p>它可以支持在$O(logn)$的时间内得到任意前缀和，以及在$O(logn)$时间内支持对区间单点值的修改。空间复杂度为$O(n)$。</p>
-<h3 id="数组存储方式"><a href="#数组存储方式" class="headerlink" title="数组存储方式"></a>数组存储方式</h3><p><img src="https://s3.ax1x.com/2020/12/22/rD8IfS.png" alt="rD8IfS.png"></p>
-<p>如图所示。</p>
-<p>$A[i]$代表原数组的元素，$C[i]$代表树状数组中的元素。</p>
-<pre><code class="lang-c++">C[1]=A[1];
-C[2]=A[1]+A[2];
-C[3]=A[3];
-C[4]=A[1]+A[2]+A[3]+A[4];
-C[5]=A[5];
-C[6]=A[5]+A[6];
-C[7]=A[7];
-C[8]=A[1]+A[2]+A[3]+A[4]+A[5]+A[6]+A[7]+A[8];
-</code></pre>
-<p>而其索引的二进制表示如下：</p>
-<pre><code class="lang-c++">C[1] = C[0001] = A[1];
-C[2] = C[0010] = A[1]+A[2];
-C[3] = C[0011] = A[3];
-C[4] = C[0100] = A[1]+A[2]+A[3]+A[4];
-C[5] = C[0101] = A[5];
-C[6] = C[0110] = A[5]+A[6];
-C[7] = C[0111] = A[7];
-C[8] = C[1000] = A[1]+A[2]+A[3]+A[4]+A[5]+A[6]+A[7]+A[8];
-</code></pre>
-<p>我们可以找出规律，</p>
-<script type="math/tex; mode=display">
-C[i] =\sum_{k=把i二进制表示的最低位1置为0后，将新的值+1}^i A[k]</script><p>也就是说，问题在于如何找出$i$的最低位$1$所代表的数值。</p>
-<h3 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h3><p>这里我们可以引入<code>lowbit</code>函数。</p>
-<pre><code class="lang-c++">int lowbit (int x)
-&#123;
-    return x &amp; (-x);
-&#125;
-</code></pre>
-<p>我们已经知道，对于整数表示，有</p>
-<ul>
-<li><p>正数的补码是其本身；</p>
-</li>
-<li><p>负数的补码是在反码的基础上$+1$；</p>
-</li>
-</ul>
-<p>因此<code>x &amp; (-x)</code>就可以满足我们对于查找最低位$1$的需求。</p>
-<p>举个例子：</p>
-<ul>
-<li>二进制数 $11010$ (1) </li>
-<li><p>其反码为 $00101$ (2)</p>
-</li>
-<li><p>加 $1$ 后为 $00110$ (3)</p>
-</li>
-<li>将(1)(3)两者相与便得到最低位的 $1$ 所表示的数值</li>
-</ul>
-<h2 id="树状数组的建立"><a href="#树状数组的建立" class="headerlink" title="树状数组的建立"></a>树状数组的建立</h2><p>上面准备工作都做好了，码就行了:(</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;
-#define MAXN 12
-using namespace std;
-
-int ft[MAXN+1] = &#123;0&#125;;
-int a[MAXN + 1] = &#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12&#125;;
-
-int lowbit(int x)&#123;
-    return x &amp; (-x);
-&#125;
-
-void generateTree()&#123;
-    for (int i = 1; i &lt;= MAXN; i++)&#123;
-        for (int k = i - lowbit(i) + 1; k &lt;= i; k++)
-            ft[i] += a[k];
-    &#125;
-&#125;
-
-int main()&#123;
-    generateTree();
-    return 0;
-&#125;
-</code></pre>
-<h2 id="单点更新"><a href="#单点更新" class="headerlink" title="单点更新"></a>单点更新</h2><p>再把这张图拿过来：</p>
-<p><img src="https://s3.ax1x.com/2020/12/22/rD8IfS.png" alt="rD8IfS.png"></p>
-<p>如果我们要更改$A[3]$的值，那么我们知道，$C[3], C[4], C[8]$ 的值都会受到影响。</p>
-<ul>
-<li>$3(011)$ =&gt; <code>C[3] += temp;</code></li>
-<li>$lowbit(3) = 001$, $3 + lowbit(3)= 100 = 4(100)$ =&gt; <code>C[4] += temp;</code></li>
-<li>$lowbit(4) = 100$, $4+lowbit(4)=1000=8(1000)$ =&gt; <code>C[8] += temp;</code></li>
-<li>……</li>
-</ul>
-<p>因此，我们只需要对所要更新的数据不断使其自增lowbit后，</p>
-<p>使树状数组的对应索引增加 temp 值即可。</p>
-<pre><code class="lang-c++">void update(int index, int val)&#123;
-    for (int i = index; i &lt;= MAXN; i = i + lowbit(i))&#123;
-        ft[i] += val;
-    &#125;
-&#125;
-</code></pre>
-<h2 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h2><p>假设现在我们要查询1~7的前缀和。</p>
-<pre><code class="lang-c++">C[7] = C[0111] = A[7];
-C[6] = C[0110] = A[5] + A[6];
-C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
-</code></pre>
-<p>归纳可知，我们只需每次将索引减少i的lowbit，然后将对应的树状数组的值求和即可。</p>
-<pre><code class="lang-c++">int getSum(int index)&#123;
-    int result = 0;
-    for (int k = index; k &gt; 0; k-=lowbit(k))&#123;
-        result += ft[k];
-    &#125;
-    return result;
-&#125;
-</code></pre>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84</a>‘</li>
-<li><a href="https://bestsort.cn/2019/04/26/195/">https://bestsort.cn/2019/04/26/195/</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Data Structure</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一些参数方程/极坐标图像</title>
     <url>/2020/12/26/figure-of-some-curves/</url>
     <content><![CDATA[<p>菜鸡没学过4-4，在微积分应用里面积面积和体积的时候有的草图画不出来…</p>
@@ -461,94 +551,45 @@ y=a(1-\cos t)
 ]]></content>
   </entry>
   <entry>
-    <title>Hello, World.</title>
-    <url>/2020/11/20/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
+    <title>合同矩阵与相似矩阵</title>
+    <url>/2020/12/26/matrix-congruence-and-similarity/</url>
+    <content><![CDATA[<h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>合同关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身合同</li>
+<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
+<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
+</ul>
+<ol>
+<li>合同矩阵的<strong>秩</strong>相同。</li>
+</ol>
+<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>相似关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身相似</li>
+<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
+<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
+</ul>
+<ol>
+<li>相似矩阵具有一系列相同的特点.</li>
+</ol>
+<ul>
+<li>两者的秩相等；</li>
+<li>两者的行列式值相等；</li>
+<li>两者的迹相等；</li>
+<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
+<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
+</ul>
+<ol>
+<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
+</ol>
 ]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hash Table（散列表）</title>
-    <url>/2020/11/25/hash-table/</url>
-    <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
-<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
-<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
-<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
-<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
-<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
-</ul>
-<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
-<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
-<li>开放定址法</li>
-<li>避免聚集：<ul>
-<li>单独链表法</li>
-<li>再散列</li>
-</ul>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
-</li>
-<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Data Structure</tag>
-        <tag>Hash Table</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>同余 逆元 费马小定理</title>
-    <url>/2020/12/02/inverse-element/</url>
-    <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
-<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
-<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
-<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
-<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
-1\%p=a^{p-1}\%p \\
-=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
-<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
-&#123;
-    return qpow(x, M - 2, M);
-&#125;
-</code></pre>
-<p>【黑人问号脸.jpeg】</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
-<li><a href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>数学</tag>
-        <tag>逆元</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>密码保护文章测试</title>
-    <url>/2021/01/11/encrypt-test/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="【■■■ - 密码错误 - ■■■】" data-whm="Oh, these decrypted content cannot be verified, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="8712cc481fc34ae6d16ea47f63532ef2acc2c124b33fb3f40c54973de3857f5f">018a63061e17dd91a60e05280129f742932d41a23e2bd96bdb1d48a7faba3ed7b029007f6e466b7ae950fd3977006312fab6bc5ff0c39b2e1bf6c5f37584a15703aba8c89474cb7ce75d3218d2a7d448</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Please complete the sentence: c7w,_______.<br/> You should type in four characters in lowercase.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
   <entry>
     <title>洛谷 P1908 求逆序对</title>
@@ -819,46 +860,5 @@ I_{n} &=\int \tan ^{n} x d x \\
       <tags>
         <tag>Calculus</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>合同矩阵与相似矩阵</title>
-    <url>/2020/12/26/matrix-congruence-and-similarity/</url>
-    <content><![CDATA[<h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
-<script type="math/tex; mode=display">
-A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
-<li>合同关系是等价关系.</li>
-</ol>
-<ul>
-<li>自反性: $A$与$A$本身合同</li>
-<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
-<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
-</ul>
-<ol>
-<li>合同矩阵的<strong>秩</strong>相同。</li>
-</ol>
-<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
-<script type="math/tex; mode=display">
-A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
-<li>相似关系是等价关系.</li>
-</ol>
-<ul>
-<li>自反性: $A$与$A$本身相似</li>
-<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
-<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
-</ul>
-<ol>
-<li>相似矩阵具有一系列相同的特点.</li>
-</ol>
-<ul>
-<li>两者的秩相等；</li>
-<li>两者的行列式值相等；</li>
-<li>两者的迹相等；</li>
-<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
-<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
-</ul>
-<ol>
-<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
-</ol>
-]]></content>
   </entry>
 </search>
