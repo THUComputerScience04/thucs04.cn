@@ -38,125 +38,6 @@
       </tags>
   </entry>
   <entry>
-    <title>动态规划的背包问题</title>
-    <url>/2020/dp-backpack/</url>
-    <content><![CDATA[<p>所以为什么要找一个背包图片当头图啊喂</p>
-<h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0/1 背包问题"></a>0/1 背包问题</h2><p>有$N$件物品和一个容量为$V$的背包。<strong>每种物品仅有一件，可以选择放或不放。</strong>第$i$件物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
-<p>设$f[i][v]$表示前$i$件物品(部分或全部)<em>恰</em>放入一个容量为$v$的背包可以获得的最大价值。则其状态转移方程便是：</p>
-<script type="math/tex; mode=display">
-f[i][v]=\max(f[i-1][v],f[i-1][v-w[i]]+c[i])</script><h3 id="0-1背包的空间优化"><a href="#0-1背包的空间优化" class="headerlink" title="0/1背包的空间优化"></a>0/1背包的空间优化</h3><p>我们可以将二维数组存储优化为一维数组存储。</p>
-<p>在每次主循环中，如果我们以$v=V…0$的逆序推$f[v]$，这样就能保证推$f[v]$时$f[v-w[i]]$保存的是状态$f[i-1][v-w[i]]$的值。</p>
-<p>伪代码如下：</p>
-<pre><code class="lang-c++">for i = 1...N 
-    for v = V...0 
-        f[v] = max(f[v], f[v-w[i]]+c[i]);
-</code></pre>
-<p>　　其中$f[v]=max(f[v],f[v-w[i]]+c[i])$便与原转移方程等价。</p>
-<h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><p>有$N$种物品和一个容量为$V$的背包，<strong>每种物品都有无限件可用</strong>。第$i$种物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
-<p>令$f[i][v]$表示前$i$种物品<em>恰</em>放入一个容量为$v$的背包的最大价值，于是可以按照每种物品不同的策略写出状态转移方程：</p>
-<script type="math/tex; mode=display">
-for \ k\ in \ range[0, floor(\frac v {w[i]})]:\\
- f[i][v]=max(f[i-1][v-k*w[i]]+k*c[i])</script><h3 id="完全背包问题的空间优化"><a href="#完全背包问题的空间优化" class="headerlink" title="完全背包问题的空间优化"></a>完全背包问题的空间优化</h3><p>完全背包的特点恰是每种物品可选无限件，所以我们可以考虑“加选一件第$i$种物品”策略。因此我们可以使用<strong>可能已选入第i种物品</strong>的子结果$f[i][v-w[i]]$，于是我们必须采用$v=0…V$的顺序循环。</p>
-<p>伪代码如下：</p>
-<pre><code class="lang-c++">for i = 1...N 
-    for v = 0...V
-        f[v] = max(f[v], f[v-w[i]]+c[i]);
-</code></pre>
-<h3 id="另一种解法：转化为0-1背包问题"><a href="#另一种解法：转化为0-1背包问题" class="headerlink" title="另一种解法：转化为0/1背包问题"></a>另一种解法：转化为0/1背包问题</h3><p>考虑到第$i$种物品最多选$floor(\frac V {w[i]})$件，于是可以把第$i$种物品转化为$floor(\frac V {w[i]})$件费用及价值均不变的物品，然后求解这个0/1背包问题。</p>
-<p>更高效的转化方法是：把第$i$种物品拆成费用为$2^kw[i]$、价值为$2^kc[i]$的若干件物品，其中$k$满足$2^kw[i]&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
-<h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><p>有$N$种物品和一个容量为$V$的背包。<strong>第$i$种物品最多有$n[i]$件可用</strong>，每件费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
-<p>基本的方程只需将完全背包问题的方程略微一改即可，因为对于第$i$种物品有$n[i]+1$种策略：取$0$件，取$1$件……取$n[i]$件。令$f[i][v]$表示前$i$种物品恰放入一个容量为$v$的背包的最大价值，则：</p>
-<script type="math/tex; mode=display">
-for \ k\ in \ range[0, n[i]]:\\
-f[i][v]=max(f[i-1][v-k*w[i]]+ k*c[i])</script><p>循环时注意$v-k*w[i]$ 非负即可。</p>
-<h3 id="转化为0-1背包问题"><a href="#转化为0-1背包问题" class="headerlink" title="转化为0/1背包问题"></a>转化为0/1背包问题</h3><p>将第$i$种物品分成若干件物品，其中每件物品有一个系数，这件物品的费用和价值均是原来的费用和价值乘以这个系数。使这些系数分别为</p>
-<script type="math/tex; mode=display">
-1,2,4,...,2^{k-1},n[i]-2^k+1</script><p>且k是满足$n[i]-2^k+1&gt;0$的最大整数。</p>
-<p>例如，如果$n[i]$为$13$，就将这种物品分成系数分别为$1,2,4,6$的四件物品。 </p>
-<h2 id="二维背包问题"><a href="#二维背包问题" class="headerlink" title="二维背包问题"></a>二维背包问题</h2><p>二维费用的背包问题是指：对于每件物品，具有两种不同的费用；选择这件物品必须同时付出这两种代价；对于每种代价都有一个可付出的最大值（背包容量）。问怎样选择物品可以得到最大的价值。</p>
-<p>设这两种代价分别为代价1和代价2，第$i$件物品所需的两种代价分别为$a[i]$和$b[i]$。两种代价可付出的最大值（两种背包容量）分别为$V$和$U$。物品的价值为$c[i]$。</p>
-<p>费用加了一维，只需状态也加一维即可。设$f[i][v][u]$表示前$i$件物品付出两种代价分别恰为$v$和$u$时可获得的最大价值。状态转移方程就是：</p>
-<script type="math/tex; mode=display">
-f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述方法，可以只使用二维的数组：当每件物品只可以取一次时变量$v$和$u$采用逆序的循环，当物品有如完全背包问题时采用顺序的循环。当物品有如多重背包问题时拆分物品。</p>
-<h3 id="物品总个数的限制"><a href="#物品总个数的限制" class="headerlink" title="物品总个数的限制"></a>物品总个数的限制</h3><p>有时，“二维费用”的条件是以这样一种隐含的方式给出的：最多只能取$M$件物品。这事实上相当于每件物品多了一种“件数”的费用，每个物品的件数费用均为$1$，可以付出的最大件数费用为$M$。</p>
-<h2 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h2><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
-<p>诶mathjax怎么又炸了</p>
-<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
-<li><a href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
-</ul>
-<p>附AC代码：</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-using namespace std;
-
-int v, n=0;
-    //  i j   k
-int f[1001] = &#123;0&#125;;
-
-int max(int a, int b)&#123;
-    return a &gt; b ? a : b;
-&#125;
-
-void processTime()&#123;
-    int a, b, c, d;
-    scanf(&quot;%d:%d %d:%d&quot;, &amp;a, &amp;b, &amp;c, &amp;d);
-    v = d - b + (c - a) * 60;
-&#125;
-
-void tryItem(int cost, int value, bool inf)&#123;
-    if(inf)&#123;
-        for (int j = cost; j &lt;= v; j++)&#123;
-            f[j] = max(f[j], f[j - cost]+value);
-        &#125;
-    &#125;else&#123;
-        for (int j = v; j &gt;= cost; j--)&#123;
-            f[j] = max(f[j], f[j - cost]+value);
-        &#125;
-    &#125;
-&#125;
-
-void decompose(int cost, int value, int num)&#123;
-    int base = 1;
-    while(num&gt;=base)&#123;
-        tryItem(cost * base, value * base, false);
-        num -= base;
-        base &lt;&lt;= 1;
-    &#125;
-    if(num&gt;0)&#123;
-        tryItem(cost * num, value * num, false);
-    &#125;
-&#125;
-
-int main()&#123;
-    processTime();
-    int n;
-    cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; i++)&#123;
-        int a, b, c;
-        scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c);
-        if(c==0)&#123;
-            tryItem(a, b, true);
-        &#125;else if(c==1)&#123;
-            tryItem(a, b, false);
-        &#125;else&#123;
-            decompose(a, b, c);
-        &#125;
-    &#125;
-    int result = 0;
-    for (int i = 1; i &lt;= v; i++)&#123;
-        result = max(result, f[i]);
-    &#125;
-    cout &lt;&lt; result;
-    return 0;
-&#125;
-</code></pre>
-]]></content>
-      <tags>
-        <tag>dp</tag>
-        <tag>背包</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据结构-堆</title>
     <url>/2020/ds-heap/</url>
     <content><![CDATA[<p>　　　数据结构中的堆结构　　　</p>
@@ -334,6 +215,125 @@ public:
       </tags>
   </entry>
   <entry>
+    <title>动态规划的背包问题</title>
+    <url>/2020/dp-backpack/</url>
+    <content><![CDATA[<p>所以为什么要找一个背包图片当头图啊喂</p>
+<h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0/1 背包问题"></a>0/1 背包问题</h2><p>有$N$件物品和一个容量为$V$的背包。<strong>每种物品仅有一件，可以选择放或不放。</strong>第$i$件物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
+<p>设$f[i][v]$表示前$i$件物品(部分或全部)<em>恰</em>放入一个容量为$v$的背包可以获得的最大价值。则其状态转移方程便是：</p>
+<script type="math/tex; mode=display">
+f[i][v]=\max(f[i-1][v],f[i-1][v-w[i]]+c[i])</script><h3 id="0-1背包的空间优化"><a href="#0-1背包的空间优化" class="headerlink" title="0/1背包的空间优化"></a>0/1背包的空间优化</h3><p>我们可以将二维数组存储优化为一维数组存储。</p>
+<p>在每次主循环中，如果我们以$v=V…0$的逆序推$f[v]$，这样就能保证推$f[v]$时$f[v-w[i]]$保存的是状态$f[i-1][v-w[i]]$的值。</p>
+<p>伪代码如下：</p>
+<pre><code class="lang-c++">for i = 1...N 
+    for v = V...0 
+        f[v] = max(f[v], f[v-w[i]]+c[i]);
+</code></pre>
+<p>　　其中$f[v]=max(f[v],f[v-w[i]]+c[i])$便与原转移方程等价。</p>
+<h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><p>有$N$种物品和一个容量为$V$的背包，<strong>每种物品都有无限件可用</strong>。第$i$种物品的费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 </p>
+<p>令$f[i][v]$表示前$i$种物品<em>恰</em>放入一个容量为$v$的背包的最大价值，于是可以按照每种物品不同的策略写出状态转移方程：</p>
+<script type="math/tex; mode=display">
+for \ k\ in \ range[0, floor(\frac v {w[i]})]:\\
+ f[i][v]=max(f[i-1][v-k*w[i]]+k*c[i])</script><h3 id="完全背包问题的空间优化"><a href="#完全背包问题的空间优化" class="headerlink" title="完全背包问题的空间优化"></a>完全背包问题的空间优化</h3><p>完全背包的特点恰是每种物品可选无限件，所以我们可以考虑“加选一件第$i$种物品”策略。因此我们可以使用<strong>可能已选入第i种物品</strong>的子结果$f[i][v-w[i]]$，于是我们必须采用$v=0…V$的顺序循环。</p>
+<p>伪代码如下：</p>
+<pre><code class="lang-c++">for i = 1...N 
+    for v = 0...V
+        f[v] = max(f[v], f[v-w[i]]+c[i]);
+</code></pre>
+<h3 id="另一种解法：转化为0-1背包问题"><a href="#另一种解法：转化为0-1背包问题" class="headerlink" title="另一种解法：转化为0/1背包问题"></a>另一种解法：转化为0/1背包问题</h3><p>考虑到第$i$种物品最多选$floor(\frac V {w[i]})$件，于是可以把第$i$种物品转化为$floor(\frac V {w[i]})$件费用及价值均不变的物品，然后求解这个0/1背包问题。</p>
+<p>更高效的转化方法是：把第$i$种物品拆成费用为$2^kw[i]$、价值为$2^kc[i]$的若干件物品，其中$k$满足$2^kw[i]&lt;V$。这是二进制的思想，因为不管最优策略选几件第$i$种物品，总可以表示成若干个$2^k$件物品的和。</p>
+<h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><p>有$N$种物品和一个容量为$V$的背包。<strong>第$i$种物品最多有$n[i]$件可用</strong>，每件费用是$w[i]$，价值是$c[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
+<p>基本的方程只需将完全背包问题的方程略微一改即可，因为对于第$i$种物品有$n[i]+1$种策略：取$0$件，取$1$件……取$n[i]$件。令$f[i][v]$表示前$i$种物品恰放入一个容量为$v$的背包的最大价值，则：</p>
+<script type="math/tex; mode=display">
+for \ k\ in \ range[0, n[i]]:\\
+f[i][v]=max(f[i-1][v-k*w[i]]+ k*c[i])</script><p>循环时注意$v-k*w[i]$ 非负即可。</p>
+<h3 id="转化为0-1背包问题"><a href="#转化为0-1背包问题" class="headerlink" title="转化为0/1背包问题"></a>转化为0/1背包问题</h3><p>将第$i$种物品分成若干件物品，其中每件物品有一个系数，这件物品的费用和价值均是原来的费用和价值乘以这个系数。使这些系数分别为</p>
+<script type="math/tex; mode=display">
+1,2,4,...,2^{k-1},n[i]-2^k+1</script><p>且k是满足$n[i]-2^k+1&gt;0$的最大整数。</p>
+<p>例如，如果$n[i]$为$13$，就将这种物品分成系数分别为$1,2,4,6$的四件物品。 </p>
+<h2 id="二维背包问题"><a href="#二维背包问题" class="headerlink" title="二维背包问题"></a>二维背包问题</h2><p>二维费用的背包问题是指：对于每件物品，具有两种不同的费用；选择这件物品必须同时付出这两种代价；对于每种代价都有一个可付出的最大值（背包容量）。问怎样选择物品可以得到最大的价值。</p>
+<p>设这两种代价分别为代价1和代价2，第$i$件物品所需的两种代价分别为$a[i]$和$b[i]$。两种代价可付出的最大值（两种背包容量）分别为$V$和$U$。物品的价值为$c[i]$。</p>
+<p>费用加了一维，只需状态也加一维即可。设$f[i][v][u]$表示前$i$件物品付出两种代价分别恰为$v$和$u$时可获得的最大价值。状态转移方程就是：</p>
+<script type="math/tex; mode=display">
+f[i][v][u]=max(f[i-1][v][u], f[i-1][v-a[i]][u-b[i]]+c[i])</script><p>如前述方法，可以只使用二维的数组：当每件物品只可以取一次时变量$v$和$u$采用逆序的循环，当物品有如完全背包问题时采用顺序的循环。当物品有如多重背包问题时拆分物品。</p>
+<h3 id="物品总个数的限制"><a href="#物品总个数的限制" class="headerlink" title="物品总个数的限制"></a>物品总个数的限制</h3><p>有时，“二维费用”的条件是以这样一种隐含的方式给出的：最多只能取$M$件物品。这事实上相当于每件物品多了一种“件数”的费用，每个物品的件数费用均为$1$，可以付出的最大件数费用为$M$。</p>
+<h2 id="咕咕咕"><a href="#咕咕咕" class="headerlink" title="咕咕咕"></a>咕咕咕</h2><p>还有分组背包还有依赖背包但懒得写，源代码也有空再说8</p>
+<p>诶mathjax怎么又炸了</p>
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
+<li><a href="https://www.luogu.com.cn/problem/P1833">https://www.luogu.com.cn/problem/P1833</a></li>
+</ul>
+<p>附AC代码：</p>
+<pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+int v, n=0;
+    //  i j   k
+int f[1001] = &#123;0&#125;;
+
+int max(int a, int b)&#123;
+    return a &gt; b ? a : b;
+&#125;
+
+void processTime()&#123;
+    int a, b, c, d;
+    scanf(&quot;%d:%d %d:%d&quot;, &amp;a, &amp;b, &amp;c, &amp;d);
+    v = d - b + (c - a) * 60;
+&#125;
+
+void tryItem(int cost, int value, bool inf)&#123;
+    if(inf)&#123;
+        for (int j = cost; j &lt;= v; j++)&#123;
+            f[j] = max(f[j], f[j - cost]+value);
+        &#125;
+    &#125;else&#123;
+        for (int j = v; j &gt;= cost; j--)&#123;
+            f[j] = max(f[j], f[j - cost]+value);
+        &#125;
+    &#125;
+&#125;
+
+void decompose(int cost, int value, int num)&#123;
+    int base = 1;
+    while(num&gt;=base)&#123;
+        tryItem(cost * base, value * base, false);
+        num -= base;
+        base &lt;&lt;= 1;
+    &#125;
+    if(num&gt;0)&#123;
+        tryItem(cost * num, value * num, false);
+    &#125;
+&#125;
+
+int main()&#123;
+    processTime();
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        int a, b, c;
+        scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c);
+        if(c==0)&#123;
+            tryItem(a, b, true);
+        &#125;else if(c==1)&#123;
+            tryItem(a, b, false);
+        &#125;else&#123;
+            decompose(a, b, c);
+        &#125;
+    &#125;
+    int result = 0;
+    for (int i = 1; i &lt;= v; i++)&#123;
+        result = max(result, f[i]);
+    &#125;
+    cout &lt;&lt; result;
+    return 0;
+&#125;
+</code></pre>
+]]></content>
+      <tags>
+        <tag>dp</tag>
+        <tag>背包</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>树状数组-入门</title>
     <url>/2020/ds-fenwick-tree-basic/</url>
     <content><![CDATA[<h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>树状数组可以用于高效计算数列的前缀和，区间和等等。</p>
@@ -451,6 +451,22 @@ C[4] = C[0100] = A[1] + A[2] + A[3] + A[4];
       </tags>
   </entry>
   <entry>
+    <title>密码保护文章测试</title>
+    <url>/2021/encrypt-test/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="【■■■ - 密码错误 - ■■■】" data-whm="Oh, these decrypted content cannot be verified, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="8712cc481fc34ae6d16ea47f63532ef2acc2c124b33fb3f40c54973de3857f5f">018a63061e17dd91a60e05280129f742932d41a23e2bd96bdb1d48a7faba3ed7b029007f6e466b7ae950fd3977006312fab6bc5ff0c39b2e1bf6c5f37584a15703aba8c89474cb7ce75d3218d2a7d448</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Please complete the sentence: c7w,_______.<br/> You should type in four characters in lowercase.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
     <title>一些参数方程/极坐标图像</title>
     <url>/2020/figure-of-some-curves/</url>
     <content><![CDATA[<p>菜鸡没学过4-4，在微积分应用里面积面积和体积的时候有的草图画不出来…</p>
@@ -508,22 +524,6 @@ y=a(1-\cos t)
 ]]></content>
   </entry>
   <entry>
-    <title>密码保护文章测试</title>
-    <url>/2021/encrypt-test/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="【■■■ - 密码错误 - ■■■】" data-whm="Oh, these decrypted content cannot be verified, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="8712cc481fc34ae6d16ea47f63532ef2acc2c124b33fb3f40c54973de3857f5f">018a63061e17dd91a60e05280129f742932d41a23e2bd96bdb1d48a7faba3ed7b029007f6e466b7ae950fd3977006312fab6bc5ff0c39b2e1bf6c5f37584a15703aba8c89474cb7ce75d3218d2a7d448</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Please complete the sentence: c7w,_______.<br/> You should type in four characters in lowercase.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-  </entry>
-  <entry>
     <title>Hash Table（散列表）</title>
     <url>/2020/hash-table/</url>
     <content><![CDATA[<p>　　散列表的相关概念和内容　　</p>
@@ -558,19 +558,6 @@ y=a(1-\cos t)
       </tags>
   </entry>
   <entry>
-    <title>Hello, World.</title>
-    <url>/2020/hello-world/</url>
-    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>同余 逆元 费马小定理</title>
     <url>/2020/inverse-element/</url>
     <content><![CDATA[<p>　　　如果会数学就好了　　　　</p>
@@ -598,87 +585,16 @@ y=a(1-\cos t)
       </tags>
   </entry>
   <entry>
-    <title>三角函数的正整数幂的不定积分</title>
-    <url>/2020/simple-triangular-indefinite-integral/</url>
-    <content><![CDATA[<p>啊说真的排版好麻烦明天再来调吧</p>
-<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>换元法（凑微分法）</li>
-</ul>
-<script type="math/tex; mode=display">
-\int f'(\phi(x))\phi'(x)dx = \int f'(\phi(x))d\phi(x) = f(\phi(x))+C</script><script type="math/tex; mode=display">
-\int f'(u)du = \int f'(\phi(x)) \phi'(x)dx = g(x)+C = g(\phi^{-1} (x))+C</script><ul>
-<li>分部积分法</li>
-</ul>
-<h2 id="关于三角函数的幂的积分"><a href="#关于三角函数的幂的积分" class="headerlink" title="关于三角函数的幂的积分"></a>关于三角函数的幂的积分</h2><h3 id="sin-或-cos-的幂"><a href="#sin-或-cos-的幂" class="headerlink" title="sin 或 cos 的幂"></a>sin 或 cos 的幂</h3><p>若指数中存在奇数：</p>
-<script type="math/tex; mode=display">
-\int \cos^7x \sin^{10}xdx</script><ol>
-<li>选定 cos 与 sin 中次幂较低，且为奇数的一个，使用凑微分法</li>
-<li>使用公式 $sin^2x+cos^2x=1$ 替换掉剩下的项</li>
-</ol>
-<p><em>Solve:</em></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\int \cos ^{7} x \sin ^{10} x d x \\
-&=\int \cos ^{6} x \sin ^{10} x d \sin x \\
-&=\int\left(1-\sin ^{2} x\right)^{3} \sin ^{10} x d \sin x \\
-(t &=\sin x) \\
-&= \int\left(1-3 t^{2}+3 t^{4}-t^{6}\right) t^{10} d t \\
-&=\int\left(t^{10}-3 t^{12}+3 t^{14}-t^{16}\right) d t \\
-&=\frac {t^{11}} {11}-\frac{3}{13} t^{13}+\frac{3}{15} t^{15}-\frac{1}{17} t^{17}+C \\
-&=\frac{1}{11} \sin ^{11} x-\frac{3}{13} \sin ^{2} x+\frac{1}{5} \sin ^{10} x-\frac{1}{17} \sin ^{17} x+C
-\end{aligned}</script><p>若指数中不存在奇数：</p>
-<script type="math/tex; mode=display">
-\quad \int \cos ^{2} x \sin ^{4} x d x</script><ol>
-<li>使用二倍角公式</li>
-<li>展开后分别积分</li>
-</ol>
-<p><em>Solve:</em></p>
-<p>$\quad \int \cos ^{2} x \sin ^{4} x d x=\int \frac{1+\cos 2 x}{2} \frac{\left(1-\cos ^{2} x\right)^{2}}{4} d x$<br>$=\frac{1}{8} \int\left(\cos ^{2} 2 x-2 \cos 2 x+1\right)(1+\cos 2 x) d x$<br>$=\frac{1}{8} \int\left(\cos ^{3} 2 x-\cos ^{2} 2 x-\cos 2 x+1\right) d x$<br>$=\frac{1}{8} \int \cos ^{3} 2 x d x-\frac{1}{8} \int \cos ^{2} 2 x d x-\frac{1}{8} \int \cos 2 x d x+\frac{1}{8} \int d x$<br>$=\frac{1}{8} \cdot \frac{1}{2} \int \cos ^{2} 2x d \sin 2 x-\frac{1}{8} \int \frac{1+\cos 4 x}{2} d x-\frac{1}{8} \cdot \frac{1}{2} \sin 2 x+\frac{1}{8} x+C<br>$</p>
-<p>$=\frac{1}{16} \int d \sin 2 x-\frac{1}{16} \int \sin ^{2} 2 x d \sin 2 x-\frac{1}{16} x-\frac{1}{16} \cdot \frac{1}{4} \sin 4 x-\frac{1}{16} \sin 2 x+\frac{1}{8} x+C$</p>
-<p>$=\frac{x}{16}-\frac{\sin^32x}{48}-\frac{\sin4x}{64}+C$</p>
-<h3 id="tan-与-cot-的幂"><a href="#tan-与-cot-的幂" class="headerlink" title="tan 与 cot 的幂"></a>tan 与 cot 的幂</h3><script type="math/tex; mode=display">
-\int \tan ^{4} x d x</script><p>使用公式 $ \tan ^{2} x=\sec ^{2} x-1 $</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}
-\int \tan ^{0} x d x=\int d x=x+C \\
-\int \tan ^{1} x d x=\int \frac{\sin x}{\cos x} d x=-\int \frac{1}{\cos x} d \cos x=-\ln |\cos x|+C \\
-\qquad=\ln |\sec x|+C \\
-\end{array}</script><script type="math/tex; mode=display">
-\begin{aligned}
-I_{n} &=\int \tan ^{n} x d x \\
-&=\int \tan ^{n-2} x \tan ^{2} x d x \\
-&=\int \tan ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
-&=\int \tan ^{n-2} x \sec ^{2} x d x-\int \tan ^{n-2} x d x \\
-&=\int \tan ^{n-2} x d \tan x-\int \tan ^{n-2} x d x \\
-&=\frac{1}{n-1} \cdot \tan ^{n-1} x-I_{n-2}
-\end{aligned}</script><p><em>Solve:</em></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\int \tan ^{4} x d x &=\int \tan ^{2} x\left(\sec ^{2} x-1\right) d x \\
-&=\int \tan ^{2} x \sec ^{2} x d x-\int \tan ^{2} x d x \\
-&=\frac{1}{3} \tan ^{3} x-\int \sec ^{2} x d x+\int d x \\
-&=\frac{1}{3} \tan ^{3} x-\tan x+x+C
-\end{aligned}</script><p>cot 的幂读者自证不难.</p>
-<h3 id="sec-与-csc-的幂"><a href="#sec-与-csc-的幂" class="headerlink" title="sec 与 csc 的幂"></a>sec 与 csc 的幂</h3><script type="math/tex; mode=display">
-\begin{aligned}
-\int \sec x d x &=\int \frac{(\sec x)(\sec x+\tan x)}{\sec x+\tan x} d x \\
-&=\int \frac{\sec x \tan x+\sec ^{2} x}{\sec x+\tan x} d x \\
-&=\ln |\sec x+\tan x|+C \\
-\int \sec ^{2} x d x &=\tan x+C
-\end{aligned}</script><script type="math/tex; mode=display">
-\begin{aligned}
-\int \sec ^{n} x d x &=\int \sec ^{n-2} x \sec ^{2} x d x \\
-&=\int \sec ^{n-2} x d \tan x \\
-&=\sec ^{n-2} x \tan x-\int \tan x(n-2) \sec ^{n-3} x \sec x \tan x d x \\
-&=\sec ^{n-2} \tan x-(n-2) \int \sec ^{n-2} x \tan ^{2} x d x \\
-&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
-&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n} x d x+(n-2) \int \sec ^{n-2} x d x \\
-\end{aligned}</script><p>因此我们有：</p>
-<script type="math/tex; mode=display">
-\int \sec ^{n} x d x=\frac{1}{n-1} \sec ^{n-2} x \tan x+\frac{n-2}{n-1} \int \sec ^{n-2} x d x</script><p>csc 的幂同理显然.</p>
+    <title>Hello, World.</title>
+    <url>/2020/hello-world/</url>
+    <content><![CDATA[<p>没钱结款只得把自己博客搬家的屑</p>
+<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
+<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
+<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
+<p>​    等有空了就写博文，咕咕咕</p>
 ]]></content>
       <tags>
-        <tag>Calculus</tag>
+        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
@@ -907,5 +823,273 @@ int main()&#123;
         <tag>code</tag>
         <tag>luogu</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>三角函数的正整数幂的不定积分</title>
+    <url>/2020/simple-triangular-indefinite-integral/</url>
+    <content><![CDATA[<p>啊说真的排版好麻烦明天再来调吧</p>
+<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
+<li>换元法（凑微分法）</li>
+</ul>
+<script type="math/tex; mode=display">
+\int f'(\phi(x))\phi'(x)dx = \int f'(\phi(x))d\phi(x) = f(\phi(x))+C</script><script type="math/tex; mode=display">
+\int f'(u)du = \int f'(\phi(x)) \phi'(x)dx = g(x)+C = g(\phi^{-1} (x))+C</script><ul>
+<li>分部积分法</li>
+</ul>
+<h2 id="关于三角函数的幂的积分"><a href="#关于三角函数的幂的积分" class="headerlink" title="关于三角函数的幂的积分"></a>关于三角函数的幂的积分</h2><h3 id="sin-或-cos-的幂"><a href="#sin-或-cos-的幂" class="headerlink" title="sin 或 cos 的幂"></a>sin 或 cos 的幂</h3><p>若指数中存在奇数：</p>
+<script type="math/tex; mode=display">
+\int \cos^7x \sin^{10}xdx</script><ol>
+<li>选定 cos 与 sin 中次幂较低，且为奇数的一个，使用凑微分法</li>
+<li>使用公式 $sin^2x+cos^2x=1$ 替换掉剩下的项</li>
+</ol>
+<p><em>Solve:</em></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\int \cos ^{7} x \sin ^{10} x d x \\
+&=\int \cos ^{6} x \sin ^{10} x d \sin x \\
+&=\int\left(1-\sin ^{2} x\right)^{3} \sin ^{10} x d \sin x \\
+(t &=\sin x) \\
+&= \int\left(1-3 t^{2}+3 t^{4}-t^{6}\right) t^{10} d t \\
+&=\int\left(t^{10}-3 t^{12}+3 t^{14}-t^{16}\right) d t \\
+&=\frac {t^{11}} {11}-\frac{3}{13} t^{13}+\frac{3}{15} t^{15}-\frac{1}{17} t^{17}+C \\
+&=\frac{1}{11} \sin ^{11} x-\frac{3}{13} \sin ^{2} x+\frac{1}{5} \sin ^{10} x-\frac{1}{17} \sin ^{17} x+C
+\end{aligned}</script><p>若指数中不存在奇数：</p>
+<script type="math/tex; mode=display">
+\quad \int \cos ^{2} x \sin ^{4} x d x</script><ol>
+<li>使用二倍角公式</li>
+<li>展开后分别积分</li>
+</ol>
+<p><em>Solve:</em></p>
+<p>$\quad \int \cos ^{2} x \sin ^{4} x d x=\int \frac{1+\cos 2 x}{2} \frac{\left(1-\cos ^{2} x\right)^{2}}{4} d x$<br>$=\frac{1}{8} \int\left(\cos ^{2} 2 x-2 \cos 2 x+1\right)(1+\cos 2 x) d x$<br>$=\frac{1}{8} \int\left(\cos ^{3} 2 x-\cos ^{2} 2 x-\cos 2 x+1\right) d x$<br>$=\frac{1}{8} \int \cos ^{3} 2 x d x-\frac{1}{8} \int \cos ^{2} 2 x d x-\frac{1}{8} \int \cos 2 x d x+\frac{1}{8} \int d x$<br>$=\frac{1}{8} \cdot \frac{1}{2} \int \cos ^{2} 2x d \sin 2 x-\frac{1}{8} \int \frac{1+\cos 4 x}{2} d x-\frac{1}{8} \cdot \frac{1}{2} \sin 2 x+\frac{1}{8} x+C<br>$</p>
+<p>$=\frac{1}{16} \int d \sin 2 x-\frac{1}{16} \int \sin ^{2} 2 x d \sin 2 x-\frac{1}{16} x-\frac{1}{16} \cdot \frac{1}{4} \sin 4 x-\frac{1}{16} \sin 2 x+\frac{1}{8} x+C$</p>
+<p>$=\frac{x}{16}-\frac{\sin^32x}{48}-\frac{\sin4x}{64}+C$</p>
+<h3 id="tan-与-cot-的幂"><a href="#tan-与-cot-的幂" class="headerlink" title="tan 与 cot 的幂"></a>tan 与 cot 的幂</h3><script type="math/tex; mode=display">
+\int \tan ^{4} x d x</script><p>使用公式 $ \tan ^{2} x=\sec ^{2} x-1 $</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\int \tan ^{0} x d x=\int d x=x+C \\
+\int \tan ^{1} x d x=\int \frac{\sin x}{\cos x} d x=-\int \frac{1}{\cos x} d \cos x=-\ln |\cos x|+C \\
+\qquad=\ln |\sec x|+C \\
+\end{array}</script><script type="math/tex; mode=display">
+\begin{aligned}
+I_{n} &=\int \tan ^{n} x d x \\
+&=\int \tan ^{n-2} x \tan ^{2} x d x \\
+&=\int \tan ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
+&=\int \tan ^{n-2} x \sec ^{2} x d x-\int \tan ^{n-2} x d x \\
+&=\int \tan ^{n-2} x d \tan x-\int \tan ^{n-2} x d x \\
+&=\frac{1}{n-1} \cdot \tan ^{n-1} x-I_{n-2}
+\end{aligned}</script><p><em>Solve:</em></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int \tan ^{4} x d x &=\int \tan ^{2} x\left(\sec ^{2} x-1\right) d x \\
+&=\int \tan ^{2} x \sec ^{2} x d x-\int \tan ^{2} x d x \\
+&=\frac{1}{3} \tan ^{3} x-\int \sec ^{2} x d x+\int d x \\
+&=\frac{1}{3} \tan ^{3} x-\tan x+x+C
+\end{aligned}</script><p>cot 的幂读者自证不难.</p>
+<h3 id="sec-与-csc-的幂"><a href="#sec-与-csc-的幂" class="headerlink" title="sec 与 csc 的幂"></a>sec 与 csc 的幂</h3><script type="math/tex; mode=display">
+\begin{aligned}
+\int \sec x d x &=\int \frac{(\sec x)(\sec x+\tan x)}{\sec x+\tan x} d x \\
+&=\int \frac{\sec x \tan x+\sec ^{2} x}{\sec x+\tan x} d x \\
+&=\ln |\sec x+\tan x|+C \\
+\int \sec ^{2} x d x &=\tan x+C
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+\int \sec ^{n} x d x &=\int \sec ^{n-2} x \sec ^{2} x d x \\
+&=\int \sec ^{n-2} x d \tan x \\
+&=\sec ^{n-2} x \tan x-\int \tan x(n-2) \sec ^{n-3} x \sec x \tan x d x \\
+&=\sec ^{n-2} \tan x-(n-2) \int \sec ^{n-2} x \tan ^{2} x d x \\
+&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
+&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n} x d x+(n-2) \int \sec ^{n-2} x d x \\
+\end{aligned}</script><p>因此我们有：</p>
+<script type="math/tex; mode=display">
+\int \sec ^{n} x d x=\frac{1}{n-1} \sec ^{n-2} x \tan x+\frac{n-2}{n-1} \int \sec ^{n-2} x d x</script><p>csc 的幂同理显然.</p>
+]]></content>
+      <tags>
+        <tag>Calculus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>有谁不喜欢可爱的小狐狸呐</title>
+    <url>/2021/moe-fox/</url>
+    <content><![CDATA[<p><img src="https://i.loli.net/2021/01/29/Dk1GiuNor2h5ZRz.png" alt="img"></p>
+<p>本文转载自<a href="https://adnmb3.com/t/34139581，搬运不一定及时">https://adnmb3.com/t/34139581，搬运不一定及时</a></p>
+<hr>
+<ul>
+<li>2021-01-22(五)14:53:51 </li>
+</ul>
+<p>我刚高考完的那一个深秋，去到老家附近的荒山上。</p>
+<p>老家的长辈曾经三番五次讲过山里有鬼怪，但是作为一个坚定的无神论者，我去山上目的就是找点磷火带回去给他们当乐子看看。</p>
+<p>但是背后的声音，让我的价值观差点跟我的魂一起飞走。</p>
+<p>“您看我像人吗？”头上盖着叶子的狐狸向我问道。</p>
+<p>……花了点时间，稳住我抖的比我的手速都快的腿和心态。</p>
+<p>我看你像148公分的金毛贫乳傲娇兽耳九尾狐萝莉。</p>
+<p>狐狸：？</p>
+<ul>
+<li>2021-01-22(五)15:45:22</li>
+</ul>
+<p>其实我应该再多提一点要求的。</p>
+<p>比如说把那种变身音效搞得像魔法少女一样：一阵炫目的七彩光茫和花里胡哨的pose过后，穿着短的遮不住胖次衣服的狐娘出现在我眼前。（图文无关）</p>
+<p>结果谁知道一阵说不上是青还是白的烟过后，她又细又白的小胳膊耷拉着，小粉拳攥的都发抖了，憋屈到脸涨的通红还不忘狠狠瞪我。当然，很努力的抬着头伸着脖子。</p>
+<p>在等她说话。结果她张了几次嘴，都快哭出来了，死命抽抽搭搭想忍住。最后还是我先开的口。</p>
+<p>变成人了还有什么不高兴的？</p>
+<p>她还是没憋住哭声。</p>
+<ul>
+<li>2021-01-22(五)18:45:19</li>
+</ul>
+<p>说是什么荒山探险，实际上这山也不是没有人走，最多算是人烟稀少而已。我一开始也正是拿着爬山当晚餐后散步的方式，带点零食也无可厚非吧。</p>
+<p>所以我现在正在一边嗑瓜子，一边听她哭唧唧地补充设定。</p>
+<p>“吾，吾闭关清修五百多年……”抹了抹鼻子。<br>“堪堪度过天劫，差一步便能化形，谁知汝”我打断了一下，冲她伸手。吃瓜子吗？</p>
+<p>小狐狸吃了一惊，快要半恼了，却还是摆了摆手。真有教养。</p>
+<p>她自顾自往下说“谁知道助吾化形的是这么一个没有廉耻奇装异服的人”</p>
+<p>奇装异服？我想。啊，大明的服饰果然不同。刚才正好忘了加“古装”的萌点，真是好运气。</p>
+<p>小狐狸小心翼翼的抬了头，见我没有什么反应，白了我一眼“说吧，凡人，有什么心愿，金银珠宝还是荣华富贵？用吾的妖力帮汝实现后就互不相欠了！”</p>
+<p>仙狐大人啊。她似乎很满意这个称呼，头上的两只尖耳朵得意的抖了抖。</p>
+<p>我的愿望可能要花点时间。</p>
+<p>“人类的时间对吾来说不过白驹过隙，不要纠结时间长短，吾也不会因为要花点时间就忘记恩情，赶紧说出汝的愿望”</p>
+<p>我要你陪我一辈子。</p>
+<p>她又哭了。</p>
+<ul>
+<li>2021-01-23(六)01:29:58</li>
+</ul>
+<p>她哭的坐在地上，鼻涕一把泪一把，呜呜咽咽，活像个被抢了心爱玩具的小孩子而不是什么大妖。看起来悲痛欲绝。我更悲痛。嫌弃的也太明显了吧。</p>
+<p>过的时间有点长了，最好还是下山吧。毕竟十一点多在乡下算是极晚，再不走估计二叔公就举着手电筒来找我了。等等，现在的情况好像很不妙。不知道什么时候来的亲戚、坐在地上哭鼻子还说着什么“我不要陪你一辈子”的萝莉。要是遇到了一起……我咚一声跪下了。</p>
+<p>小狐狸好像被我这一下吓到了。睁大了眼睛看着我。</p>
+<p>姑奶奶我求求您别哭了，要是被人看见了就全完了。（指我）</p>
+<p>“这有什么嘛~”眼眶还是红红的，鼻涕也没擦干净的萝莉似乎很喜欢卖弄本事。又是一阵青烟，眼前人又回到了一只蓬蓬松松的小狐狸。“没问题了吧？（指她）”</p>
+<p>虽然她好像理解错我的意思了，但不管怎么说，我的目的达到了。</p>
+<p>这口气还没松下来，二叔公的电话就到了。“小肥肥啊，你莫事啊？这电话且打不通啦！”　莫事莫事，我马上下来。</p>
+<p>山上信号时断时续，二叔公能打通电话实在出乎我的意料。但是这种问题实在无关紧要，还是先把小狐狸带下去吧。我看向她，她也看向我。还甩了甩尾巴尖。</p>
+<p>二叔公看着我提溜一只狐狸回来实在是吃了一惊。我再三解释这不是什么妖怪没想过取我性命只是单纯的和我很亲而已。你看狐狸现在还在蹭我呢。二叔公盯着我看，我十分心虚地把眼神转向狐狸。她正站起来扒我裤子——口袋里的栗子。见我看她，耳朵抖了抖，身子也缩下去了。叹了口气，我蹲下去把狐狸抱到怀里给她剥栗子吃。趁她吃的时候挠了脑袋、耳朵和下巴。她把眼睛都眯起来了。尾巴也乱甩。</p>
+<p>二叔公都看傻了。“你这狐狸比咱家大黄都乖”<br>那确实。不过小狐狸好像不太高兴，发出咕咕噜噜的声响。</p>
+<p>在老家度过了担惊受怕的几天后（指我和狐狸），终于筹备回家了。其实不能怪我，她和我聊天到激动时总要变个身。问题在于小狐狸手感实在太好，我总是抱在怀里舍不得松手，以至于变成萝莉后对我们两人的心脏都是巨大的考验。</p>
+<ul>
+<li>2021-01-23(六)14:00:41</li>
+</ul>
+<p>小狐狸真的很喜欢仙狐大人这个称呼，我们独处的时候总是扯着我的袖子让我这样叫她。在很久很久的之后也是这样。不过作为等价交换——我是这样给小狐狸说的，她也要答应我的一些小要求。这也是为什么我能抱着她rua一整天的原因。明明她也很舒服。</p>
+<p>终于能回家了。我终于不用小心翼翼的看萝莉还怕被人发现了。我告诉小狐狸的时候她也很罕见的专门变成狐娘，嘿嘿傻笑着用毛茸茸的小脑袋在我身上蹭来蹭去。</p>
+<p>虽然总是以仙狐自称，但还是更像野狐啊。我和二叔公一起搬行李的时候看着跳来跳去抓蝴蝶的小狐狸感慨万千。</p>
+<p>大叔伯在叫我。他是最亲我的亲戚，比起一年都不一定能见到一次的父母也是这样。“我看你这狐狸通灵性，搞不好是个胡大仙。”大叔伯看了看小野狐，转过头对我说。　有什么问题吗？　他这幅神神叨叨的样子我倒是习惯了。“也不是狐狸的问题，是你的”　　我？　“对，你。我从来没见过你对什么事操过心……我就没见过你现在这幅样子。不过这也不能怪你。”他犹豫了一下，重新盯着我“你对那狐狸太上心了，都不像刚刚捡到的。”　她通灵性而已。　“我都说了不是狐狸的问题……我知道你喜欢那狐狸，但是之后呢？狐狸能活十年，之后呢？你和狐狸越亲近，你……”　我知道了，大叔伯。</p>
+<p>我都知道的。</p>
+<p>狐狸没有抓到那蝴蝶，还在垂头丧气。真是个笨狐狸。</p>
+<ul>
+<li>2021-01-24(日)12:47:47</li>
+</ul>
+<p>虽然和她说过回家一定要用这个，不过小狐狸还是有点抵触呆在车上。要不是在老家的几天和狐狸培养出了点感情和答应她的一袋栗子，她应该不会乖乖上车。不过真是好哄啊，果然还是小孩子。</p>
+<p>在车上总是担心狐狸滚来滚去会磕到哪里，就嘱托她坐在我右后面，系好安全带。她好像不太乐意，不过还是掐了个咒。眨眼后小姑娘就坐在了椅子上。</p>
+<p>鼓捣半天（包括小声向我求助）以后她终于扣好了安全带。小姑娘扭了扭总感觉不太舒服想解开，说是“这种程度施个法就好”，被我呵斥之后蔫蔫的坐着了。</p>
+<p>我不是特别敢让小狐狸施法。她第一次给我隔墙传音的时候近乎把我脑子震裂，简直像开了水陆道场。在车上万一出了点什么事，就算是大妖，她那小细胳膊恐怕还是会伤到。当然她捆安全带时扭来扭去的样子也很可爱就是了。</p>
+<p>刚开始上路时小姑娘对外面的景色还是很感兴趣的，就差趴在窗户上了。不过可能是玩的越疯累的越快，车开了没一会她竟显得有点困了，完全没了抓蝴蝶时候的兴奋劲，眼睛直直看着前面的座椅背。</p>
+<p>发现我在看她，小姑娘好像很高兴，估计是把困倦和我的训斥都忘掉了，对着后视镜里的我眨巴眨巴了眼睛，嘻嘻的笑了起来。</p>
+<ul>
+<li>2021-01-24(日)22:12:05</li>
+</ul>
+<p>简直是违反《道路交通安全法》级别的笑靥啊。好不容易从出神状态缓过来的我这么想到。方向盘还在紧握着，明明愣了神却没出什么意外，真是让人后怕。</p>
+<p>鼓起勇气再看看我的小姑娘，发现她已经歪着脑袋睡着了。果然还是会困吧。</p>
+<p>到了公寓楼下，天已经完全黑了。行李打算明天收拾，不过被褥还是要拿到家里去的。</p>
+<p>小狐狸睡的正香，先把她抱上去再下来拿？</p>
+<p>小心翼翼解开安全带，抱着小狐狸锁好了车，等到了电梯，进了家门。</p>
+<p>丢掉了沙发上放的报纸又仔细掸了掸，把小狐狸摆到上面，我也坐在沙发上喘了口气。毕竟开了几个小时的车，又到了深夜，想着把被褥搬上来就去睡个好觉。</p>
+<p>我没有下楼。因为我的小姑娘死死抓住我的袖子。想掰开的话就会从喉咙里发出“呜呜”的声音。明明睡的很沉。</p>
+<ul>
+<li>2021-01-25(一)22:47:31</li>
+</ul>
+<p>一只手搂着她一只手翻箱倒柜找出来了条薄毯。调了调空调的温度，把毯子的角掖上。尾巴太大了，看着已经分不清蜷成一团的是小姑娘还是毛球。我也闭上了眼睛。</p>
+<p>迎接我起床的并不是穿着围裙给我做饭的小姑娘，是昨天定的闹钟。还有冲着手机咕噜咕噜叫着的小狐狸。爪子还被毛毯绊住了一只。</p>
+<p>毕竟回来了，生活还是要规律点的。我给小狐狸这么解释道。眨眨眼睛歪歪脖子，小笨狐狸没有听懂。不能吃完就睡醒了就吃还总是让我抱着你挠痒痒了。她听到最后有点生气，伸出爪子拍了我。然后就把头扭过去了。</p>
+<p>把小狐狸晾在一边去搬行李，用电梯上下楼真是方便。不多的行李在现代科技的帮助下没有花费我太多时间。最后把床铺规整好后小狐狸依然没精打采地缩着头，大尾巴都不甩了。好吧，这是不规律的最后一天。话音还没有落下，她就扑到我怀里了。</p>
+<p>我是免费饭票吗？明明她是应该来报恩的吧？气愤的挠她的下巴，小狐狸舒服得下巴往天上仰，连眼睛都睁不开了。好吧，这样倒也不坏。</p>
+<ul>
+<li>2021-01-26(二)12:28:24</li>
+</ul>
+<p>让我摸摸你的耳朵。面容严肃的对小狐狸说。<br>她露出了一脸“从第一天开始你就没有停过吧！？”的表情。不得不说明明是狐狸模样，表情这么丰富到底是怎么做到的？</p>
+<p>不是，你先变成仙狐大人的样子，然后我再rua你耳朵。她倒是变成了“仙狐大人”，不过给了我一巴掌就面红耳赤的跑掉进了屋子。但是这里是我家啊？揉着脸表示理解不能。</p>
+<p>小姑娘把自己关在屋子里了。看来是生气了。不过她好像在说什么。等我把耳朵贴在门上仔细听一听……好吧，不需要了。“为什么这么下流无礼的要求他也能那样子说出来呀！？”她都快喊出来了。“说什么，什么要摸我的耳朵……呜……”这次声音倒是越来越小了。不会又要哭鼻子吧？</p>
+<p>我推门进去，把小狐狸吓了一跳，趴着的耳朵都竖起来了。见我还是在看她的耳朵，眼眶又红一圈。对不起！我弯下腰大声道歉。看见小狐狸真的伤心了，我手忙脚乱不知道说什么好，总之慌里慌张的道了歉。</p>
+<p>我没有想到摸耳朵对你是相当无礼的行为，我就是想比较一下变身前后耳朵的手感……“你还说！”小姑娘怒气冲冲的把枕头朝我扔过来。</p>
+<p>是我不对！我之前从来没有见过狐妖，也不知道这代表什么，但是我以后不会再这样了！没有得到允许之前，我绝对不会再想着揉耳朵了！</p>
+<p>“谁会给你允许啊！？你这不是还在想摸我的耳朵嘛！？登徒子！！！”仙狐大人快哭了，我也抓住头发蹲了下来，却什么也说不上来。</p>
+<p>灵光一现。您别生气了，让我怎么样都行，想要什么都行，我也不会再提耳朵的事了，好吗？“……真的？”</p>
+<p>真的，我发誓。“……那，那我可以过一辈子‘不规律’吗？”她抽抽搭搭的提出了极过分的要求。　　　可以的。我答应的很爽快。而且这个词不是这么用的，小笨狐狸。不过我很看气氛的没说出来。　　</p>
+<p>指的是“一辈子”。</p>
+<p>2021-01-26(二)19:57:53</p>
+<p>啊，这是今天的第二更。(￣∇￣)</p>
+<p>点外卖叫了炒栗子。在楼下拎着栗子的蓝衣小哥对我抱着的乖乖狐狸明显很感兴趣，不过还是被我劝退了。</p>
+<p>真是不好意思，她只能让我摸，至少这辈子是这样。他倒是没怎么在意，还跟我说他朋友的猫也是这样，一见外人就挠。他似乎理解错我的意思了……还是谢谢他的善解人意好了。</p>
+<p>坐在沙发上搂着小仙狐教她剥栗子。小姑娘倒是学的很快，不过还是喜欢吃我剥好喂到她嘴里的。不小心手指碰到了唇。软软的。</p>
+<p>仙狐大人坐的比刚才还要笔直，从后面看没有生气的意思。为什么啊？这伦理观到底怎么回事？想不出来的我选择了继续喂投小姑娘。而且我发现把剥好的栗子在她嘴边晃晃之后自己吃掉会招来她气鼓鼓的撅嘴。</p>
+<p>一袋栗子很快就吃完了，在小狐狸想起来刚才的事之前，我选择打开电视。</p>
+<p>“喂，你什么时候在听的？”还是想起来了。</p>
+<p>第一，我不叫喂。“……肥肥”</p>
+<p>只听见了最后两句而已，我还没有不识相到直接去找气成那样的你，会让你先静静的。“是这样吗？”小狐狸狐疑的看着我。就是这样的。</p>
+<p>“那还真是……太好了”她用几近细不可闻的声音补充道。大概是一开始骂的很激烈吧？不过也确实是我不好。</p>
+<p>小马宝莉调好了 ，让她先看这个吧。她对这种“高级皮影戏”兴趣很大，连着看了三集。</p>
+<ul>
+<li>2021-01-27(三)00:09:12</li>
+</ul>
+<p>把小狐狸举起来又放到沙发上。去了趟厕所之后再抱到怀里。</p>
+<p>“为什么你明明对我有恩，还要答应这样对我一辈子啊？”仙狐大人终于反应过来了，动画也不看了，把小脑袋使劲后仰，看着我问到。</p>
+<p>……你当时生气了，我慌得什么都想不到，只想着哄你。“呜……”她忽然闹起来别扭，拿脑袋用力顶我的下巴。</p>
+<p>“明明一开始选荣华富贵三妻四妾不就好了嘛，现在你开心了？”还在蹭我的下巴。</p>
+<p>很开心。再说现在早就不能什么“三妻四妾”了。</p>
+<p>“不能了吗！？”她比看见的时候电视还震惊。</p>
+<p>不能了。现在夫妻只能是一对，两人了。</p>
+<p>“两个人！？夫妻两个人过一辈子……”声音越来越小。</p>
+<p>怎么了吗？“没没没没事的”啪的一下，她把脸捂住了。好像嫌不够一样，又变回了狐狸。</p>
+<p>“不准乱揉了！”狐狸恶声恶气的跟我讲。就是好像比平时还烫了点。“狐狸的体温本来就是比区区人类要高嘛！”</p>
+<p>又看了几集动画，她用尾巴掸了我一下。</p>
+<p>“……会告诉你的”</p>
+<p>什么？</p>
+<p>“……那个的意思以后会告诉你的”</p>
+<p>？</p>
+<p>“是说摸耳朵啦！坏人！”狐狸从我腿上蹦下来，落地之前变成了小姑娘，朝我屋子里跑去。关门的时候还冲我比了个鬼脸。</p>
+<ul>
+<li>2021-01-27(三)12:33:23</li>
+</ul>
+<p>说一声准备吃晚饭，小狐狸就跑出来了。小狐狸的好脾气唯有在吃饭和挠痒痒的时候才能发挥的淋漓尽致。</p>
+<p>不过好像是因为栗子吃的太多，小姑娘还没到我身边就打了个饱嗝。要是不消化可不好。</p>
+<p>今天晚上你只能喝粥了。试着板起面孔和小狐狸讲话。她难得听话，没闹着要吃别的东西，不过粥还是喝了三碗，看来明天又要早起重新熬了。</p>
+<p>这里是我家，没有别人的。小狐狸开始打哈欠的时候我关掉了电视，把她抱到卧室之后，我对她这样讲到。</p>
+<p>“这种事情我还是知道的，怎么了？”</p>
+<p>睡觉的时候不用变回狐狸的。不过床暂时只有一张，这两天我先睡沙发。</p>
+<p>她有点纠结，不过还是摇了摇脑袋。“不要，哪有让你在外面睡觉的道理”</p>
+<p>但是你好不容易可以化形啊？也不怕被别人发现了，不想变成人的样子在床上躺着睡吗？我的床应该还是要比你修炼时住的山洞舒服一点的。</p>
+<p>“唔唔唔……”她更纠结了。</p>
+<p>“你之前说过的，都是真的吗？”仙狐大人突然发问。</p>
+<p>当然。以后不敢完全保证，但是直到现在我还没有对你说过谎。虽然有点摸不着头脑，我还是如实回答道。</p>
+<p>“……绝对不要乱动，听到了没有？”</p>
+<p>她钻进了被子。</p>
+<ul>
+<li>2021-01-28(四)01:54:05</li>
+</ul>
+<p>仙狐大人的睡相还真是差。睡了一晚上差点把我踢到地上去。轻手轻脚的给她盖好被子，穿上外套，准备给小狐狸做早饭吃。</p>
+<p>“我想练习一下法术，普通的那种”小狐狸吃完了煎鸡蛋，认真的看着我。</p>
+<p>稍等一下。她迷迷糊糊地点了点头。</p>
+<p>收拾了贵重的易碎品，关好了煤气。最重要的是我早在回老家之前便买了一份不怎么便宜的短期房屋安全险。毕竟是一个人住，出门在外还是会不放心。又因为小狐狸总是折腾，就早早回了家，因此保险还没到期。</p>
+<p>长话短说，我没受什么大伤。她说是提前用了防御的法门罩住了我。明明拍着小胸脯跟我保证不会爆炸的。拜此所赐房子好像很严重的样子。</p>
+<p>打了个电话又等了一会，保险公司的人就来了。</p>
+<p>嗯，昨天晚上回来的时候家里就是这样了。所以今天一早就联系你们了。</p>
+<p>保险调查员倒是冷静。“看起来的确是刚刚发生的事故，不过还是需要进一步的确认。”</p>
+<p>在考证一番后，调查员拎着公文包走出了门。“还有一件事。”回过头来看我抱着的狐狸，“真可爱啊，能摸摸吗？”</p>
+<p>谢谢你。不能。</p>
+<ul>
+<li>2021-01-29(五)01:54:20</li>
+</ul>
+<p>看着焦黑一片的屋子仙狐大人很是尴尬，情绪低落的程度堪比第一次遇见我。</p>
+<p>我自然也不想让她在这里待着，于是对小狐狸说带她上街逛逛。她以为这是什么惩罚，拽着衣角低着头。眼泪汪汪地似乎又要哭。尾巴都蔫了。我被她气笑了。</p>
+<p>没事的，万一保险下不了才会有点小麻烦，这真的没事的。安慰了我的小狐狸。</p>
+<p>“真的吗？真的只是去集市吗？”转眼就开心起来了。真是没心没肺。</p>
+<p>在和小姑娘解释了为什么狐狸不能上街，就算是我抱着也不行之后，她开始走来走去想办法。</p>
+<p>“我可以用法术遮掩一下！”我还没来得及出言阻拦，她就已经开始掐咒念决。</p>
+<p>青烟过去，我倒是没有看出来什么变化。金色长发，毛绒绒耳朵，古色古香的袍子，还有刚刚竖起来摇来摇去的九条尾巴。</p>
+<p>？这有什么区别吗？</p>
+<p>“除了你以外的人类都会以为我是普通人的！厉害吧？”白白嫩嫩的小胳膊抱在胸前，尾巴快翘到天上了。</p>
+<p>……所以为什么要除开我，我还没有见过你黑发的样子啊。</p>
+<p>她一副大受打击的样子“我还以为你很喜欢我现在的样子呢……明明是你选的模样，这么快就看腻了吗……”</p>
+<p>不是，不是这样的。我又开始慌乱了。但是其他人都可以看，只有我不可以，我会很嫉妒的。而且……</p>
+<p>“而且什么？”她见是误会了我的意思，有点害羞的问我。</p>
+<p>没什么，我们走吧。她倒是也没追问。</p>
+<p>而且不管你变成什么样子我都很喜欢。我想。</p>
+<p><em>To be continued…</em></p>
+]]></content>
   </entry>
 </search>
