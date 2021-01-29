@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1611925421413">
+  <link rel="stylesheet" href="/css/style.css?v=1611925527044">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -130,407 +130,342 @@
         <section class="nexmoe-posts">
     
     <div class="nexmoe-post">
-        <a href="/2020/inverse-element/">
+        <a href="/2020/data-discreatization/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 60.67415730337079%;"> 
-                    <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="同余 逆元 费马小定理" class="lazyload">
-                    <h1>同余 逆元 费马小定理</h1>
+                    <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="数据的离散化" class="lazyload">
+                    <h1>数据的离散化</h1>
                 </div>
             
         </a>
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月02日</a>
-            <a><i class="nexmoefont icon-areachart"></i>231 字</a>
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月31日</a>
+            <a><i class="nexmoefont icon-areachart"></i>139 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
-                <p>　　　如果会数学就好了　　　　</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>菜鸡不会打【<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7108?contestId=13515">P7108</a>】，来补数学知识</p>
-<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>​        给定一个正整数$m$，如果两个整数$a$和$b$满足$a-b$能够被$m$整除，即$(a-b)/m$得到一个整数，那么就称整数$a$与$b$对模$m$同余，记作<script type="math/tex">a≡b(mod m)</script>。</p>
-<p>​        对模$m$同余是整数的一个<strong>等价关系</strong>。</p>
-<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>​        如果$p$是一个质数，而整数$a$不是$p$的倍数，则有<script type="math/tex">a^{p-1}≡1（mod p）</script>。</p>
-<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><script type="math/tex; mode=display">
-1\%p=a^{p-1}\%p \\
-=> \frac 1 a \% p = a^{p-2}\%p</script><p>​        因此，在计算$\frac{b^h-1}{b-1}$时，我们可以将其转化成$(b^h-1)*inverse(b-1)$计算。</p>
-<h2 id="最后有用的代码"><a href="#最后有用的代码" class="headerlink" title="最后有用的代码"></a>最后有用的代码</h2><pre><code class="lang-c++">long long invEl(int x)
-&#123;
-    return qpow(x, M - 2, M);
+                <h2 id="数据的离散化处理"><a href="#数据的离散化处理" class="headerlink" title="数据的离散化处理"></a>数据的离散化处理</h2><p>什么是<strong>离散化</strong>？</p>
+<p>离散化，把无限空间中有限的个体映射到有限的空间中去，以此提高算法的时空效率。</p>
+<p>通俗的说，离散化是在不改变数据相对大小的条件下，对数据进行相应的缩小。例如：</p>
+<ul>
+<li><p>原数据：1,999,100000,15；处理后：1,3,4,2；</p>
+</li>
+<li><p>原数据：{100,200}，{20,50000}，{1,400}；处理后：{3,4}，{2,6}，{1,5}；</p>
+</li>
+</ul>
+<p>例子：洛谷P1908，树状数组求逆序对时的应用</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1908">https://www.luogu.com.cn/problem/P1908</a></li>
+</ul>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2020/luogu-P1908/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 60.67415730337079%;"> 
+                    <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="洛谷 P1908 求逆序对" class="lazyload">
+                    <h1>洛谷 P1908 求逆序对</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月31日</a>
+            <a><i class="nexmoefont icon-areachart"></i>698 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
+        </div>
+
+        <article>
+            
+                <h2 id="归并排序求逆序对数目"><a href="#归并排序求逆序对数目" class="headerlink" title="归并排序求逆序对数目"></a>归并排序求逆序对数目</h2><pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+unsigned long long result = 0;
+int a[500001] = &#123;0&#125;;
+int cache[500001] = &#123;0&#125;;
+
+void sort(int l, int r)&#123;
+    if (r &lt;= l) return;
+    if(r-l==1)&#123;
+        if(a[l]&gt;a[r])&#123;
+            int temp = a[l];
+            a[l] = a[r];
+            a[r] = temp;
+            result++;
+        &#125;
+        return;
+    &#125;
+    int mid = (l + r) / 2;
+    //[l, mid] &amp;&amp; [mid+1, r]
+    sort(l, mid);
+    sort(mid + 1, r);
+    int len = r - l + 1;
+    int x = l, y = mid + 1;
+    int pos = 0;
+    while(x&lt;=mid &amp;&amp; y&lt;=r)&#123;
+        while (x &lt;= mid &amp;&amp; y &lt;= r &amp;&amp; a[x] &lt;= a[y]) &#123;
+            pos++;
+            cache[pos] = a[x];
+            x++;
+        &#125;
+        if (x &lt;= mid &amp;&amp; y &lt;= r &amp;&amp; a[x] &gt; a[y])&#123;
+            pos++;
+            cache[pos] = a[y];
+            y++;
+            result += mid-x+1;
+        &#125; 
+        if(x&gt;mid)&#123;
+            while(y&lt;=r)&#123;
+                pos++;
+                cache[pos] = a[y];
+                y++;
+            &#125;
+            break;
+        &#125;
+        if(y&gt;r)&#123;
+            while (x&lt;=mid) &#123;
+                pos++;
+                cache[pos] = a[x];
+                x++;
+            &#125;
+            break;
+        &#125;
+    &#125;
+    for (int i = l; i &lt;= r; i++)&#123;
+        a[i] = cache[i - l + 1];
+    &#125;
+&#125;
+
+int main()&#123;
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    &#125;
+    sort(1, n);
+    cout &lt;&lt; result;
+    return 0;
 &#125;
 </code></pre>
-<p>【黑人问号脸.jpeg】</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html">https://www.cnblogs.com/kongbursi-2292702937/p/10582258.html</a></li>
-<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin">https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin</a></li>
-</ul>
+<h2 id="树状数组-离散化求逆序对数目"><a href="#树状数组-离散化求逆序对数目" class="headerlink" title="树状数组+离散化求逆序对数目"></a>树状数组+离散化求逆序对数目</h2><pre><code class="lang-c++">#include &lt;iostream&gt;
+#define MAXN 500001
+using namespace std;
 
-            
-        </article>
-    </div>
-    
-    <div class="nexmoe-post">
-        <a href="/2020/hash-table/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
-                    <img data-src="https://s3.ax1x.com/2020/11/25/DUNGIx.png" data-sizes="auto" alt="Hash Table（散列表）" class="lazyload">
-                    <h1>Hash Table（散列表）</h1>
-                </div>
-            
-        </a>
+int n;
+unsigned long long result = 0;
+int a[MAXN] = &#123;0&#125;;
+int ft[MAXN + 1] = &#123;0&#125;;
 
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月25日</a>
-            <a><i class="nexmoefont icon-areachart"></i>395 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
+int lowbit(int x) &#123;
+    return x &amp; (-x);
+&#125;
 
-        <article>
-            
-                <p>　　散列表的相关概念和内容　　</p>
-<p>​        <strong>散列表</strong>（<strong>Hash table</strong>，也叫<strong>哈希表</strong>），是根据键（Key）而直接访问在内存储存位置的数据结构。</p>
-<p>​        也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。</p>
-<p>​        这个映射函数称做<strong>散列函数</strong>，存放记录的数组称做<strong>散列表</strong>。</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关键字为$k$的值存储在$f(k)$的存储位置中，称映射$f$为散列函数，按照这个思想建立的表称为<strong>散列表</strong>。</li>
-<li>对不同的关键字可能得到同一散列地址，即$k_1 \neq k_2$，而$f(k_1) = f(k_2)$，这种现象称为<strong>冲突</strong>（Collision）。具有相同函数值的关键字对该散列函数来说称做<strong>同义词</strong>。</li>
-<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为<strong>均匀散列函数</strong>，这就使关键字经过散列函数得到一个“随机的地址”，从而减少冲突。</li>
-</ul>
-<h2 id="构造散列函数的方法"><a href="#构造散列函数的方法" class="headerlink" title="构造散列函数的方法"></a>构造散列函数的方法</h2><p>​        若采用求余的方法，采用质数可以在一定程度上解决冲突问题。</p>
-<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><ul>
-<li>开放定址法</li>
-<li>避免聚集：<ul>
-<li>单独链表法</li>
-<li>再散列</li>
-</ul>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zmxiangde_88/article/details/8025541">https://blog.csdn.net/zmxiangde_88/article/details/8025541</a></p>
-</li>
-<li>Computer Science: An Overview, § 9.5 Traditional File Structures.</li>
-</ul>
-
-            
-        </article>
-    </div>
-    
-    <div class="nexmoe-post">
-        <a href="/2020/ds-heap/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
-                    <img data-src="https://github.com/raywenderlich/swift-algorithm-club/raw/master/Heap/Images/Heap1.png" data-sizes="auto" alt="数据结构-堆" class="lazyload">
-                    <h1>数据结构-堆</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月24日</a>
-            <a><i class="nexmoefont icon-areachart"></i>664 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>　　　数据结构中的堆结构　　　</p>
-<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>完全二叉树：</li>
-</ul>
-<p>​        如果一棵深度为 $k$ 的二叉树，$1$ 至$ k-1$ 层的结点都是满的，即满足 $2^i-1$，只有最下面的一层的结点数小于$2^i-1$，并且最下面一层的结点都集中在该层最左边的若干位置，则此二叉树称为完全二叉树。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>​        堆结构是一种数组对象，它可以被视为一棵完全二叉树。树中每个结点与数组中存放该结点中值的那个元素相对应，如下图：</p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Da1oSH"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/11/25/Da1oSH.png" alt="Da1oSH.png" class="lazyload"></a></p>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
-<li><p>下标：</p>
-<p>​    第$i$个结点的父结点（parent(i)）、左结点(left(i))、右结点(right(i))的下标分别为：$\frac {i}{2}$、$2i$、$2i+1$；</p>
-</li>
-<li><p>大小：</p>
-<p>堆可以分为<strong>最大堆(max-heap)</strong>和<strong>最小堆(min-heap)</strong>两种，分别满足对于任意的$i$, $A[parent(i)] &gt;(&lt;)A[i]$.</p>
-</li>
-</ul>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/make_heap/">make_heap</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/push_heap/">push_heap</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/pop_heap/">pop_heap</a></li>
-</ul>
-<h2 id="src"><a href="#src" class="headerlink" title="src"></a>src</h2><pre><code class="lang-c++">//最小堆
-class smallHeap &#123;
-public:
-    int size, maxSize, * head = NULL;
-
-    void init(int depth) &#123;
-        int p = qpow(2, depth, 19260817);
-        head = new int[p-1];
-        maxSize = p - 1;
+void update(int index, int val) &#123;
+    for (int i = index; i &lt;= n; i = i + lowbit(i)) &#123;
+        ft[i] += val;
     &#125;
+&#125;
 
-    smallHeap(int depth) &#123;
-        init(depth);
+int getSum(int index) &#123;
+    int result = 0;
+    for (int k = index; k &gt; 0; k -= lowbit(k)) &#123;
+        result += ft[k];
     &#125;
+    return result;
+&#125;
 
-    int getSize() &#123;
-        return size;
-    &#125;
+class entry &#123;
+    public:
+     int id, val, rank;
+&#125; m[500001];
 
-    bool put(int val) &#123;
-        if (size == maxSize) return false;
-        size++;
-        int currentNode = size; head[currentNode] = val;
-        while (currentNode != 1) &#123;
-            int parentNode = currentNode / 2;
-            if (head[parentNode] &gt; head[currentNode]) &#123;
-                int temp = head[parentNode];
-                head[parentNode] = head[currentNode];
-                head[currentNode] = temp;
-                currentNode = parentNode;
-            &#125;
-            else &#123;
-                break;
-            &#125;
-        &#125;
+// Last Update: 2020-12-30
+/* Quick Sort With CMP Start */
+// Sort the element between [a+left, a+right)
+// You need to implement the &quot;compare&quot; function.
+// You&#39;d better implement a strict inequality in the set.
+// An example is given in pseudocode.
+/*
+bool compare(T A, T B)&#123;
+    if(A precedes B)&#123;
         return true;
+    &#125;else&#123;
+        return false;
     &#125;
-
-    int get() &#123;
-        int currentNode = 1;
-        int tempValue = head[currentNode];
-        head[currentNode] = head[size];
-        size--;
-        int parentNode = 1;
-        while (1) &#123;
-            if (parentNode * 2 &gt; size) break;
-            currentNode = (head[parentNode * 2] &lt; head[parentNode * 2 + 1]) ? (parentNode * 2) : (parentNode * 2 + 1);
-            if (head[parentNode] &gt; head[currentNode]) &#123;
-                int temp = head[parentNode];
-                head[parentNode] = head[currentNode];
-                head[currentNode] = temp;
-                parentNode = currentNode;
-            &#125;
-            else &#123;
-                break;
-            &#125;
+&#125;
+*/
+template &lt;class T&gt;
+void quickSort(T* a, int left, int right, bool (*cmp)(T, T)) &#123;
+    T pivot = *(a + right - 1);
+    int l = left, r = right - 1;
+    while (l &lt; r) &#123;
+        while (l &lt; r &amp;&amp; !cmp(pivot, a[l])) &#123;  // a[l] &gt;= pivot then continue
+            l++;
         &#125;
-
-        return tempValue;
-    &#125;
-
-    int top() &#123; return head[1]; &#125;
-
-    void show() &#123;
-        for (int i = 1; i &lt;= size; i++) &#123;
-            cout &lt;&lt; head[i] &lt;&lt; &quot; &quot;;
+        while (l &lt; r &amp;&amp; !cmp(a[r], pivot)) &#123;  // a[r] &lt;= pivot then continue
+            r--;
+        &#125;
+        if (l != r) &#123;
+            T temp = a[l];
+            a[l] = a[r];
+            a[r] = temp;
+        &#125; else &#123;
+            a[right - 1] = a[l];
+            a[l] = pivot;
+            quickSort(a, left, l, cmp);
+            quickSort(a, l + 1, right, cmp);
         &#125;
     &#125;
-&#125;;
+&#125;
+/* Quick Sort With CMP End */
 
-//最大堆
-class bigHeap &#123;
-public:
-    int size, maxSize, * head = NULL;
+bool compare1(entry a, entry b)&#123;
+    if (a.val &lt; b.val) return true;
+    if (a.val &gt; b.val) return false;
+    if (a.id &lt; b.id) return true;
+    return false;
+&#125;
 
-    void init(int depth) &#123;
-        int p = qpow(2, depth, 19260817);
-        head = new int[p-1];
-        maxSize = p - 1;
+bool compare2(entry a, entry b)&#123;
+    if (a.id &lt; b.id) return true;
+    return false;
+&#125;
+
+
+
+int main()&#123;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)&#123;
+        cin &gt;&gt; a[i];
+        m[i].id = i;
+        m[i].val = a[i]; 
     &#125;
-
-    bigHeap(int depth) &#123;
-        init(depth);
+    quickSort(m, 1, n + 1, compare1);
+    for (int i = 1; i &lt;= n; i++)&#123;
+        m[i].rank = i;
     &#125;
-
-    int getSize() &#123;
-        return size;
+    quickSort(m, 1, n + 1, compare2);
+    for (int i = n; i &gt;= 1; i--) &#123;
+        update(m[i].rank, 1);
+        result = result + getSum(m[i].rank - 1);
     &#125;
-
-    bool put(int val) &#123;
-        if (size == maxSize) return false;
-        size++;
-        int currentNode = size; head[currentNode] = val;
-        while (currentNode != 1) &#123;
-            int parentNode = currentNode / 2;
-            if (head[parentNode] &lt; head[currentNode]) &#123;
-                int temp = head[parentNode];
-                head[parentNode] = head[currentNode];
-                head[currentNode] = temp;
-                currentNode = parentNode;
-            &#125;
-            else &#123;
-                break;
-            &#125;
-        &#125;
-        return true;
-    &#125;
-
-    int get() &#123;
-        int currentNode = 1;
-        int tempValue = head[currentNode];
-        head[currentNode] = head[size];
-        size--;
-        int parentNode = 1;
-        while (1) &#123;
-            if (parentNode * 2 &gt; size) break;
-            currentNode = (head[parentNode * 2] &gt; head[parentNode * 2 + 1]) ? (parentNode * 2) : (parentNode * 2 + 1);
-            if (head[parentNode] &lt; head[currentNode]) &#123;
-                int temp = head[parentNode];
-                head[parentNode] = head[currentNode];
-                head[currentNode] = temp;
-                parentNode = currentNode;
-            &#125;
-            else &#123;
-                break;
-            &#125;
-        &#125;
-
-        return tempValue;
-    &#125;
-
-    int top() &#123; return head[1]; &#125;
-
-    void show() &#123;
-        for (int i = 1; i &lt;= size; i++) &#123;
-            cout &lt;&lt; head[i] &lt;&lt; &quot; &quot;;
-        &#125;
-    &#125;
-&#125;;
+    cout &lt;&lt; result;
+    return 0;
+&#125;
 </code></pre>
-<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1090">https://www.luogu.com.cn/problem/P1090</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1168">https://www.luogu.com.cn/problem/P1168</a></li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Heap</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></li>
-</ul>
 
             
         </article>
     </div>
     
     <div class="nexmoe-post">
-        <a href="/2020/simple-triangular-indefinite-integral/">
+        <a href="/2020/figure-of-some-curves/">
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
-                    <img data-src="https://s3.ax1x.com/2020/11/22/DGBt7q.png" data-sizes="auto" alt="三角函数的正整数幂的不定积分" class="lazyload">
-                    <h1>三角函数的正整数幂的不定积分</h1>
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 60.67415730337079%;"> 
+                    <img data-src="https://s3.ax1x.com/2020/12/05/DL3cFO.jpg" data-sizes="auto" alt="一些参数方程/极坐标图像" class="lazyload">
+                    <h1>一些参数方程/极坐标图像</h1>
                 </div>
             
         </a>
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>915 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>啊说真的排版好麻烦明天再来调吧</p>
-<h2 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h2><ul>
-<li>换元法（凑微分法）</li>
-</ul>
-<script type="math/tex; mode=display">
-\int f'(\phi(x))\phi'(x)dx = \int f'(\phi(x))d\phi(x) = f(\phi(x))+C</script><script type="math/tex; mode=display">
-\int f'(u)du = \int f'(\phi(x)) \phi'(x)dx = g(x)+C = g(\phi^{-1} (x))+C</script><ul>
-<li>分部积分法</li>
-</ul>
-<h2 id="关于三角函数的幂的积分"><a href="#关于三角函数的幂的积分" class="headerlink" title="关于三角函数的幂的积分"></a>关于三角函数的幂的积分</h2><h3 id="sin-或-cos-的幂"><a href="#sin-或-cos-的幂" class="headerlink" title="sin 或 cos 的幂"></a>sin 或 cos 的幂</h3><p>若指数中存在奇数：</p>
-<script type="math/tex; mode=display">
-\int \cos^7x \sin^{10}xdx</script><ol>
-<li>选定 cos 与 sin 中次幂较低，且为奇数的一个，使用凑微分法</li>
-<li>使用公式 $sin^2x+cos^2x=1$ 替换掉剩下的项</li>
-</ol>
-<p><em>Solve:</em></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\int \cos ^{7} x \sin ^{10} x d x \\
-&=\int \cos ^{6} x \sin ^{10} x d \sin x \\
-&=\int\left(1-\sin ^{2} x\right)^{3} \sin ^{10} x d \sin x \\
-(t &=\sin x) \\
-&= \int\left(1-3 t^{2}+3 t^{4}-t^{6}\right) t^{10} d t \\
-&=\int\left(t^{10}-3 t^{12}+3 t^{14}-t^{16}\right) d t \\
-&=\frac {t^{11}} {11}-\frac{3}{13} t^{13}+\frac{3}{15} t^{15}-\frac{1}{17} t^{17}+C \\
-&=\frac{1}{11} \sin ^{11} x-\frac{3}{13} \sin ^{2} x+\frac{1}{5} \sin ^{10} x-\frac{1}{17} \sin ^{17} x+C
-\end{aligned}</script><p>若指数中不存在奇数：</p>
-<script type="math/tex; mode=display">
-\quad \int \cos ^{2} x \sin ^{4} x d x</script><ol>
-<li>使用二倍角公式</li>
-<li>展开后分别积分</li>
-</ol>
-<p><em>Solve:</em></p>
-<p>$\quad \int \cos ^{2} x \sin ^{4} x d x=\int \frac{1+\cos 2 x}{2} \frac{\left(1-\cos ^{2} x\right)^{2}}{4} d x$<br>$=\frac{1}{8} \int\left(\cos ^{2} 2 x-2 \cos 2 x+1\right)(1+\cos 2 x) d x$<br>$=\frac{1}{8} \int\left(\cos ^{3} 2 x-\cos ^{2} 2 x-\cos 2 x+1\right) d x$<br>$=\frac{1}{8} \int \cos ^{3} 2 x d x-\frac{1}{8} \int \cos ^{2} 2 x d x-\frac{1}{8} \int \cos 2 x d x+\frac{1}{8} \int d x$<br>$=\frac{1}{8} \cdot \frac{1}{2} \int \cos ^{2} 2x d \sin 2 x-\frac{1}{8} \int \frac{1+\cos 4 x}{2} d x-\frac{1}{8} \cdot \frac{1}{2} \sin 2 x+\frac{1}{8} x+C<br>$</p>
-<p>$=\frac{1}{16} \int d \sin 2 x-\frac{1}{16} \int \sin ^{2} 2 x d \sin 2 x-\frac{1}{16} x-\frac{1}{16} \cdot \frac{1}{4} \sin 4 x-\frac{1}{16} \sin 2 x+\frac{1}{8} x+C$</p>
-<p>$=\frac{x}{16}-\frac{\sin^32x}{48}-\frac{\sin4x}{64}+C$</p>
-<h3 id="tan-与-cot-的幂"><a href="#tan-与-cot-的幂" class="headerlink" title="tan 与 cot 的幂"></a>tan 与 cot 的幂</h3><script type="math/tex; mode=display">
-\int \tan ^{4} x d x</script><p>使用公式 $ \tan ^{2} x=\sec ^{2} x-1 $</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}
-\int \tan ^{0} x d x=\int d x=x+C \\
-\int \tan ^{1} x d x=\int \frac{\sin x}{\cos x} d x=-\int \frac{1}{\cos x} d \cos x=-\ln |\cos x|+C \\
-\qquad=\ln |\sec x|+C \\
-\end{array}</script><script type="math/tex; mode=display">
-\begin{aligned}
-I_{n} &=\int \tan ^{n} x d x \\
-&=\int \tan ^{n-2} x \tan ^{2} x d x \\
-&=\int \tan ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
-&=\int \tan ^{n-2} x \sec ^{2} x d x-\int \tan ^{n-2} x d x \\
-&=\int \tan ^{n-2} x d \tan x-\int \tan ^{n-2} x d x \\
-&=\frac{1}{n-1} \cdot \tan ^{n-1} x-I_{n-2}
-\end{aligned}</script><p><em>Solve:</em></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\int \tan ^{4} x d x &=\int \tan ^{2} x\left(\sec ^{2} x-1\right) d x \\
-&=\int \tan ^{2} x \sec ^{2} x d x-\int \tan ^{2} x d x \\
-&=\frac{1}{3} \tan ^{3} x-\int \sec ^{2} x d x+\int d x \\
-&=\frac{1}{3} \tan ^{3} x-\tan x+x+C
-\end{aligned}</script><p>cot 的幂读者自证不难.</p>
-<h3 id="sec-与-csc-的幂"><a href="#sec-与-csc-的幂" class="headerlink" title="sec 与 csc 的幂"></a>sec 与 csc 的幂</h3><script type="math/tex; mode=display">
-\begin{aligned}
-\int \sec x d x &=\int \frac{(\sec x)(\sec x+\tan x)}{\sec x+\tan x} d x \\
-&=\int \frac{\sec x \tan x+\sec ^{2} x}{\sec x+\tan x} d x \\
-&=\ln |\sec x+\tan x|+C \\
-\int \sec ^{2} x d x &=\tan x+C
-\end{aligned}</script><script type="math/tex; mode=display">
-\begin{aligned}
-\int \sec ^{n} x d x &=\int \sec ^{n-2} x \sec ^{2} x d x \\
-&=\int \sec ^{n-2} x d \tan x \\
-&=\sec ^{n-2} x \tan x-\int \tan x(n-2) \sec ^{n-3} x \sec x \tan x d x \\
-&=\sec ^{n-2} \tan x-(n-2) \int \sec ^{n-2} x \tan ^{2} x d x \\
-&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n-2} x\left(\sec ^{2} x-1\right) d x \\
-&=\sec ^{n-2} x \tan x-(n-2) \int \sec ^{n} x d x+(n-2) \int \sec ^{n-2} x d x \\
-\end{aligned}</script><p>因此我们有：</p>
-<script type="math/tex; mode=display">
-\int \sec ^{n} x d x=\frac{1}{n-1} \sec ^{n-2} x \tan x+\frac{n-2}{n-1} \int \sec ^{n-2} x d x</script><p>csc 的幂同理显然.</p>
-
-            
-        </article>
-    </div>
-    
-    <div class="nexmoe-post">
-        <a href="/2020/hello-world/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
-                    <img data-src="https://s1.ax1x.com/2020/10/21/BPJPu8.jpg" data-sizes="auto" alt="Hello, World." class="lazyload">
-                    <h1>Hello, World.</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月20日</a>
-            <a><i class="nexmoefont icon-areachart"></i>134 字</a>
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月26日</a>
+            <a><i class="nexmoefont icon-areachart"></i>123 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
-                <p>没钱结款只得把自己博客搬家的屑</p>
-<h2 id="c7w-的破站-ver-2-0"><a href="#c7w-的破站-ver-2-0" class="headerlink" title="c7w 的破站 ver 2.0"></a>c7w 的破站 ver 2.0</h2><p>​        之前用 WordPress 搭的小站快要到期了，现在也不好找免费的虚拟主机薅羊毛，遂借用 github.io + Hexo 搭建本“静态博客”，来记录今后的点滴。</p>
-<p><s>         azaz，我打点滴第一候选项是垫底，bksw</s></p>
-<p>​        然后强行安利了贵班的文艺委员也用上了这种方法建的博客，甚至还组建了班级的github organisation.</p>
-<p>​    等有空了就写博文，咕咕咕</p>
+                <p>菜鸡没学过4-4，在微积分应用里面积面积和体积的时候有的草图画不出来…</p>
+<h2 id="星形线"><a href="#星形线" class="headerlink" title="星形线"></a>星形线</h2><script type="math/tex; mode=display">
+x^{\frac 2 3}+y^{\frac 2 3}=a^{\frac 2 3} \\
+\begin{cases}
+x=a\cos^3t\\
+y=a\sin^3t
+\end{cases}</script><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4AL8K.png" alt="" class="lazyload"></p>
+<h2 id="摆线"><a href="#摆线" class="headerlink" title="摆线"></a>摆线</h2><script type="math/tex; mode=display">
+\begin {cases}
+x= a(t-\sin t)\\
+y=a(1-\cos t)
+\end {cases}</script><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4E12T.png" alt="" class="lazyload"></p>
+<p>图为$-4\pi \le t \le 4\pi, a=1$的图像.</p>
+<p>周期为$2\pi$.</p>
+<h2 id="双纽线"><a href="#双纽线" class="headerlink" title="双纽线"></a>双纽线</h2><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4VeSK"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4VeSK.png" alt="r4VeSK.png" class="lazyload"></a></p>
+<h2 id="笛卡尔心形线"><a href="#笛卡尔心形线" class="headerlink" title="笛卡尔心形线"></a>笛卡尔心形线</h2><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4ZSht"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4ZSht.png" alt="r4ZSht.png" class="lazyload"></a></p>
+<h2 id="其它曲线"><a href="#其它曲线" class="headerlink" title="其它曲线"></a>其它曲线</h2><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4ZeNn"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4ZeNn.png" alt="r4ZeNn.png" class="lazyload"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4Zu90"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4Zu90.png" alt="r4Zu90.png" class="lazyload"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4ZK3V"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4ZK3V.png" alt="r4ZK3V.png" class="lazyload"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4ZMcT"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s3.ax1x.com/2020/12/26/r4ZMcT.png" alt="r4ZMcT.png" class="lazyload"></a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mm.edrawsoft.cn/template/65439">https://mm.edrawsoft.cn/template/65439</a></li>
+<li>部分图像采用 GeoGebra 绘制</li>
+</ul>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2020/matrix-congruence-and-similarity/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
+                    <img data-src="https://s3.ax1x.com/2020/12/26/rhxjTU.png" data-sizes="auto" alt="合同矩阵与相似矩阵" class="lazyload">
+                    <h1>合同矩阵与相似矩阵</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月26日</a>
+            <a><i class="nexmoefont icon-areachart"></i>297 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+        </div>
+
+        <article>
+            
+                <h2 id="合同矩阵"><a href="#合同矩阵" class="headerlink" title="合同矩阵"></a>合同矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$合同，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^TBC</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>合同关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身合同</li>
+<li>对称性: $A$合同于$B$, 则$B$合同于$A$</li>
+<li>传递性: $A$合同于$B$, $B$合同于$C$, 则$A$合同于$C$.</li>
+</ul>
+<ol>
+<li>合同矩阵的<strong>秩</strong>相同。</li>
+</ol>
+<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>称两矩阵$A,B$相似，当且仅当存在可逆矩阵$C$，使得</p>
+<script type="math/tex; mode=display">
+A=C^{-1}BC</script><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>相似关系是等价关系.</li>
+</ol>
+<ul>
+<li>自反性: $A$与$A$本身相似</li>
+<li>对称性: $A$相似于$B$, 则$B$相似于$A$</li>
+<li>传递性: $A$相似于$B$, $B$相似于$C$, 则$A$相似于$C$.</li>
+</ul>
+<ol>
+<li>相似矩阵具有一系列相同的特点.</li>
+</ol>
+<ul>
+<li>两者的秩相等；</li>
+<li>两者的行列式值相等；</li>
+<li>两者的迹相等；</li>
+<li>两者拥有同样的特征值，但相应的特征向量一般不同；</li>
+<li>两者拥有同样的特征多项式；<br>（我们可以利用这些必要条件来判断两个矩阵是否相似）</li>
+</ul>
+<ol>
+<li>相似矩阵具有相同的可逆性，当它们可逆时，则它们的逆矩阵也相似。</li>
+</ol>
 
             
         </article>
@@ -539,7 +474,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 </section>
 
     <nav class="nexmoe-page-nav">
-      <a class="extend prev" rel="prev" href="/"><i class="nexmoefont icon-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/"><i class="nexmoefont icon-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="nexmoefont icon-right"></i></a>
     </nav>
   
     </div>
@@ -554,7 +489,7 @@ I_{n} &=\int \tan ^{n} x d x \\
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1611925421415"></script>
+ <script src="/js/app.js?v=1611925527046"></script>
 
   
 
