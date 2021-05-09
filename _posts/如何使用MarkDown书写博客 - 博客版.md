@@ -5,6 +5,9 @@ categories: Introduction
 tags:
 - introduction
 - 教程
+authors:
+- WXY
+- QC
 ---
 
 ## 如何使用MarkDown书写博客
@@ -151,7 +154,9 @@ Markdown的具体语法可以在网上查到，推荐一个网站：[Markdown基
 ---
 title: 这是标题
 date: 2021/05/08 12:00:00
-author: 作者名称（建议使用GitHub用户名）
+author: 
+- 作者名称1（建议使用GitHub用户名）
+- 作者名称2（建议使用GitHub用户名）
 categories: 这是分类
 tag:
 - demo
@@ -191,5 +196,5 @@ tag:
 
    ![空图3.png](https://i.loli.net/2021/05/09/3doiDKBtmanGelJ.png)
 
-## authors: WXY QC
+
 
