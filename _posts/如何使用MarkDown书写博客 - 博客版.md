@@ -5,7 +5,7 @@ categories: Introduction
 tags:
 - introduction
 - 教程
-authors:
+author:
 - WXY
 - QC
 ---
