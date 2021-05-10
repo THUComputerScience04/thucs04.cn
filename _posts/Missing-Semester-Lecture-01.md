@@ -1,5 +1,5 @@
 ---
-title: 如何使用MarkDown书写博客
+title: Missing Semester Lecture 1
 date: 2021/05/02 21:29:00
 tags:
 - 知识分享
@@ -7,8 +7,6 @@ tags:
 author:
 - QC
 ---
-
-
 
 ## Missing Semester Lecture 1
 

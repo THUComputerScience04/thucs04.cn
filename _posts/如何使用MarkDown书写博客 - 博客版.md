@@ -10,6 +10,10 @@ author:
 - QC
 ---
 
+如何使用MarkDown书写博客
+
+<!--more-->
+
 ## 如何使用MarkDown书写博客
 
 ### 1. 引言

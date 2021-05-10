@@ -6,6 +6,10 @@ categories: Note
 tags: [OOP,笔记]
 ---
 
+OOP某节课的笔记
+
+<!--more-->
+
 ## 模板与STL初步
 
 类模板：使用参数类型 <typename T> 用类型T来定义模板类
