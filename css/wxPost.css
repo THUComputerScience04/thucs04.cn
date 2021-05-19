@@ -1,0 +1,37 @@
+.weChatPostMainDiv {
+    display: table;
+}
+.weChatPostPictureDiv {
+    display: table-cell;
+    width: 35%;
+}
+
+.weChatPostPicture {
+    width: 100%;
+    border-radius: 10%;
+    float: left;
+}
+
+.weChatPostLinkDiv {
+    width: 65%;
+    float: inline-start;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.weChatPostLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    margin: 0 auto;
+    font-size: 24px;
+}
+
+.weChatPostLinkA:link {
+    color: black;
+}
+
+.weChatPostLinkA:visited {
+    color: gray;
+}
