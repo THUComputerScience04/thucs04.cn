@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cc7w.cf","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="如何使用MarkDown书写博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用MarkDown书写博客">
+<meta property="og:url" content="https://cc7w.cf/2021/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8MarkDown%E4%B9%A6%E5%86%99%E5%8D%9A%E5%AE%A2%20-%20%E5%8D%9A%E5%AE%A2%E7%89%88/index.html">
+<meta property="og:site_name" content="c7w 的破站 v2.0">
+<meta property="og:description" content="如何使用MarkDown书写博客">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/8TfaBZdCFWbkAcD.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/nCNAxTJZuqabl4V.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/6ypgriUdthWH7Nq.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/GqoRmiFEkDnfl3C.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/y7QZD42mA1tHcKn.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/vagwUxXlNIO49Dr.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/HLy5mDAivb7jtRO.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/wybZBPEjp1o5SVR.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/gbEdm3RhncS5jMo.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/16VqZWt7DSLgdOK.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/m1juBy7MObsXo42.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/GYwbNknClS9UKJa.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/7HGn21NarhXBUAR.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/ZB8YjtXrCwLFyzM.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/bBwpkNqtL7fiuZD.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/hawdrX9oUBEqJDT.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/tz53jiuWyhDg7vc.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/agUVmMuLK4dHntp.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/wOu4AWe6a2ojULY.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/vNkcCuhEUHWFqf2.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/PHJcvCAizxfEugS.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/XDMStH8uwE7PICR.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/QbXC5w9UoaFre6p.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/phgSi54vzPGD7b1.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/ZuYolXvWhUJgK16.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/O7DUpFEMuJseNmL.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/uUrsjwNIqiR4Vap.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/296sI1LpbTBRioa.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/MvAgdCxeQEnoj3S.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/PCbwsqE2VS8Hv1K.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/UjuxBOtd8wKPim5.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/09/3doiDKBtmanGelJ.png">
+<meta property="article:published_time" content="2021-05-09T06:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-19T12:30:29.260Z">
+<meta property="article:author" content="c7w">
+<meta property="article:tag" content="introduction">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/05/09/8TfaBZdCFWbkAcD.png">
+
+<link rel="canonical" href="https://cc7w.cf/2021/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8MarkDown%E4%B9%A6%E5%86%99%E5%8D%9A%E5%AE%A2%20-%20%E5%8D%9A%E5%AE%A2%E7%89%88/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh'
+  };
+</script>
+
+  <title>如何使用MarkDown书写博客 | c7w 的破站 v2.0</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">c7w 的破站 v2.0</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://cc7w.cf/2021/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8MarkDown%E4%B9%A6%E5%86%99%E5%8D%9A%E5%AE%A2%20-%20%E5%8D%9A%E5%AE%A2%E7%89%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="c7w">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c7w 的破站 v2.0">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何使用MarkDown书写博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-09 14:00:00" itemprop="dateCreated datePublished" datetime="2021-05-09T14:00:00+08:00">2021-05-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-19 20:30:29" itemprop="dateModified" datetime="2021-05-19T20:30:29+08:00">2021-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Introduction/" itemprop="url" rel="index"><span itemprop="name">Introduction</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>如何使用MarkDown书写博客</p>
+<span id="more"></span>
+<h2 id="如何使用MarkDown书写博客"><a href="#如何使用MarkDown书写博客" class="headerlink" title="如何使用MarkDown书写博客"></a>如何使用MarkDown书写博客</h2><h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h3><p>到目前为止，计04班的设备采购工作已经完成，基础的博客网页（ www.thucs04.cn ）也已经搭建完成，班级博客将是以后班级形象展示的重要阵地。</p>
+<p>那班级博客上都有什么呢？这就需要大家来贡献自己的力量，书写一些博文，然后经过Github进行上传，充实我们的班级博客。</p>
+<p>为了方便博客的维护，以及减少书写HTML的麻烦，经主要技术人员研究决定，让大家使用MarkDown来书写博文，主题、内容不限。</p>
+<p>那么，什么是MarkDown呢？确切地来说，MarkDown是一种格式，就像是Word文档里可以调整字体的风格、字号，可以加粗文字等，Markdown也是用来进行这些操作的一种语言规范，例如本篇教程就是使用这种规范来书写的。但与Word不同的是，Markdown没有十分方便的GUI（图像界面），需要我们书写一些简单的代码来对这些文字进行格式的设定。</p>
+<h3 id="2-MarkDown的书写平台"><a href="#2-MarkDown的书写平台" class="headerlink" title="2. MarkDown的书写平台"></a>2. MarkDown的书写平台</h3><p>就像是我们写C++的代码会放在VScode 上一样，书写Markdown也有这样的平台，在这种平台上书写，可以方便地让我们看到代码的效果。</p>
+<p>下面推荐两种书写Markdown的平台</p>
+<ul>
+<li><p>VS code</p>
+</li>
+<li><p>typora</p>
+</li>
+</ul>
+<h4 id="2-1-VS-code-书写Markdown-方式"><a href="#2-1-VS-code-书写Markdown-方式" class="headerlink" title="2.1 VS code 书写Markdown 方式"></a>2.1 VS code 书写Markdown 方式</h4><ol>
+<li>安装vscode，这就足够了，不需要在vscode中安装其他插件</li>
+<li>在vscode新建一个文件，后缀为 .md  例如：test1.md</li>
+<li>右键点击上方 test1.md的标签，选择打开预览，就可以在预览当中看到自己书写的MarkDown代码的效果。</li>
+<li>完成上述工作之后，你就可以在test1.md文件中<del>快乐地</del>书写博文和代码了（如何书写见下方语法教程）</li>
+</ol>
+<p><img src="https://i.loli.net/2021/05/09/8TfaBZdCFWbkAcD.png" alt="操作图示"  /></p>
+<h4 id="2-2-typora书写Markdown-方式"><a href="#2-2-typora书写Markdown-方式" class="headerlink" title="2.2 typora书写Markdown 方式"></a>2.2 typora书写Markdown 方式</h4><ol>
+<li>安装typora，网址：<a target="_blank" rel="noopener" href="https://typora.io/">https://typora.io/</a>  ，往下翻，可以看到右上角Download选项，点击跳转到下载页面，根据电脑操作系统的版本下载对应的安装包</li>
+<li>安装typora（无需打开这个软件）</li>
+<li>在桌面（或其他位置）上新建一个文件，后缀为.md，以test.md为例</li>
+<li>打开这个文件（选择打开方式为typora），之后你就可以在test.md文件中<del>快乐地</del>书写博文和代码了</li>
+</ol>
+<p><img src="https://i.loli.net/2021/05/09/nCNAxTJZuqabl4V.png" alt="typora版.png"  /></p>
+<h3 id="3-Markdown基本使用"><a href="#3-Markdown基本使用" class="headerlink" title="3. Markdown基本使用"></a>3. Markdown基本使用</h3><p><strong>在写博文时，你只需要正常地输入博客的内容，然后在需要的格式处加上MarkDown的语法即可</strong></p>
+<p>如下例（左侧为代码和文本，右侧为效果图）</p>
+<p><img src="https://i.loli.net/2021/05/09/6ypgriUdthWH7Nq.png" alt="书写演示.png"></p>
+<p>这里强烈推荐使用typora，它可以即时地看到效果，不需要打开预览图</p>
+<p>Markdown的具体语法可以在网上查到，推荐一个网站：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/191d1e21f7ed/">Markdown基本语法 - 简书 (jianshu.com)</a></p>
+<h3 id="4-Markdown的基本语法教程"><a href="#4-Markdown的基本语法教程" class="headerlink" title="4. Markdown的基本语法教程"></a>4. Markdown的基本语法教程</h3><ol>
+<li><p>n个#加上一个空格代表一个n级标题</p>
+<p><img src="https://i.loli.net/2021/05/09/GqoRmiFEkDnfl3C.png" alt="基本使用1.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/y7QZD42mA1tHcKn.png" alt="基本使用2.png"></p>
+</li>
+<li><p>一对*括起来表示斜体；两对表示加粗；三对表示斜体加加粗</p>
+<p><img src="https://i.loli.net/2021/05/09/vagwUxXlNIO49Dr.png" alt="基本使用3.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/HLy5mDAivb7jtRO.png" alt="基本使用4.png"></p>
+</li>
+<li><p>1、2、3、4等编号会自动延续，生成有序列表</p>
+<p><img src="https://i.loli.net/2021/05/09/wybZBPEjp1o5SVR.png" alt="基本使用5.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/gbEdm3RhncS5jMo.png" alt="基本使用6.png"></p>
+</li>
+<li><p>三个或以上小短线 —- 在单行输入将会作为分割线</p>
+<p><img src="https://i.loli.net/2021/05/09/16VqZWt7DSLgdOK.png" alt="基本使用7.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/m1juBy7MObsXo42.png" alt="基本使用8.png"></p>
+</li>
+<li><p>+，-，*加上空格将会生成无序列表；其可进行分级；在无序列表中shift+tab可回退至无序表的上一级</p>
+<p><img src="https://i.loli.net/2021/05/09/GYwbNknClS9UKJa.png" alt="基本使用9.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/7HGn21NarhXBUAR.png" alt="基本使用10.png"></p>
+</li>
+<li><p>用n个&gt;符号之后加空格可以表示n级引用，可无限嵌套</p>
+<p><img src="https://i.loli.net/2021/05/09/ZB8YjtXrCwLFyzM.png" alt="基本使用11.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/bBwpkNqtL7fiuZD.png" alt="基本使用12.png"></p>
+</li>
+<li><p>连续输入三个`可调用代码块</p>
+<p><img src="https://i.loli.net/2021/05/09/hawdrX9oUBEqJDT.png" alt="基本使用13.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/tz53jiuWyhDg7vc.png" alt="基本使用14.png"></p>
+</li>
+<li><p>两对~中内容表示加上删除线</p>
+<p><img src="https://i.loli.net/2021/05/09/agUVmMuLK4dHntp.png" alt="基本使用15.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/wOu4AWe6a2ojULY.png" alt="基本使用16.png"></p>
+</li>
+<li><p>用短竖线 |内容|内容| 的方式可以创建表格，创建完后可自行调整大小</p>
+<p><img src="https://i.loli.net/2021/05/09/vNkcCuhEUHWFqf2.png" alt="基本使用17.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/PHJcvCAizxfEugS.png" alt="基本使用18.png"></p>
+</li>
+<li><p>[内容]：(网址) 的形式可以实现参数式超链接，不加：也有其他方式</p>
+<p><img src="https://i.loli.net/2021/05/09/XDMStH8uwE7PICR.png" alt="基本使用19.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/QbXC5w9UoaFre6p.png" alt="基本使用20.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/phgSi54vzPGD7b1.png" alt="基本使用21.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/ZuYolXvWhUJgK16.png" alt="基本使用22.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/O7DUpFEMuJseNmL.png" alt="基本使用23.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/uUrsjwNIqiR4Vap.png" alt="基本使用24.png"></p>
+</li>
+<li><p>用！[名字]（路径）的方式可以插入图片（或大部分情况下直接复制即可）</p>
+<p><img src="https://i.loli.net/2021/05/09/296sI1LpbTBRioa.png" alt="基本使用25.png"></p>
+</li>
+</ol>
+<h3 id="5-Markdown书写博客的其他要求"><a href="#5-Markdown书写博客的其他要求" class="headerlink" title="5. Markdown书写博客的其他要求"></a>5. Markdown书写博客的其他要求</h3><p>上面的教程已经教会了大家如何书写Markdown语言规范，而在书写博客时有一个额外的要求：在整篇文档的最上方添加Front-matter</p>
+<p>如何添加Front-matter？</p>
+<p>如图所示，只需在前面添加几行代码：</p>
+<p><img src="https://i.loli.net/2021/05/09/MvAgdCxeQEnoj3S.png" alt="title演示.png"></p>
+<p>如果是typora，输入前面的三个短横线后会自动识别，此时不需要书写最后三个短横线</p>
+<pre><code class="lang-markdown">---
+title: 这是标题
+date: 2021/05/08 12:00:00
+author: 
+- 作者名称1（建议使用GitHub用户名）
+- 作者名称2（建议使用GitHub用户名）
+categories: 这是分类
+tag:
+- demo
+- test
+---
+</code></pre>
+<p>从三条短横线开始，到三条短横线结束，需要填写title、date、author、categories、tag</p>
+<ul>
+<li>title 填写博客的标题，可以中文可以英文</li>
+<li>date 填写博客的建立日期 格式为 YYYY/MM/DD hh:mm:ss</li>
+<li>author 填写作者名称</li>
+<li>categories 这一篇博客的分类，（为了方便管理，目前大家从这四个英文标题当中选填，首字母大写）<ul>
+<li>Introduction  (各类教程、简介)</li>
+<li>Diary （个人生活记录、推送）</li>
+<li>Note （课堂、讲座笔记）</li>
+<li>Discussion （有感而发的讨论）</li>
+</ul>
+</li>
+<li>tag 博客希望的标签，可以添加多个，但是每个短横线之后一定要有<strong>空格</strong></li>
+</ul>
+<p>注意： 每一个参数的冒号后一定要有<strong>空格</strong></p>
+<h3 id="6-关于博客图片的要求"><a href="#6-关于博客图片的要求" class="headerlink" title="6. 关于博客图片的要求"></a>6. 关于博客图片的要求</h3><p>大家在书写博客时可能会有要用到图片的地方，但与基础的图片语法不同的是，博客的图片需要经过处理：</p>
+<ol>
+<li><p>将所用图片储存在本地（你的电脑里）</p>
+</li>
+<li><p>打开网址 www.sm.ms</p>
+</li>
+<li><p>将图片拖入框内，选择upload</p>
+</li>
+<li><p>复制下方markdown的语句，粘贴到博客当中即可在博客中插入图片，此外不需要做任何操作</p>
+<p><img src="https://i.loli.net/2021/05/09/PCbwsqE2VS8Hv1K.png" alt="空图.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/UjuxBOtd8wKPim5.png" alt="空图2.png"></p>
+<p><img src="https://i.loli.net/2021/05/09/3doiDKBtmanGelJ.png" alt="空图3.png"></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/introduction/" rel="tag"># introduction</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/note_of_OOP_from_Teburile/" rel="prev" title="OOP某节课的笔记">
+      <i class="fa fa-chevron-left"></i> OOP某节课的笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/%E8%AE%A104%E6%9A%91%E6%9C%9F%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%E6%8A%A5%E5%91%8A%E5%A4%A7%E7%BA%B2/" rel="next" title="总结报告大纲">
+      总结报告大纲 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8MarkDown%E4%B9%A6%E5%86%99%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.</span> <span class="nav-text">如何使用MarkDown书写博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">1. 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-MarkDown%E7%9A%84%E4%B9%A6%E5%86%99%E5%B9%B3%E5%8F%B0"><span class="nav-number">1.2.</span> <span class="nav-text">2. MarkDown的书写平台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-VS-code-%E4%B9%A6%E5%86%99Markdown-%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 VS code 书写Markdown 方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-typora%E4%B9%A6%E5%86%99Markdown-%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 typora书写Markdown 方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">3. Markdown基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Markdown%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E6%95%99%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">4. Markdown的基本语法教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Markdown%E4%B9%A6%E5%86%99%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%85%B6%E4%BB%96%E8%A6%81%E6%B1%82"><span class="nav-number">1.5.</span> <span class="nav-text">5. Markdown书写博客的其他要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-number">1.6.</span> <span class="nav-text">6. 关于博客图片的要求</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">c7w</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">c7w</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
